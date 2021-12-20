@@ -1,0 +1,13 @@
+package com.bloodbank.model;
+
+public class RequestModel {
+	
+	private String hospitalName;
+	private String bloodType;
+	private int unit;
+	private String bloodCollectorName;
+	private Long phoneNumber;
+	private Long adharcard;
+	
+
+}

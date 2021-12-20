@@ -1,6 +1,0 @@
-package com.bloodbank.Dao;
-
-public class SeekerDao {
-	public int insertSeeker
-
-}

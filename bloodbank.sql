@@ -92,7 +92,7 @@ adharcard number(20) not null,
  select * from admin;
  select * from blood_details;
  
-drop table   blood_details cascade constraints;
+drop table  request_details cascade constraints;
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
@@ -122,3 +122,14 @@ hospital_name varchar2(100) not null,
 blood_type varchar2(20) not null,
 unit number(11) not null);
 select * from seeker_details;
+
+create table request_details (request_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
+hospital_name varchar2(100) not null,
+blood_type varchar2(50) not null,
+unit number(11) not null,
+blood_collector_name varchar2(50) not null,
+phone_number number(20) not null,
+adharcard_number number(20) not null);
+select * from request_details;
+desc request_details
+commit
