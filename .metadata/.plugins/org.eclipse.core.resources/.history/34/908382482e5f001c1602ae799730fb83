@@ -1,0 +1,8 @@
+package com.bloodbank.Dao;
+
+public class DonorDao {
+	public void insertDonor() {
+		
+	}
+
+}

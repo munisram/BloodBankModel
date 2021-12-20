@@ -1,0 +1,38 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.bloodbank.model.BloodDetailsModel;
+
+public class BloodDetailsDao {
+	
+	
+	
+	public boolean insertBloodDetails(BloodDetailsModel details) {
+		
+		ConnectionUtil connection=new ConnectionUtil();
+		try {
+			String query="insert into blood_details values(?,?,?,?)";
+			
+			Connection con=connection.getConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

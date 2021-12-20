@@ -1,0 +1,13 @@
+package com.bloodbank.Dao;
+
+public class SeekerDao {
+	public int insertSeekerDetails() {
+		ConnectionUtil connection=new ConnectionUtil();
+		connection
+		
+		
+		
+		return 0;
+	}
+
+}

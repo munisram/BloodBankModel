@@ -1,0 +1,12 @@
+package com.bloodbank.model;
+
+import java.util.Objects;
+
+public class BloodDetailsModel {
+	private Long adharcard;
+	private int unit;
+	private String bloodType;
+	private int price;
+	
+
+}

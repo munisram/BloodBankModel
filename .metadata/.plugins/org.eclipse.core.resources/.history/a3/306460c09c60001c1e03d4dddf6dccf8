@@ -1,0 +1,5 @@
+package com.bloodbank.Dao;
+
+public class BloodStackDao {
+
+}

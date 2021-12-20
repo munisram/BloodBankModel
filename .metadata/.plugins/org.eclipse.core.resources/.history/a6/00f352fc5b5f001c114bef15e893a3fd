@@ -1,0 +1,40 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import com.bloodbank.model.Donor;
+
+public class DonorDao {
+	public void insertDonor(Donor donor) {
+		ConnectionUtil connection =new ConnectionUtil();
+		int n=0;
+		try {
+			
+			Connection con=connection.getConnection();
+			String query="insert into donor_details values(?,?,?,?,?,?,?)";
+			PreparedStatement pstmt=con.prepareStatement(query);
+			pstmt.setString(1, donor.getFirstName());
+			pstmt.setString(2, donor.getLastName());
+			pstmt.setString(3, donor.getAddress());
+			pstmt.setLong(4, donor.getAdharcard());
+			pstmt.setLong(5, donor.getNumber());
+			pstmt.setInt(6, donor.getAge());
+			pstmt.setString(7, donor.getBloodType());
+			n=pstmt.executeUpdate();
+			if(n>0) {
+				System.out.println("register completed");
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+
+}

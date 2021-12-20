@@ -1,0 +1,86 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.Date;
+
+import com.bloodbank.model.BookingModel;
+import com.bloodbank.model.Donor;
+
+public class BookingDao {
+	
+	
+	public int  booking(BookingModel book) {
+		int n=0;
+		ConnectionUtil connection=new ConnectionUtil();
+		String query="insert into booking (adharcard,address,app_date,blood_type) values(?,?,?,?)";
+		try {
+			Connection con=connection.getConnection();
+			PreparedStatement pstmt=con.prepareStatement(query);
+			pstmt.setLong(1,book.getAdharcard() );
+			pstmt.setString(2, book.getAddress());
+			pstmt.setDate(3, new java.sql.Date(book.getAppdate().getTime()));
+			pstmt.setString(4, book.getBloodType());
+	      n=pstmt.executeUpdate();
+		
+			
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return n;		
+		
+	}
+ public int updateBooking(BookingModel book) {
+	 int n=0;
+	 ConnectionUtil connection=new ConnectionUtil();
+	 try {
+		Connection con =connection.getConnection();
+		String query="update from booking set address=?, app_date=? where='"+book.getAdharcard()+"'";
+		PreparedStatement pstmt=con.prepareStatement(query);
+		pstmt.setString(1, book.getAddress());
+		pstmt.setDate(2, new java.sql.Date (book.getAppdate().getTime()));
+		n=pstmt.executeUpdate();
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+ 	 
+	 
+	 return n;
+	 
+ }
+ public int deleteBooking(BookingModel book) {
+	 ConnectionUtil connection=new ConnectionUtil();
+	 int n=0;
+			 try {
+				Connection con=connection.getConnection();
+				String query="delete from booking where ='"+book.getAdharcard()
+			} catch (ClassNotFoundException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	 
+	 
+	 
+	 return 0;
+	 
+ }
+ 
+ 
+}

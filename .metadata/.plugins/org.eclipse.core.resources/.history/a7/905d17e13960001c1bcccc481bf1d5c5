@@ -1,0 +1,19 @@
+package com.bloodbank.Dao;
+
+public class BloodDetailsDao {
+	
+	
+	
+	public void insertBloodDetails(BloodDetailsDao details) {
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

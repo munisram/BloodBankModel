@@ -1,0 +1,13 @@
+package com.bloodbank.model;
+
+public class Seeker {
+	private String firstName;
+	private String lastName;
+	private String address;
+	private Long phoneNumber;
+	private S hospitalName;
+	private String bloodType;
+	
+	
+
+}

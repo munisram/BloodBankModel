@@ -1,0 +1,10 @@
+package com.bloodbank.Dao;
+
+public class BloodStackDao {
+	
+	
+	public int insert stack() {
+		
+	}
+
+}

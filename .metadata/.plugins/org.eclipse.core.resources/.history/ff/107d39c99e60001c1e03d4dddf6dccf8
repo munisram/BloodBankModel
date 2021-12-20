@@ -1,0 +1,19 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+
+import com.bloodbank.model.BloodStack;
+
+public class BloodStackDao {
+	
+	
+	public int insertStack(BloodStack stack) {
+		ConnectionUtil connection=new ConnectionUtil();
+		Connection con=connection.getConnection();
+		
+		
+		
+		return 0;
+	}
+
+}

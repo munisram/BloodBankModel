@@ -1,0 +1,26 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+public class SeekerDao {
+	int n=0;
+	public int insertSeekerDetails() {
+		ConnectionUtil connection=new ConnectionUtil();
+		String query="insert into seeker_details (first_name,last_name,address,phone_number,)values()";
+		try {
+			Connection con=connection.getConnection();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return n;
+	}
+
+}

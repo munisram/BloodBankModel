@@ -1,0 +1,11 @@
+package com.bloodbank.model;
+
+import java.util.Date;
+
+public class BookingModel {
+
+	private Long adharcard;
+	private String address;
+	private Date appdate;
+	private  String bloodType;
+}

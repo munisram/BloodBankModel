@@ -1,0 +1,25 @@
+package com.bloodbank.Dao;
+
+import com.bloodbank.model.BloodDetailsModel;
+
+public class BloodDetailsDao {
+	
+	
+	
+	public void insertBloodDetails(BloodDetailsModel details) {
+		
+		ConnectionUtil connection=new ConnectionUtil();
+		connection con=connection.getConnection();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+	}
+
+}

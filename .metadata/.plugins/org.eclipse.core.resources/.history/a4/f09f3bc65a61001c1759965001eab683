@@ -1,0 +1,9 @@
+package com.bloodbank.model;
+
+public class Seeker {
+	private String firstName;
+	private String lastName;
+	private 
+	
+
+}

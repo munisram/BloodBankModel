@@ -1,0 +1,15 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+
+public class SeekerDao {
+	public int insertSeekerDetails() {
+		ConnectionUtil connection=new ConnectionUtil();
+		Connection con=connection.getConnection();
+		
+		
+		
+		return 0;
+	}
+
+}

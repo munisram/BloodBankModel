@@ -1,0 +1,11 @@
+package com.bloodbank.Dao;
+
+import com.bloodbank.model.Donor;
+
+public class DonorDao {
+	public void insertDonor(Donor donor) {
+		
+		
+	}
+
+}

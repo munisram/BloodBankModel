@@ -1,0 +1,73 @@
+package com.bloodbank.model;
+
+public class Seeker {
+	private String firstName;
+	private String lastName;
+	private String address;
+	private Long phoneNumber;
+	private Long patientId;
+	public Seeker(String firstName, String lastName, String address, Long phoneNumber, Long patientId,
+			String hospitalName, String bloodType) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.patientId = patientId;
+		this.hospitalName = hospitalName;
+		this.bloodType = bloodType;
+	}
+	@Override
+	public String toString() {
+		return "Seeker [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", phoneNumber="
+				+ phoneNumber + ", patientId=" + patientId + ", hospitalName=" + hospitalName + ", bloodType="
+				+ bloodType + "]";
+	}
+	public String getFirstName() {
+		return firstName;
+	}
+	public void setFirstName(String firstName) {
+		this.firstName = firstName;
+	}
+	public String getLastName() {
+		return lastName;
+	}
+	public void setLastName(String lastName) {
+		this.lastName = lastName;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Long getPhoneNumber() {
+		return phoneNumber;
+	}
+	public void setPhoneNumber(Long phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	public Long getPatientId() {
+		return patientId;
+	}
+	public void setPatientId(Long patientId) {
+		this.patientId = patientId;
+	}
+	public String getHospitalName() {
+		return hospitalName;
+	}
+	public void setHospitalName(String hospitalName) {
+		this.hospitalName = hospitalName;
+	}
+	public String getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+	private String hospitalName;
+	private String bloodType;
+	
+	
+
+}

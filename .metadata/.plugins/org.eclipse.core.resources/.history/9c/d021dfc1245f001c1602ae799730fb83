@@ -1,0 +1,12 @@
+package com.bloodbank.model;
+
+public class Donor {
+
+	private String firstName;
+	private String lastName;
+	private String address;
+	private Long adharcard;
+	private long number;
+	private int age;
+	private String bloodType;
+}
