@@ -1,0 +1,13 @@
+package com.bloodbank.model;
+
+import java.util.Objects;
+
+public class BillingModel {
+	private String bloodType;
+	private int quantity;
+	private int totalprice;
+	
+	
+
+	
+}

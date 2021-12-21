@@ -1,0 +1,31 @@
+package com.bloodbank.Dao;
+
+import com.bloodbank.model.BillingModel;
+
+public class BillingDao {
+	
+	public int insertBilling(BillingModel billing) {
+		
+		
+		ConnectionUtil connection=new ConnectionUtil();
+		connection con=connection.getConnection();
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return 0;
+		
+	}
+	
+
+}

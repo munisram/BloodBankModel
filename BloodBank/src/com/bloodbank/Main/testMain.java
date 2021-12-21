@@ -5,13 +5,18 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.bloodbank.Dao.AdminModelDao;
 import com.bloodbank.Dao.BloodDetailsDao;
+
 import com.bloodbank.Dao.BloodStackDao;
 import com.bloodbank.Dao.BookingDao;
 import com.bloodbank.Dao.DonorDao;
 import com.bloodbank.Dao.RequestDao;
 import com.bloodbank.Dao.SeekerDao;
+import com.bloodbank.model.AdminModel;
+import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.BloodDetailsModel;
+
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
@@ -126,7 +131,7 @@ public class testMain {
 	
 		 tempNumber=bookDao.booking(booking);
 		if(tempNumber>0) {
-			System.out.println("booking success \n you next donate blood in after 90days");
+			System.out.println("booking success ");
 		}
 		
 		
@@ -211,13 +216,13 @@ public class testMain {
 					
 					if(tempNumber>0) {
 						BloodStack stack=null;
-						System.out.println("donation conform");
+						System.out.println("donation conform\\n you next donate blood in after 90days");
 						
 						BloodStackDao stackDao= new BloodStackDao();
 						   
 					 stack=new BloodStack(details.getUnit(),details.getBloodType());	
 					
-					     stackDao.showStack(stack);
+					     stackDao.showStack();
 					
 					int check=stackDao.updateStack(stack);
 					
@@ -439,6 +444,44 @@ public class testMain {
 		
 		
 		 }else if(choice==2) {
+			
+			System.out.println("admin process");
+			
+			String email=null;
+			String password=null;
+			
+			do {
+				System.out.println("enter emailId:");
+				email = scan.nextLine();
+				if (!email.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+")) {
+					System.out.println("email must include upper&special character");
+				}
+				if (email.isEmpty()) {
+					System.out.println("email cant be empty");
+				}
+
+			} while (!email.matches("[a-z][a-z0-9]+[@][a-z]+[.][a-z]+") || email.isEmpty());
+
+			do {
+				System.out.println("enter password");
+				password = scan.nextLine();
+				if (!password.matches("[A-Za-z0-9@#.!&]{8,16}")) {
+					System.out.println("password must include 8 or 16 character");
+				}
+				if (password.isEmpty()) {
+					System.out.println("password should be 8 character");
+				}
+			} while (!password.matches("[A-Za-z0-9@#.!&]{8,16}") || password.isEmpty());
+			
+			
+			AdminModel aModel=new AdminModel(email, password);
+			
+			AdminModelDao aDao=new AdminModelDao();
+			tempNumber=aDao.verificationAdmin(aModel);
+			
+			if(tempNumber>0) {
+				System.out.println("verification success");
+			}
 			
 			
 			
@@ -702,7 +745,51 @@ public class testMain {
 			    	if(tempNumber>0) {
 			    		
 			    		System.out.println("request booking success");
+			    		
+			    		
 			    	}
+			    	
+			    	System.out.println("billing process");
+			    	
+			    	SeekerDao dao=new SeekerDao();
+			    	
+			    	//int seekerId=dao.seekerIdFind(reqModel.getBloodType());
+			    	//dao.seekerIdFind(reqModel.getBloodType(), reqModel.getHospitalName());
+			    	
+			    	
+			    	//BloodStackDao bloodStockDao=new BloodStackDao();
+			    	
+			    	//SeekerDao seekerDao1=new SeekerDao();
+			    	
+			    	//SeekerDetails seeker1=seekerDao1.seekerObject(bloodType, hospitalName);
+			    	 // seekerDao1.seekerIdFind(seeker1);
+			    	//int price=bloodStockDao.findPrice(reqModel.getBloodType());
+			    	
+			    	//int currentUnit=reqModel.getUnit();
+			    	//int totalPrice=currentUnit*price;
+			    	
+			    	
+			    	//BillingModel bDao1=new BillingModel(reqModel.getBloodType(),seeker1, reqModel.getUnit(),totalPrice);
+			    	
+			    	
+			    	BloodStackDao stackDao=new BloodStackDao();
+			    	
+			    	if(stackDao.checkOfQuantity(reqModel.getBloodType())>reqModel.getUnit())
+			    	{
+			    		
+			    		stackDao.updateStackReduce(reqModel.getBloodType(),reqModel.getUnit());
+			    		System.out.println("Welcome Again");
+			    		
+			    	}
+			    	else
+			    	{
+			    		System.out.println("Stock not available");
+			    	}
+//			    	stackDao.FindBlood(reqModel.getBloodType());
+			    	
+			    	
+			    	
+			    	
 			    	
 			    
 			    break;

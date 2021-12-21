@@ -1,0 +1,8 @@
+package com.bloodbank.model;
+
+public class BloodPriceModel {
+	
+	private String bloodType;
+	private int price;
+
+}

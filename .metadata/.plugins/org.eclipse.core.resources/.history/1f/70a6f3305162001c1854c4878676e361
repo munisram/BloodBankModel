@@ -1,0 +1,43 @@
+package com.bloodbank.Dao;
+
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import com.bloodbank.model.BillingModel;
+
+public class BillingDao {
+	
+	public int insertBilling(BillingModel billing) {
+		
+		
+		ConnectionUtil connection=new ConnectionUtil();
+		try {
+			Connection  con=connection.getConnection();
+			String query="update blood_"
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return 0;
+		
+	}
+	
+
+}
