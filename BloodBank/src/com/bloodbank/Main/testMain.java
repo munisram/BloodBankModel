@@ -2,10 +2,13 @@ package com.bloodbank.Main;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Scanner;
 
 import com.bloodbank.Dao.AdminModelDao;
+import com.bloodbank.Dao.BillingDao;
 import com.bloodbank.Dao.BloodDetailsDao;
 
 import com.bloodbank.Dao.BloodStackDao;
@@ -191,7 +194,7 @@ public class testMain {
 			if(ifNumber==1) {
 						booking=new BookingModel(adharcard, address, bookDate, bloodType);
 								
-				 tempNumber=bookDao.deleteBooking(booking);
+				 tempNumber=bookDao.deleteBooking(booking.getAdharcard());
 				if(tempNumber>0) {
 					System.out.println("booking cancel success");
 				}
@@ -220,7 +223,7 @@ public class testMain {
 						
 						BloodStackDao stackDao= new BloodStackDao();
 						   
-					 stack=new BloodStack(details.getUnit(),details.getBloodType());	
+					 stack=new BloodStack(details.getUnit(),details.getBloodType(),price);	
 					
 					     stackDao.showStack();
 					
@@ -273,10 +276,20 @@ public class testMain {
 	           
 			donor.setAge(age);
 			
-			
+			String temp=null;
+			do {
+				System.out.println("enter the phone  Number:");
+				 temp=scan.nextLine();
+				 if(temp.isEmpty())
+				 {
+					 System.out.println("phone number can't be empty");
+				 }
+	               if(!temp.matches("[0-9]{10}")) {
+	            	   System.out.println("phone number can not be smaller than 10 ");
+	               }
+				}while(!temp.matches("[0-9]{10}"));
 		
-		
-		 donor.setNumber(Long.parseLong(scan.nextLine()));
+		 donor.setNumber(Long.parseLong(temp));
 		 // donor=new Donor();
 		  DonorDao dao=new DonorDao();
 			tempNumber=dao.updateDonor(donor);
@@ -474,17 +487,65 @@ public class testMain {
 			} while (!password.matches("[A-Za-z0-9@#.!&]{8,16}") || password.isEmpty());
 			
 			
-			AdminModel aModel=new AdminModel(email, password);
+			AdminModel adminModel=new AdminModel(email, password);
 			
-			AdminModelDao aDao=new AdminModelDao();
-			tempNumber=aDao.verificationAdmin(aModel);
+			AdminModelDao adminDao=new AdminModelDao();
+			adminModel=adminDao.verificationAdmin(adminModel);
 			
-			if(tempNumber>0) {
+			if(!adminModel.equals(null)) {
 				System.out.println("verification success");
 			}
+			System.out.println("\n1.show Stock \n2.show billing \n3.request cancel \n4.booking cancel \n5.Home collection");
 			
+			int adminChioce=Integer.parseInt(scan.nextLine());
+			switch(adminChioce) {
+			case 1:
+				System.out.println("blood stocks");
+				BloodStackDao stockDao=new BloodStackDao();
+				List<BloodStack> bloodStackList =new ArrayList<BloodStack>();
+						bloodStackList=stockDao.showStack();
+						for(int i=0;i<bloodStackList.size();i++) {
+							System.out.println(bloodStackList.get(i));
+						}
+				
+				break;
+			case 2:
+				System.out.println("billing ");
+				BillingDao billingDao=new BillingDao();
+				List<BillingModel>billingList=new ArrayList<BillingModel>();
+				
+				billingList= billingDao.biilingShow();
+				for(int i=0;i<billingList.size();i++) {
+				System.out.println(billingList.get(i));
+				}
+				
+				break;
+			case 3:
 			
-			
+				System.out.println("enter the adharcard number of seeker");
+				adharcard =Long.parseLong(scan.nextLine());
+				RequestDao RequestDao=new RequestDao();
+				tempNumber=RequestDao.deleteRequest(adharcard);
+				if(tempNumber>0) {
+					System.out.println("request cancel");
+				}
+				
+				break;
+			case 4:
+				
+				BookingDao bookingDao=new BookingDao();
+				System.out.println("enter the adharcard number of donor ");
+				tempNumber=bookingDao.deleteBooking(adharcard);
+				if(tempNumber>0) {
+					System.out.println("booking cancel");
+				}
+				break;
+			case 5:
+				System.out.println("collecting blood from donor Home");
+				
+				
+				break;
+			}
 			
 			
 			
@@ -753,25 +814,31 @@ public class testMain {
 			    	
 			    	SeekerDao dao=new SeekerDao();
 			    	
-			    	//int seekerId=dao.seekerIdFind(reqModel.getBloodType());
+			    	
+			    	
+			    	
+			    	BloodStackDao bloodStockDao=new BloodStackDao();
+			    	
+			    	SeekerDao seekerDao1=new SeekerDao();
+			    	
+			    	SeekerDetails seeker1=seekerDao1.seekerObject(reqModel.getBloodType(), reqModel.getHospitalName());
+                      int seekerId=dao.seekerIdFind(seeker1);
+			    	
 			    	//dao.seekerIdFind(reqModel.getBloodType(), reqModel.getHospitalName());
+			    	// seekerDao1.seekerIdFind(seeker1);
+			    	 
+			    	int price=bloodStockDao.findPrice(reqModel.getBloodType());
+			    	
+			    	int currentUnit=reqModel.getUnit();
+			    	int totalPrice=currentUnit*price;
 			    	
 			    	
-			    	//BloodStackDao bloodStockDao=new BloodStackDao();
-			    	
-			    	//SeekerDao seekerDao1=new SeekerDao();
-			    	
-			    	//SeekerDetails seeker1=seekerDao1.seekerObject(bloodType, hospitalName);
-			    	 // seekerDao1.seekerIdFind(seeker1);
-			    	//int price=bloodStockDao.findPrice(reqModel.getBloodType());
-			    	
-			    	//int currentUnit=reqModel.getUnit();
-			    	//int totalPrice=currentUnit*price;
-			    	
-			    	
-			    	//BillingModel bDao1=new BillingModel(reqModel.getBloodType(),seeker1, reqModel.getUnit(),totalPrice);
-			    	
-			    	
+			    	BillingModel bDao1=new BillingModel(reqModel.getBloodType(),seeker1, reqModel.getUnit(),totalPrice);
+			    	BillingDao billingDao=new BillingDao();
+			    	int n=billingDao.insertBilling(bDao1);
+			    	if(n>0) {
+			    		System.out.println("billing success");
+			    	}
 			    	BloodStackDao stackDao=new BloodStackDao();
 			    	
 			    	if(stackDao.checkOfQuantity(reqModel.getBloodType())>reqModel.getUnit())
@@ -800,7 +867,7 @@ public class testMain {
 			    	
 			    	RequestDao reqDao1=new RequestDao();
 			    	
-			    	tempNumber=reqDao1.deleteRequest(reqModel);
+			    	tempNumber=reqDao1.deleteRequest(reqModel.getAdharcard());
 			    	
 			    	if(tempNumber>0) {
 			    		
@@ -811,14 +878,7 @@ public class testMain {
 			    	
 			    	break;
 			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
-			    
+			  			    
 			    
 			    
 			    }

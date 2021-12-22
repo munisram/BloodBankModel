@@ -45,13 +45,11 @@ phone varchar2(20) not null,
 age number (5) not null,
 blood_type varchar2(5));
 ---------------------------
-create table blood_bank_admin (admin_id number(11) GENERATED ALWAYS AS IDENTITY START WITH 1 primary key,
-user_name varchar2(50) unique,
-password varchar2(50)not null);
+
 --------------------------------
-create table blood_details(blood_group varchar2(50) primary key,
+/*create table blood_details(blood_group varchar2(50) primary key,
 accept_blood varchar2(50) not null ,
-received varchar2(50));
+received varchar2(50));*/
 ---------------------------
 /*create table blood_transaction (transact_id number(11) GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 mdpreson_id number (11)not null,
@@ -67,15 +65,14 @@ donor_id  number (11)not null,
 date_donated date not null,
 quantity int not null ,
 foreign key (donor_id) references donor(donor_id) );
+
 -------------------
 select * from donor;
 desc donor
 insert into donor (first_name,last_name,address,email,phone,age,blood_type,password)values('munis','waran','chennai','munisram6@gmail.com','9894688836',24,'O-','050476ram');
-commit
-delete from center;
-create table center (center_id number(11) primary key ,
-center_name varchar2(50) not null,
-address varchar2(100) unique);
+--commit
+
+
 -------------------------
 create table booking (book_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key,
 adharcard number(20) not null,
@@ -92,7 +89,7 @@ adharcard number(20) not null,
  select * from admin;
  select * from blood_details;
  
-drop table    blood_stack cascade constraints;
+drop table   blood_bank_admin cascade constraints;
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
@@ -102,8 +99,12 @@ price number(11)not null);
 
 desc blood_details
 select * from blood_details;
+
 select * from blood_stack;
 select * from booking;
+
+
+
 create table blood_stack(stack_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20)unique ,
 quantity number(11) not null,
@@ -112,8 +113,10 @@ unit_price number(20) not null);
 insert into blood_stack (blood_type,quantity,unit_price)values('ab-',1,1200);
 select * from blood_stack;
 
-select MONTHS_BETWEEN(current_timestamp,'17-09-2021')*30
-from dual;
+--select MONTHS_BETWEEN(current_timestamp,'17-09-2021')*30
+--from dual;
+
+
 create table seeker_details(id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 first_name varchar2(50)not null,
 last_name varchar2(50) not null,
@@ -132,12 +135,16 @@ unit number(11) not null,
 blood_collector_name varchar2(50) not null,
 phone_number number(20) not null,
 adharcard_number number(20) not null);
+
 select * from request_details;
+
+
 desc request_details
 commit
 
 create table billing (bill_id number(20) GENERATED ALWAYS AS IDENTITY START WITH 1 primary key,
 blood_type varchar2(20) not null,
+seeker_id number(20)not null,
 quantity number(11) not null,
 price number(20) not null);
 
@@ -152,21 +159,29 @@ select * from billing;
 
 
 
-create table blood_price (price_id number(11) GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
-blood_type varchar2(50) not null,
-price number(20) not null);
-select * from blood_price;
-insert into blood_price(blood_type,price)values('b-',500);
+
 
 
 create table admin (admin_id number(12) GENERATED ALWAYS AS IDENTITY START WITH 100 primary key,
 email varchar2(50) unique,
 password varchar2(50) not null);
 insert into admin (email,password)values('munisram6@gmail.com','050476ram');
+
+
 select * from admin;
+
 select* from blood_stack;
 
+--desc blood_stack;
 select * from seeker_details;
-desc seeker_details;
+--desc seeker_details;
+select * from donor_details;
+select * from request_details;
+select * from billing;
+select * from booking;
+select * from billing;
+---------------------------
+select * from admin;
 
+desc admin
 

@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import com.bloodbank.model.SeekerDetails;
 
@@ -46,7 +47,7 @@ public class SeekerDao {
 		int n=0;
 		try {
 			Connection con=connection.getConnection();
-			String query ="select * from seeker_details where first_name=? last_name=? ";
+			String query ="select * from seeker_details where first_name=? and last_name=? ";
 			PreparedStatement pstmt=con.prepareStatement(query);
 			pstmt.setString(1, seeker.getFirstName());
 			pstmt.setString(2, seeker.getLastName());
@@ -82,7 +83,7 @@ public class SeekerDao {
 		
 		try {
 			Connection con=connection.getConnection();
-			String query ="select * from seeker_details where blood_type=? hospital_name=? ";
+			String query ="select * from seeker_details where blood_type=? and hospital_name=? ";
 			PreparedStatement pstmt=con.prepareStatement(query);
 			pstmt.setString(1, bloodType);
 			pstmt.setString(2, hospital);
@@ -105,4 +106,33 @@ public class SeekerDao {
 		return seeker;
 	
 	}
+	
+	public SeekerDetails SeekerFindId(int seekerId) {
+		
+		SeekerDetails seeker=null;
+		
+		ConnectionUtil connection=new ConnectionUtil();
+		try {
+			Connection con=connection.getConnection();
+			String query="select * from seeker_details";
+			Statement stmt=con.createStatement();
+		ResultSet rs=stmt.executeQuery(query);
+			while(rs.next()) {
+				seeker=new SeekerDetails(rs.getString(2),rs.getString(3),rs.getString(4),
+						rs.getLong(5),rs.getLong(6),rs.getString(7),rs.getString(8),rs.getInt(9));
+			}
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+		
+		return seeker;
+		
+	}
+	
 }

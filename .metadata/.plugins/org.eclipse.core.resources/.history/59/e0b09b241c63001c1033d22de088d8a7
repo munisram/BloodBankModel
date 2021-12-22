@@ -1,0 +1,13 @@
+package exeception.com;
+
+public class ExeceptionHandle extends Exception{
+	
+	public void NoDataFound() {
+		System.out.println(" ");
+	}
+	
+	public void SQLException() {
+		System.out.println("connection Error ");
+	}
+
+}

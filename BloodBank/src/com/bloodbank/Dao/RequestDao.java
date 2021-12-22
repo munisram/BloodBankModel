@@ -45,13 +45,13 @@ public class RequestDao {
 		
 	}
 	
-	public int deleteRequest(RequestModel request) {
+	public int deleteRequest(Long adharcard) {
 		ConnectionUtil connection=new ConnectionUtil();
 		int tempNumber=0;
 		
 		try {
 			Connection con=connection.getConnection();
-			String query="delete from booking where adharcard ='"+request.getAdharcard()+"'";
+			String query="delete from booking where adharcard ='"+adharcard+"'";
 			Statement stmt=con.createStatement();
 			tempNumber=stmt.executeUpdate(query);
 			
