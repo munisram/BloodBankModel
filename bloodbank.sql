@@ -79,6 +79,7 @@ adharcard number(20) not null,
  address varchar2(100) not null,
   book_date date not null ,
   blood_type varchar2(10) not null,
+  blood_collect_choice varchar2(100) not null,
   foreign key (adharcard) references donor_details(adharcard) );
  ----------------------------
  
@@ -89,7 +90,7 @@ adharcard number(20) not null,
  select * from admin;
  select * from blood_details;
  
-drop table   blood_bank_admin cascade constraints;
+drop table  booking cascade constraints;
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
@@ -179,9 +180,15 @@ select * from donor_details;
 select * from request_details;
 select * from billing;
 select * from booking;
+desc booking;
 select * from billing;
 ---------------------------
 select * from admin;
 
-desc admin
+desc booking
+select * from blood_details;
+select * from donor_details inner join booking on donor_details.adharcard=booking.adharcard
+where BLOOD_COLLECT_CHOICE='home';
 
+
+select * from booking;

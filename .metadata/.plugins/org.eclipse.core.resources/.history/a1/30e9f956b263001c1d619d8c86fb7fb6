@@ -1,0 +1,79 @@
+package com.bloodbank.model;
+
+import java.util.Date;
+import java.util.Objects;
+
+public class BookingModel {
+
+	private Donor donor;
+	private String address;
+	private Date appdate;
+	private  String bloodType;
+	private String bloodCollectchoice;
+	public Donor getDonor() {
+		return donor;
+	}
+	public void setDonor(Donor donor) {
+		this.donor = donor;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	public Date getAppdate() {
+		return appdate;
+	}
+	public void setAppdate(Date appdate) {
+		this.appdate = appdate;
+	}
+	public String getBloodType() {
+		return bloodType;
+	}
+	public void setBloodType(String bloodType) {
+		this.bloodType = bloodType;
+	}
+	public String getBloodCollecthoice() {
+		return bloodCollectChoice;
+	}
+	public void setBloodCollecthoice(String bloodCollecthoice) {
+		this.bloodCollecthoice = bloodCollecthoice;
+	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, appdate, bloodCollecthoice, bloodType, donor);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BookingModel other = (BookingModel) obj;
+		return Objects.equals(address, other.address) && Objects.equals(appdate, other.appdate)
+				&& Objects.equals(bloodCollecthoice, other.bloodCollecthoice)
+				&& Objects.equals(bloodType, other.bloodType) && Objects.equals(donor, other.donor);
+	}
+	@Override
+	public String toString() {
+		return "BookingModel [donor=" + donor + ", address=" + address + ", appdate=" + appdate + ", bloodType="
+				+ bloodType + ", bloodCollecthoice=" + bloodCollecthoice + "]";
+	}
+	public BookingModel(Donor donor, String address, Date appdate, String bloodType, String bloodCollecthoice) {
+		super();
+		this.donor = donor;
+		this.address = address;
+		this.appdate = appdate;
+		this.bloodType = bloodType;
+		this.bloodCollecthoice = bloodCollecthoice;
+	}
+	public BookingModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+
+}

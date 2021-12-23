@@ -126,7 +126,42 @@ public class testMain {
 							System.out.println("address can not be smaller than 10");
 						}
 					}while(!address.matches("[a-zA-Z0-9,/]{10,}"));
-			 booking=new BookingModel(donor.getAdharcard(), address, bookDate, donor.getBloodType());
+			 
+			 System.out.println("\\n1.home \n2.center ");
+			 int bookingchoice=Integer.parseInt(scan.nextLine());
+			 String center=null;
+			
+				BookingModel book=null;
+			if(bookingchoice==1) {
+				System.out.println("enter the home details");
+				center=scan.nextLine();
+				
+				 
+				Donor donor1=donorDao.validAdharcardNumber(donor.getAdharcard());
+				
+				
+				System.out.println(donor1.getBloodType());
+			BookingModel book1=new BookingModel(donor1, address, bookDate, donor1.getBloodType(),center);
+			
+			
+			 tempNumber=bookDao.booking(book1);
+			System.out.println(tempNumber);
+			 if(tempNumber>0) {
+				 System.out.println("booking conform");
+			 }
+				
+				
+			}else if(bookingchoice==2) {
+				
+                     center="center";
+				
+				
+				
+			 book=new BookingModel(donor, address, bookDate, donor.getBloodType(),center);
+			
+			 tempNumber=bookDao.updateBooking(book);
+				
+			}
 			 
 		} catch (ParseException e) {
 			e.printStackTrace();
@@ -142,6 +177,7 @@ public class testMain {
 		System.out.println("\n 1.booking change \n2.booking cancel \n 3.conformation");
 		
 		tempNumber=Integer.parseInt(scan.nextLine());
+		Donor donor1=donorDao.validAdharcardNumber(donor.getAdharcard());
 		switch(tempNumber) {
 		
 		
@@ -181,25 +217,55 @@ public class testMain {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			BookingModel book=new BookingModel(donor.getAdharcard(), address, bookDate, donor.getBloodType());
-			
-			 tempNumber=bookDao.updateBooking(book);
-			 if(tempNumber>0) {
-				 System.out.println("booking updated");
-			 }
-			 break;
-		case 2:
-			System.out.println("\n1.booking cancel");
-			ifNumber=Integer.parseInt(scan.nextLine());
-			if(ifNumber==1) {
-						booking=new BookingModel(adharcard, address, bookDate, bloodType);
-								
-				 tempNumber=bookDao.deleteBooking(booking.getAdharcard());
-				if(tempNumber>0) {
-					System.out.println("booking cancel success");
+				 System.out.println("\\n1.home \n2.center ");
+				 int bookingchoice=Integer.parseInt(scan.nextLine());
+				 String center=null;
+				
+					BookingModel book=null;
+				if(bookingchoice==1) {
+					System.out.println("enter the home details");
+					center=scan.nextLine();
+					
+					
+					 donor1=donorDao.validAdharcardNumber(donor.getAdharcard());
+					
+					
+				 book=new BookingModel(donor1, address, bookDate, donor.getBloodType(),center);
+				
+				 tempNumber=bookDao.updateBooking(book);
+				 if(tempNumber>0) {
+					 System.out.println("booking change");
+				 }
+					
+					
+				}else if(bookingchoice==2) {
+					
+                         center="center";
+					
+					
+					
+				 book=new BookingModel(donor1, address, bookDate, donor.getBloodType(),center);
+				
+				 tempNumber=bookDao.updateBooking(book);
+					
 				}
-			}			
-			break;
+				System.out.println("booikng change");
+				
+			
+			 break;
+//		case 2:
+//			System.out.println("\n1.booking cancel");
+//			ifNumber=Integer.parseInt(scan.nextLine());
+//			if(ifNumber==1) {
+//				
+//						booking=new BookingModel(donor1, address, bookDate, bloodType,book.getBloodCollectChoice());
+//								
+//				 tempNumber=bookDao.deleteBooking(booking.getAddress(),booking.getBloodType(),booking.getBloodCollectChoice());
+//				if(tempNumber>0) {
+//					System.out.println("booking cancel success");
+//				}
+//			}			
+//			break;
 		case 3:
 			int alcohol=0;
 			System.out.println("enter the blood pressure");
@@ -212,7 +278,10 @@ public class testMain {
 					
 					 unit=1;
 					int price=200;
-				BloodDetailsModel details=new BloodDetailsModel(booking.getAdharcard(),unit, booking.getBloodType(),price);
+					
+					Donor donor2=donorDao.validNumber(donor.getNumber());
+					
+				BloodDetailsModel details=new BloodDetailsModel(donor2,unit, booking.getBloodType(),price);
 				BloodDetailsDao detailDao=new BloodDetailsDao();		
 					tempNumber=detailDao.insertBloodDetails(details);
 					
@@ -524,6 +593,7 @@ public class testMain {
 			
 				System.out.println("enter the adharcard number of seeker");
 				adharcard =Long.parseLong(scan.nextLine());
+				
 				RequestDao RequestDao=new RequestDao();
 				tempNumber=RequestDao.deleteRequest(adharcard);
 				if(tempNumber>0) {
@@ -531,20 +601,24 @@ public class testMain {
 				}
 				
 				break;
-			case 4:
-				
-				BookingDao bookingDao=new BookingDao();
-				System.out.println("enter the adharcard number of donor ");
-				tempNumber=bookingDao.deleteBooking(adharcard);
-				if(tempNumber>0) {
-					System.out.println("booking cancel");
-				}
-				break;
-			case 5:
-				System.out.println("collecting blood from donor Home");
-				
-				
-				break;
+//			case 4:
+//				
+//				BookingDao bookingDao=new BookingDao();
+//				System.out.println("enter the donor address ");
+//				address=scan.nextLine();
+//				System.out.println();
+//			String   choice=null;
+//				tempNumber=bookingDao.deleteBooking(bloodType,address,choice);
+//				if(tempNumber>0) {
+//					System.out.println("booking cancel");
+//				}
+//				break;
+//			case 5:
+//				System.out.println("collecting blood from donor Home");
+//				
+//				
+//				
+//				break;
 			}
 			
 			

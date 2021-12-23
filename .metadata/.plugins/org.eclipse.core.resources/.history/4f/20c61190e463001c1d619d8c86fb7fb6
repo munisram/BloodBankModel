@@ -1,0 +1,9 @@
+package com.bloodbank.Main;
+
+public class AdminMainTest {
+
+	public static void main(String[] args) {
+		
+	}
+
+}

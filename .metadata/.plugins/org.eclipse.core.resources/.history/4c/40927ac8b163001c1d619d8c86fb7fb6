@@ -1,0 +1,15 @@
+package com.bloodbank.model;
+
+import java.util.Date;
+import java.util.Objects;
+
+public class BookingModel {
+
+	private Donor donor;
+	private String address;
+	private Date appdate;
+	private  String bloodType;
+	private String bloodCollecthoice;
+	
+
+}

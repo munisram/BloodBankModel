@@ -158,7 +158,37 @@ public class BloodStackDao {
 	}
 	
 	
-	
+//	public List<BloodStack> HomeCollection(){
+//		
+//		List<BloodStack>bloodList=new ArrayList<BloodStack>();
+//		ConnectionUtil connection=new ConnectionUtil();
+//		BloodStack stack=null;
+//		String query="select donor_details.first_name,booking.address from donor_details inner join booking on donor_details.adharcard=booking.adharcard\r\n"
+//				+ "where BLOOD_COLLECT_CHOICE='home'";
+//		try {
+//			Connection con=connection.getConnection();
+//			
+//			Statement stmt=con.createStatement();
+//		ResultSet rs= stmt.executeQuery(query);
+//		while(rs.next()) {
+//			
+//			
+//			
+//		}
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		
+//		
+//		return bloodList;
+//		
+//	}
 	
 	
 	

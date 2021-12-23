@@ -6,6 +6,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.bloodbank.model.RequestModel;
+import com.bloodbank.model.SeekerDetails;
 
 public class RequestDao {
 
