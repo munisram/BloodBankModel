@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -112,17 +113,24 @@ public class BookingDao {
  public List<BookingModel> HomeCollection(){
 	 BookingModel model=null;
 	 ConnectionUtil connection =new ConnectionUtil();
+	 List<BookingModel>booking=new ArrayList<BookingModel>();
 	 try {
+		
 		Connection con=connection.getConnection();
-		String query="select * from booking where BLOOD_COLLECT_CHOICE =?";
+		String query="select * from booking where BLOOD_COLLECT_CHOICE ='home'";
 		Statement stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(query);
 		while(rs.next()) {
+			DonorDao donor=new DonorDao();
 			
-			//model=new BookingModel(rs.getObject(2), rs.getString(3),rs.getDate(4), rs.getString(5), rs.getString(6));
+		    Donor donor1=donor.validAdharcardNumber(rs.getLong(2));
+		    System.out.println(donor1);
+			model=new BookingModel(donor1,rs.getString(3),rs.getDate(4), rs.getString(5), rs.getString(6));
 			
+			booking.add(model);
 			
 		}
+		
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block
@@ -133,7 +141,7 @@ public class BookingDao {
 	}
 	 
 	 
-	 return null;
+	 return booking;
 	 
 	 
 	 

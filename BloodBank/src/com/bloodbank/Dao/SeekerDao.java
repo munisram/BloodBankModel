@@ -88,7 +88,7 @@ public class SeekerDao {
 			pstmt.setString(1, bloodType);
 			pstmt.setString(2, hospital);
 			ResultSet rs=pstmt.executeQuery();
-			
+			//System.out.println(bloodType);
 			
 			while(rs.next()) {
 				seeker=new SeekerDetails(rs.getString(2),rs.getString(3),rs.getString(4),

@@ -324,24 +324,21 @@ public class UserMainTest {
 		}else {
 			
 			
-			
-			System.out.println("welcome");
+			System.out.println("register page");
+			do {
+		System.out.println("enter the first Name:");
 		
-		
-		do {
-			System.out.println("enter the first Name:");
-			
-			 firstName=scan.nextLine();
-			 if(firstName.isEmpty())
-			 {
-				 System.out.println("first name can't be empty");
-			 }
-			 if(!firstName.matches("[a-zA-Z]{3,}"))
-				{
-					System.out.println("first name can't be smaller than 3 ");
-				}
-			}while(!firstName.matches("[a-zA-Z]{3,}"));
-		
+		 firstName=scan.nextLine();
+		 if(firstName.isEmpty())
+		 {
+			 System.out.println("first name can't be empty");
+		 }
+		 if(!firstName.matches("[a-zA-Z]{3,}"))
+			{
+				System.out.println("first name can't be smaller than 3 ");
+			}
+		}while(!firstName.matches("[a-zA-Z]{3,}"));
+				
 		
 		do {
 			System.out.println("enter the last Name:");
@@ -369,6 +366,21 @@ public class UserMainTest {
 				}
 			}while(!address.matches("[a-zA-Z0-9,/]{10,}"));
 		
+		String temp4=null;
+		do {
+			System.out.println("enter the adharcard number");
+			temp4=scan.nextLine();
+			 if(temp4.isEmpty())
+			 {
+				 System.out.println("adharcard number can't be empty");
+			 }
+			if(!temp4.matches("[0-9]{12}")) {
+				System.out.println("adharcard number 12 digit");
+				
+			}
+		}while (!temp4.matches("[0-9]{12}"));
+		adharcard=Long.parseLong(temp4);
+		
 		String temp=null;
 		do {
 			System.out.println("enter the phone  Number:");
@@ -384,79 +396,49 @@ public class UserMainTest {
 		
                 phoneNumber=Long.parseLong(temp);
                 
-                
-                String temp1=null;
-    			do {
-    				System.out.println("enter the patient id:");
-    				 temp1=scan.nextLine();
-    				 if(temp1.isEmpty())
-    				 {
-    					 System.out.println("patient id can't be empty");
-    				 }
-    	               if(!temp1.matches("[0-9]{5,}")) {
-    	            	   System.out.println("patient id can not be smaller than 5 ");
-    	               }
-    				}while(!temp.matches("[0-9]{5,}"));
-    			
-    			patientId=Long.parseLong(temp1);
-                
-                
-    			do {
-    				System.out.println("enter the hospitalName:");
-    				
-    				hospitalName=scan.nextLine();
-    				 if(hospitalName.isEmpty())
-    				 {
-    					 System.out.println("hospitalName can't be empty");
-    				 }
-    				 if(!hospitalName.matches("[a-zA-Z]{5,}"))
-    					{
-    						System.out.println("hospitalNamecan't be smaller than 5 ");
-    					}
-    				}while(!hospitalName.matches("[a-zA-Z]{5,}"));
-                
-    			  do {
-    	        	   System.out.println("enter the blood type");
-    	        	   bloodType=scan.nextLine();
-    	        	   if(bloodType.isEmpty())
-    	  			 {
-    	  				 System.out.println("blood type can't be empty");
-    	  			 }
-    	        	   if(!bloodType.matches("([aboABO]|[aA][bB])[+|-]"))
-    	        	   
-    	        	   System.out.println("blood type can not be enter than exampe A-,ab-");
-    	        	   
-    	           }while(!bloodType.matches("([aboABO]|[aA][bB])[+|-]"));
-		
-    			  
-			  
-    			  
-    			  
-    			  String temp2=null;
-	    			do {
-	    				System.out.println("enter the unit:");
-	    				 temp2=scan.nextLine();
-	    				 if(temp2.isEmpty())
-	    				 {
-	    					 System.out.println("unit can't be empty");
-	    				 }
-	    	               if(!temp2.matches("[0-9]{1}")) {
-	    	            	   System.out.println("patient id can not be smaller than 1");
-	    	               }
-	    				}while(!temp2.matches("[0-9]{1}"));
-	    			
-	    			unit=Integer.parseInt(temp2);
-    			  
-	    			 SeekerDetails seeker=new SeekerDetails(firstName, lastName, address, phoneNumber, patientId, hospitalName, bloodType, unit);
-	    			 SeekerDao seekerDao=new SeekerDao();
-	    			tempNumber= seekerDao.insertSeekerDetails(seeker);
-		
-		    if(tempNumber>0) {
-		    	System.out.println("register success ");
-		    	
-		    	
-		    }
-		    
+           String temp1=null;
+          
+           do {
+        	   System.out.println("enter the age");
+        	   temp1=scan.nextLine();
+        	   if(temp1.isEmpty())
+  			 {
+  				 System.out.println("age can't be empty");
+  			 }
+        	   
+        	   if(!temp1.matches("[0-9]{1,2}")) {
+        		   System.out.println("age can not be more then 2 ");
+        		     }
+        	   
+           }while(!temp1.matches("[0-9]{1,2}"));
+           
+           age=Integer.parseInt(temp1);
+           if(age>17) {
+           
+           do {
+        	   System.out.println("enter the blood type");
+        	   bloodType=scan.nextLine();
+        	   if(bloodType.isEmpty())
+  			 {
+  				 System.out.println("blood type can't be empty");
+  			 }
+        	   if(!bloodType.matches("([aboABO]|[aA][bB])[+|-]"))
+        	   
+        	   System.out.println("blood type can not be enter than exampe A-,ab-");
+        	   
+           }while(!bloodType.matches("([aboABO]|[aA][bB])[+|-]"));
+           
+           
+           Donor donor1=new Donor(firstName, lastName, address,  adharcard,phoneNumber, age, bloodType);
+           DonorDao dao=new DonorDao();
+        		   dao.insertDonor(donor1);
+        	  
+        		   
+        		   
+           }else {
+        	   System.out.println("not applicaple to donate blood");
+           }
+
 }
 
 		
