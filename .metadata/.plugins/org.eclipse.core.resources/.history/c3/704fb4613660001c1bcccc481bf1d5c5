@@ -1,8 +1,0 @@
-package com.bloodbank.model;
-
-public class BloodDetailsModel {
-	private Long adharcard;
-	private int quantity;
-	
-
-}

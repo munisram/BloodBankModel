@@ -4,6 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.bloodbank.Dao.AdminModelDao;
 import com.bloodbank.Dao.BillingDao;
 import com.bloodbank.Dao.BloodStackDao;
 import com.bloodbank.Dao.RequestDao;
@@ -287,7 +288,10 @@ public class SeekerMainTest {
 		    	}
 		    	
 		    	System.out.println("billing process");
-		    	
+		    	BloodStackDao stackDao=new BloodStackDao();
+		    	if(stackDao.checkOfQuantity(reqModel.getBloodType())>reqModel.getUnit())
+		    	{
+		    		
 		    	SeekerDao dao=new SeekerDao();
 		    	
 		    	
@@ -306,7 +310,7 @@ public class SeekerMainTest {
 		    	int price=bloodStockDao.findPrice(reqModel.getBloodType());
 		    	
 		    	int currentUnit=reqModel.getUnit();
-		    	int totalPrice=currentUnit*price;
+		    	double totalPrice=currentUnit*price;
 		    	
 		    	
 		    	BillingModel bDao1=new BillingModel(reqModel.getBloodType(),seeker1, reqModel.getUnit(),totalPrice);
@@ -315,12 +319,18 @@ public class SeekerMainTest {
 		    	if(n>0) {
 		    		System.out.println("billing success");
 		    	}
-		    	BloodStackDao stackDao=new BloodStackDao();
 		    	
-		    	if(stackDao.checkOfQuantity(reqModel.getBloodType())>reqModel.getUnit())
-		    	{
-		    		
+		    	
+		    	
 		    		stackDao.updateStackReduce(reqModel.getBloodType(),reqModel.getUnit());
+		    		
+		    		AdminModelDao adminDao=new AdminModelDao();
+		    		int no1=adminDao.seekerPayment(totalPrice);
+		    		
+		    		if(no1>0) {
+		    			System.out.println("payment success");
+		    		}
+		    		
 		    		System.out.println("Welcome Again");
 		    		
 		    	}

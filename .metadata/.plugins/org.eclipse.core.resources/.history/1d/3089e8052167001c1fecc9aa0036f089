@@ -1,0 +1,16 @@
+package com.bloodbank.model;
+
+import java.util.Objects;
+
+public class AdminModel {
+	
+	private String email;
+	private String password;
+	private double wallet;
+	public AdminModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	
+
+}

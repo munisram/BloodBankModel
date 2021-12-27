@@ -6,39 +6,7 @@ public class BillingModel {
 	private String bloodType;
 	private SeekerDetails seeker;
 	private int unit;
-	private int totalprice;
-	public BillingModel() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public BillingModel(String bloodType, SeekerDetails seeker, int unit, int totalprice) {
-		super();
-		this.bloodType = bloodType;
-		this.seeker = seeker;
-		this.unit = unit;
-		this.totalprice = totalprice;
-	}
-	@Override
-	public String toString() {
-		return "BillingModel [bloodType=" + bloodType + ", seeker=" + seeker + ", unit=" + unit + ", totalprice="
-				+ totalprice + "]";
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(bloodType, seeker, totalprice, unit);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		BillingModel other = (BillingModel) obj;
-		return Objects.equals(bloodType, other.bloodType) && Objects.equals(seeker, other.seeker)
-				&& totalprice == other.totalprice && unit == other.unit;
-	}
+	private double totalprice;
 	public String getBloodType() {
 		return bloodType;
 	}
@@ -57,15 +25,45 @@ public class BillingModel {
 	public void setUnit(int unit) {
 		this.unit = unit;
 	}
-	public int getTotalprice() {
+	public double getTotalprice() {
 		return totalprice;
 	}
-	public void setTotalprice(int totalprice) {
+	public void setTotalprice(double totalprice) {
 		this.totalprice = totalprice;
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(bloodType, seeker, totalprice, unit);
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BillingModel other = (BillingModel) obj;
+		return Objects.equals(bloodType, other.bloodType) && Objects.equals(seeker, other.seeker)
+				&& Double.doubleToLongBits(totalprice) == Double.doubleToLongBits(other.totalprice)
+				&& unit == other.unit;
+	}
+	@Override
+	public String toString() {
+		return "BillingModel [bloodType=" + bloodType + ", seeker=" + seeker + ", unit=" + unit + ", totalprice="
+				+ totalprice + "]";
+	}
+	public BillingModel(String bloodType, SeekerDetails seeker, int unit, double totalprice) {
+		super();
+		this.bloodType = bloodType;
+		this.seeker = seeker;
+		this.unit = unit;
+		this.totalprice = totalprice;
+	}
+	public BillingModel() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	
-	
-	
-
 	
 }

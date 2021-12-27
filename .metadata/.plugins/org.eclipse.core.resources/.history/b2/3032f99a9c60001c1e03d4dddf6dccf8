@@ -1,8 +1,0 @@
-package com.bloodbank.model;
-
-public class BloodStack {
-	private int quantity;
-	private String bloodType;
-	
-
-}

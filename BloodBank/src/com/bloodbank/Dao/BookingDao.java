@@ -124,7 +124,7 @@ public class BookingDao {
 			DonorDao donor=new DonorDao();
 			
 		    Donor donor1=donor.validAdharcardNumber(rs.getLong(2));
-		    System.out.println(donor1);
+		    //System.out.println(donor1);
 			model=new BookingModel(donor1,rs.getString(3),rs.getDate(4), rs.getString(5), rs.getString(6));
 			
 			booking.add(model);
@@ -143,27 +143,63 @@ public class BookingDao {
 	 
 	 return booking;
 	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
-	 
+	  
 	 
 	 
  }
  
+ 
+ public Date dateCheck(Donor donor) {
+	 Date date=null;
+	 ConnectionUtil connection=new ConnectionUtil();
+	 try {
+		Connection con=connection.getConnection();
+		String query="select book_date+90 from booking where adharcard=?";
+		PreparedStatement pstmt=con.prepareStatement(query);
+		
+		pstmt.setLong(1, donor.getAdharcard());
+		//System.out.println(donor.getAdharcard());
+		ResultSet rs= pstmt.executeQuery();
+		while(rs.next()) {
+			
+			
+			date= rs.getDate(1);
+		}
+		
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	//System.out.println(date);
+	 
+	 return date;
+ }
+ 
+ public int updateDateForDonor(BookingModel book) {
+	 
+	 ConnectionUtil connection=new ConnectionUtil();
+	 try {
+		Connection con=connection.getConnection();
+		String query="update booking set book_date=? where adharcard=?";
+		PreparedStatement pstmt=con.prepareStatement(query);
+		pstmt.setDate(1, new java.sql.Date(book.getAppdate().getTime()));
+		pstmt.setLong(2, book.getDonor().getAdharcard());		
+		
+		
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 
+	 
+	 return 0;
+ }
 }
+

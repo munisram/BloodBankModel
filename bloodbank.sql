@@ -1,4 +1,4 @@
-create table blood_bank_admin (user_name varchar2(50) primary key ,password varchar2(20) not null);
+
 select * from donor;
 
 alter table client_side rename column las_tname to last_name ;
@@ -90,7 +90,7 @@ adharcard number(20) not null,
  select * from admin;
  select * from blood_details;
  
-drop table  booking cascade constraints;
+drop table  blood_bank_admin cascade constraints;
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
@@ -165,15 +165,19 @@ select * from billing;
 
 create table admin (admin_id number(12) GENERATED ALWAYS AS IDENTITY START WITH 100 primary key,
 email varchar2(50) unique,
-password varchar2(50) not null);
-insert into admin (email,password)values('munisram6@gmail.com','050476ram');
+password varchar2(50) not null,
+wallet number(20)  default 0 not null);
 
 
+insert into admin (email,password)values('munisram6@gmail.com','050476ram',);
+
+update  admin set wallet=2000 where email='munisram6@gmail.com';
 select * from admin;
+drop table admin cascade CONSTRAINT ;
 
 select* from blood_stack;
 
---desc blood_stack;
+select * from blood_stack;
 select * from seeker_details;
 --desc seeker_details;
 select * from donor_details;
@@ -192,3 +196,14 @@ where BLOOD_COLLECT_CHOICE='home';
 
 
 select * from booking;
+commit;
+select * from  admin;
+
+
+select book_date+90 from booking where adharcard=123456789012;
+
+select * from booking where to_char(book_date,'dd-mm-yyyy')between '27-12-2019' and '27-12-2021';
+
+
+truncate table seeker_details;
+

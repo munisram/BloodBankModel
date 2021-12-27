@@ -1,8 +1,0 @@
-package com.bloodbank.model;
-
-public class RequestModel {
-	
-	private String hospitalName;
-	private String blood
-
-}

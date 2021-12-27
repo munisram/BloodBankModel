@@ -5,11 +5,13 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
+import com.bloodbank.Dao.AdminModelDao;
 import com.bloodbank.Dao.BloodDetailsDao;
 import com.bloodbank.Dao.BloodStackDao;
 import com.bloodbank.Dao.BookingDao;
 import com.bloodbank.Dao.DonorDao;
 import com.bloodbank.Dao.SeekerDao;
+import com.bloodbank.model.AdminModel;
 import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.BookingModel;
@@ -20,7 +22,7 @@ public class UserMainTest {
 
 	public static void main(String[] args) {
 
-		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-YYYY");
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
 		Scanner scan = new Scanner(System.in);
 		String firstName = null;
 		String lastName = null;
@@ -88,7 +90,7 @@ public class UserMainTest {
 							}
 							if (!tempDate.matches("(0[1-9]|[12][0-9]|3[01])[-](0[1-9]|1[012])[-]\\d{4}")) {
 
-								System.out.println("Date format 'dd/mm/yyyy'");
+								System.out.println("Date format 'dd/MM/yyyy'");
 
 							}
 
@@ -120,15 +122,54 @@ public class UserMainTest {
 							Donor donor1 = donorDao.validAdharcardNumber(donor.getAdharcard());
 
 							//System.out.println(donor1.getBloodType());
+							SimpleDateFormat sd=new SimpleDateFormat("dd-MM-yyyy");
+                              Date date1=bookDao.dateCheck(donor1);
+                              if(date1!=null && bookDate.after(date1)) {
+							//System.out.println(date1);
+							//System.out.println(sd.format(bookDate));
+							
+								
+								System.out.println("welcome");
 							
 							
-							BookingModel book1 = new BookingModel(donor1, address, bookDate, donor1.getBloodType(),
-									center);
+							
+							
+							BookingModel book1 = new BookingModel(donor1, address, bookDate, donor1.getBloodType(),center);
+							
 							
 							tempNumber = bookDao.booking(book1);
 
 							donorDao=new DonorDao();
 							
+
+							if (tempNumber > 0) {
+								System.out.println("booking success ");
+							}
+							
+							
+                              
+							bookDao.updateDateForDonor(book1);
+							
+							}else if(date1==null)
+							{
+								
+								System.out.println("welcome");
+								
+								
+								
+								
+								BookingModel book1 = new BookingModel(donor1, address, bookDate, donor1.getBloodType(),center);
+								
+								
+								tempNumber = bookDao.booking(book1);
+
+								donorDao=new DonorDao();
+								
+							}
+							else
+							{
+								System.out.println("See you later");
+							}
 							
 
 					} catch (ParseException e) {
@@ -136,10 +177,6 @@ public class UserMainTest {
 					}
 
 					
-					if (tempNumber > 0) {
-						System.out.println("booking success ");
-					}
-
 					System.out.println("\n 1.booking change \n2.booking cancel \n 3.conformation");
 
 					tempNumber = Integer.parseInt(scan.nextLine());
@@ -257,6 +294,16 @@ public class UserMainTest {
 
 									if (check > 0) {
 										System.out.println("stack update");
+									}
+									AdminModelDao adminDao=new AdminModelDao();
+									AdminModel admin=new AdminModel();
+									 admin=adminDao.updateWallet();
+									
+									if(admin!=null)
+									{
+									System.out.println("payment success");
+										
+										
 									}
 
 								}
