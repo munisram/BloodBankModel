@@ -1,6 +1,0 @@
-package com.bloodbank.model;
-
-public class BloodPrice {
-private String bloodType;
-p
-}
