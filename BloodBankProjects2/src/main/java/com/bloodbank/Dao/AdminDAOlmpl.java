@@ -9,7 +9,7 @@ import java.sql.Statement;
 import com.Interface.Dao.AdminDAO;
 import com.bloodbank.model.AdminModel;
 
-public class AdminDOlmpl implements AdminDAO {
+public class AdminDAOlmpl implements AdminDAO {
 	
 	public  AdminModel  verificationAdmin(AdminModel aModel) {
 		AdminModel model=null;
@@ -55,7 +55,7 @@ public class AdminDOlmpl implements AdminDAO {
 			admin=new AdminModel(rs.getString(2),rs.getString(3), rs.getDouble(4));
 		}
 			//System.out.println(id);
-		double walletTotal=500-wallet;
+		double walletTotal=300-wallet;
 		//System.out.println(walletTotal);
 			String query ="update admin set wallet=? where email=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
@@ -79,7 +79,7 @@ public class AdminDOlmpl implements AdminDAO {
 	
 public int seekerPayment(double totalPrice) {
 	
-	AdminDOlmpl adminDao=new AdminDOlmpl();
+	AdminDAOlmpl adminDao=new AdminDAOlmpl();
 	AdminModel admin=new AdminModel();
 	admin=adminDao.updateWallet();
 	double total=admin.getWallet()+totalPrice;

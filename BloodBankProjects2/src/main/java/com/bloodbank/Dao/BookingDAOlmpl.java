@@ -14,7 +14,7 @@ import com.Interface.Dao.DonorDAO;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
-public class BookingDOlmpl implements  BookingDAO {
+public class BookingDAOlmpl implements  BookingDAO {
 	
 	
 	public int  booking(BookingModel book) {
@@ -123,7 +123,7 @@ public class BookingDOlmpl implements  BookingDAO {
 		Statement stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(query);
 		while(rs.next()) {
-			DonorDOImpl donor=new DonorDOImpl();
+			DonorDAOImpl donor=new DonorDAOImpl();
 			
 		    Donor donor1=donor.validAdharcardNumber(rs.getLong(2));
 		    //System.out.println(donor1);

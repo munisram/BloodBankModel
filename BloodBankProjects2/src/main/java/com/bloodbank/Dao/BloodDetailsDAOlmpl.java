@@ -8,7 +8,7 @@ import com.Interface.Dao.BloodDetailsDAO;
 import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.Donor;
 
-public class BloodDetailsDOlmpl implements BloodDetailsDAO {
+public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 	
 	
 	

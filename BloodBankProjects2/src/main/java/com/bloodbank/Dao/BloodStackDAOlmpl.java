@@ -12,7 +12,7 @@ import com.Interface.Dao.BloodStackDAO;
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.RequestModel;
 
-public class BloodStackDOlmpl implements BloodStackDAO {
+public class BloodStackDAOlmpl implements BloodStackDAO {
 	
 	
 	public int updateStack(BloodStack stack) {
@@ -21,12 +21,12 @@ public class BloodStackDOlmpl implements BloodStackDAO {
 		try {
 			Connection con=connection.getConnection();
 			
-			
+			int quantity=checkOfQuantity(stack.getBloodType());
 			String query="update blood_stack set quantity=? where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
-			
-			pstmt.setInt(1, stack.getQuantity()+1);
-			pstmt.setString(2, stack.getBloodType());
+		
+			pstmt.setInt(1, quantity+stack.getQuantity());
+			pstmt.setString(2,stack.getBloodType());
 			n=pstmt.executeUpdate();
 			
 			

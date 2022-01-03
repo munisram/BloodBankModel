@@ -7,50 +7,12 @@ public class SeekerDetails {
 	private String lastName;
 	private String address;
 	private Long phoneNumber;
+	private String password ;
 	private Long  patientId;
 	private String hospitalName;
 	private String bloodType;
-	private int unit;
-	public SeekerDetails() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
-	public SeekerDetails(String firstName, String lastName, String address, Long phoneNumber, Long patientId,
-			String hospitalName, String bloodType, int unit) {
-		super();
-		this.firstName = firstName;
-		this.lastName = lastName;
-		this.address = address;
-		this.phoneNumber = phoneNumber;
-		this.patientId = patientId;
-		this.hospitalName = hospitalName;
-		this.bloodType = bloodType;
-		this.unit = unit;
-	}
-	@Override
-	public String toString() {
-		return "Seeker [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", phoneNumber="
-				+ phoneNumber + ", patientId=" + patientId + ", hospitalName=" + hospitalName + ", bloodType="
-				+ bloodType + ", unit=" + unit + "]";
-	}
-	@Override
-	public int hashCode() {
-		return Objects.hash(address, bloodType, firstName, hospitalName, lastName, patientId, phoneNumber, unit);
-	}
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		SeekerDetails other = (SeekerDetails) obj;
-		return Objects.equals(address, other.address) && Objects.equals(bloodType, other.bloodType)
-				&& Objects.equals(firstName, other.firstName) && Objects.equals(hospitalName, other.hospitalName)
-				&& Objects.equals(lastName, other.lastName) && Objects.equals(patientId, other.patientId)
-				&& Objects.equals(phoneNumber, other.phoneNumber) && unit == other.unit;
-	}
+	
+	
 	public String getFirstName() {
 		return firstName;
 	}
@@ -75,6 +37,12 @@ public class SeekerDetails {
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
+	public String getPassword() {
+		return password;
+	}
+	public void setPassword(String password) {
+		this.password = password;
+	}
 	public Long getPatientId() {
 		return patientId;
 	}
@@ -93,11 +61,45 @@ public class SeekerDetails {
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
-	public int getUnit() {
-		return unit;
+	@Override
+	public int hashCode() {
+		return Objects.hash(address, bloodType, firstName, hospitalName, lastName, password, patientId, phoneNumber);
 	}
-	public void setUnit(int unit) {
-		this.unit = unit;
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		SeekerDetails other = (SeekerDetails) obj;
+		return Objects.equals(address, other.address) && Objects.equals(bloodType, other.bloodType)
+				&& Objects.equals(firstName, other.firstName) && Objects.equals(hospitalName, other.hospitalName)
+				&& Objects.equals(lastName, other.lastName) && Objects.equals(password, other.password)
+				&& Objects.equals(patientId, other.patientId) && Objects.equals(phoneNumber, other.phoneNumber);
+	}
+	public SeekerDetails() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+	public SeekerDetails(String firstName, String lastName, String address, Long phoneNumber, String password,
+			Long patientId, String hospitalName, String bloodType) {
+		super();
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.address = address;
+		this.phoneNumber = phoneNumber;
+		this.password = password;
+		this.patientId = patientId;
+		this.hospitalName = hospitalName;
+		this.bloodType = bloodType;
+	}
+	@Override
+	public String toString() {
+		return "SeekerDetails [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address
+				+ ", phoneNumber=" + phoneNumber + ", password=" + password + ", patientId=" + patientId
+				+ ", hospitalName=" + hospitalName + ", bloodType=" + bloodType + "]";
 	}
 	
 	

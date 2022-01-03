@@ -7,8 +7,32 @@
 <title>Insert title here</title>
 </head>
 <body>
+<form action="BillingSeekerServlet" method="post">
 
-<input type="date" name="" id="">
-<input type="datetime-local">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</form>
 </body>
 </html>

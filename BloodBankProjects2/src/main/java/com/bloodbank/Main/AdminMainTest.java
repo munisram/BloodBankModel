@@ -6,11 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Scanner;
 
-import com.bloodbank.Dao.AdminDOlmpl;
-import com.bloodbank.Dao.BillingDOlmpl;
-import com.bloodbank.Dao.BloodStackDOlmpl;
-import com.bloodbank.Dao.BookingDOlmpl;
-import com.bloodbank.Dao.RequestDOlmpl;
+import com.bloodbank.Dao.AdminDAOlmpl;
+import com.bloodbank.Dao.BillingDAOlmpl;
+import com.bloodbank.Dao.BloodStackDAOlmpl;
+import com.bloodbank.Dao.BookingDAOlmpl;
+import com.bloodbank.Dao.RequestDAOlmpl;
 import com.bloodbank.model.AdminModel;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.BloodStack;
@@ -71,7 +71,7 @@ public class AdminMainTest {
 		
 		AdminModel adminModel=new AdminModel(email, password,0);
 		
-		AdminDOlmpl adminDao=new AdminDOlmpl();
+		AdminDAOlmpl adminDao=new AdminDAOlmpl();
 		adminModel=adminDao.verificationAdmin(adminModel);
 		
 		if(!adminModel.equals(null)) {
@@ -83,7 +83,7 @@ public class AdminMainTest {
 		switch(adminChioce) {
 		case 1:
 			System.out.println("blood stocks");
-			BloodStackDOlmpl stockDao=new BloodStackDOlmpl();
+			BloodStackDAOlmpl stockDao=new BloodStackDAOlmpl();
 			List<BloodStack> bloodStackList =new ArrayList<BloodStack>();
 					bloodStackList=stockDao.showStack();
 					for(int i=0;i<bloodStackList.size();i++) {
@@ -93,7 +93,7 @@ public class AdminMainTest {
 			break;
 		case 2:
 			System.out.println("billing ");
-			BillingDOlmpl billingDao=new BillingDOlmpl();
+			BillingDAOlmpl billingDao=new BillingDAOlmpl();
 			List<BillingModel>billingList=new ArrayList<BillingModel>();
 			
 			billingList= billingDao.biilingShow();
@@ -107,7 +107,7 @@ public class AdminMainTest {
 			System.out.println("enter the adharcard number of seeker");
 			adharcard =Long.parseLong(scan.nextLine());
 			
-			RequestDOlmpl RequestDao=new RequestDOlmpl();
+			RequestDAOlmpl RequestDao=new RequestDAOlmpl();
 			tempNumber=RequestDao.deleteRequest(adharcard);
 			if(tempNumber>0) {
 				System.out.println("request cancel");
@@ -116,7 +116,7 @@ public class AdminMainTest {
 			break;
 		case 4:
 			
-			BookingDOlmpl bookingDao=new BookingDOlmpl();
+			BookingDAOlmpl bookingDao=new BookingDAOlmpl();
 			System.out.println("enter the donor adharcard number ");
 			Long adharcard1=Long.parseLong(scan.nextLine());
 		
@@ -127,7 +127,7 @@ public class AdminMainTest {
 			break;
 		case 5:
 			System.out.println("collecting blood from donor Home");
-			 BookingDOlmpl bookingDao1=new BookingDOlmpl();
+			 BookingDAOlmpl bookingDao1=new BookingDAOlmpl();
 			 
 			 List<BookingModel>bookingList=new ArrayList<BookingModel>();
 			 

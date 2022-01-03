@@ -9,7 +9,7 @@ import com.Interface.Dao.RequestDAO;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
-public class RequestDOlmpl  implements RequestDAO{
+public class RequestDAOlmpl  implements RequestDAO{
 
 	
 	public int insertRequest(RequestModel request) {

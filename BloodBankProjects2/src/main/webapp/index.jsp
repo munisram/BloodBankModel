@@ -7,29 +7,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<h1 style="text-align: center;">Register</h1>
-<form action="AdminController">
-UserName:<input type="text" name="username">
-passWord:<input type="password" name="password">
-<input type="submit" value="login">
-</form>
 
+    <h1 style="text-align: center;">WELCOME </h1>
+ <div style="text-align: center;">
+    <nav style="background: rgb(35, 87, 184);">
+        <a href="DonorLogin.jsp">Donor</a> &nbsp; 
+       <a href="SeekerLogin.jsp">Seeker</a>  &nbsp;
+       <a href="">Admin</a>&nbsp;
+         </nav>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ </div>
 
 
 

@@ -6,12 +6,12 @@ import java.util.Date;
 import java.util.Scanner;
 
 import com.Interface.Dao.DonorDAO;
-import com.bloodbank.Dao.AdminDOlmpl;
-import com.bloodbank.Dao.BloodDetailsDOlmpl;
-import com.bloodbank.Dao.BloodStackDOlmpl;
-import com.bloodbank.Dao.BookingDOlmpl;
-import com.bloodbank.Dao.DonorDOImpl;
-import com.bloodbank.Dao.SeekerDOlmpl;
+import com.bloodbank.Dao.AdminDAOlmpl;
+import com.bloodbank.Dao.BloodDetailsDAOlmpl;
+import com.bloodbank.Dao.BloodStackDAOlmpl;
+import com.bloodbank.Dao.BookingDAOlmpl;
+import com.bloodbank.Dao.DonorDAOImpl;
+import com.bloodbank.Dao.SeekerDAOlmpl;
 import com.bloodbank.model.AdminModel;
 import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.BloodStack;
@@ -60,7 +60,7 @@ public class UserMainTest {
 		
 		adharcard = Long.parseLong(temp3);
 
-		DonorDOImpl donorDao = new  DonorDOImpl();
+		DonorDAOImpl donorDao = new  DonorDAOImpl();
 		Donor donor = donorDao.validAdharcardNumber(adharcard);
 		if (donor != null) {
 
@@ -70,7 +70,7 @@ public class UserMainTest {
 
 				userChoice = Integer.parseInt(scan.nextLine());
 				BookingModel booking = null;
-				BookingDOlmpl bookDao = new BookingDOlmpl();
+				BookingDAOlmpl bookDao = new BookingDAOlmpl();
 				switch (userChoice) {
 
 				case 1:
@@ -140,7 +140,7 @@ public class UserMainTest {
 							
 							tempNumber = bookDao.booking(book1);
 
-							donorDao=new DonorDOImpl();
+							donorDao=new DonorDAOImpl();
 							
 
 							if (tempNumber > 0) {
@@ -164,7 +164,7 @@ public class UserMainTest {
 								
 								tempNumber = bookDao.booking(book1);
 
-								donorDao=new DonorDOImpl();
+								donorDao=new DonorDAOImpl();
 								
 							}
 							else
@@ -277,7 +277,7 @@ public class UserMainTest {
 								
 								BloodDetailsModel details = new BloodDetailsModel(donor1, unit,donor1.getBloodType(),price);
 								
-								BloodDetailsDOlmpl detailDao = new BloodDetailsDOlmpl();
+								BloodDetailsDAOlmpl detailDao = new BloodDetailsDAOlmpl();
 								
 								tempNumber = detailDao.insertBloodDetails(details);
 
@@ -285,7 +285,7 @@ public class UserMainTest {
 									BloodStack stack = null;
 									System.out.println("donation conform\\n you next donate blood in after 90days");
 
-									BloodStackDOlmpl stackDao = new BloodStackDOlmpl();
+									BloodStackDAOlmpl stackDao = new BloodStackDAOlmpl();
 
 									stack = new BloodStack(details.getUnit(), details.getBloodType(), price);
 
@@ -296,7 +296,7 @@ public class UserMainTest {
 									if (check > 0) {
 										System.out.println("stack update");
 									}
-									AdminDOlmpl adminDao=new AdminDOlmpl();
+									AdminDAOlmpl adminDao=new AdminDAOlmpl();
 									AdminModel admin=new AdminModel();
 									 admin=adminDao.updateWallet();
 									
@@ -356,7 +356,7 @@ public class UserMainTest {
 
 						donor.setNumber(Long.parseLong(temp));
 						// donor=new Donor();
-						DonorDOImpl dao = new DonorDOImpl();
+						DonorDAOImpl dao = new DonorDAOImpl();
 						tempNumber = dao.updateDonor(donor);
 						if (tempNumber > 0) {
 							System.out.println("update success");
@@ -478,7 +478,7 @@ public class UserMainTest {
            
            
            Donor donor1=new Donor(firstName, lastName, address,  adharcard,phoneNumber, age, bloodType);
-           DonorDOImpl dao=new DonorDOImpl();
+           DonorDAOImpl dao=new DonorDAOImpl();
         		   dao.insertDonor(donor1);
         	  
         		   

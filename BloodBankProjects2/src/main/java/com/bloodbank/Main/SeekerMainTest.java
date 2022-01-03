@@ -4,11 +4,11 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
 
-import com.bloodbank.Dao.AdminDOlmpl;
-import com.bloodbank.Dao.BillingDOlmpl;
-import com.bloodbank.Dao.BloodStackDOlmpl;
-import com.bloodbank.Dao.RequestDOlmpl;
-import com.bloodbank.Dao.SeekerDOlmpl;
+import com.bloodbank.Dao.AdminDAOlmpl;
+import com.bloodbank.Dao.BillingDAOlmpl;
+import com.bloodbank.Dao.BloodStackDAOlmpl;
+import com.bloodbank.Dao.RequestDAOlmpl;
+import com.bloodbank.Dao.SeekerDAOlmpl;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
@@ -163,7 +163,7 @@ public class SeekerMainTest {
 	    			unit=Integer.parseInt(temp2);
     			  
 	    			 SeekerDetails seeker=new SeekerDetails(firstName, lastName, address, phoneNumber, patientId, hospitalName, bloodType, unit);
-	    			 SeekerDOlmpl seekerDao=new SeekerDOlmpl();
+	    			 SeekerDAOlmpl seekerDao=new SeekerDAOlmpl();
 	    			tempNumber= seekerDao.insertSeekerDetails(seeker);
 		
 		    if(tempNumber>0) {
@@ -276,7 +276,7 @@ public class SeekerMainTest {
 		    	
 		    	reqModel=new RequestModel(hospitalName, bloodType, unit, bloodCollectorName, phoneNumber, adharcard);
 		    	
-		    	RequestDOlmpl reqDao=new RequestDOlmpl();
+		    	RequestDAOlmpl reqDao=new RequestDAOlmpl();
 		    	
 		    	tempNumber=reqDao.insertRequest(reqModel);
 		    	
@@ -288,18 +288,18 @@ public class SeekerMainTest {
 		    	}
 		    	
 		    	System.out.println("billing process");
-		    	BloodStackDOlmpl stackDao=new BloodStackDOlmpl();
+		    	BloodStackDAOlmpl stackDao=new BloodStackDAOlmpl();
 		    	if(stackDao.checkOfQuantity(reqModel.getBloodType())>reqModel.getUnit())
 		    	{
 		    		
-		    	SeekerDOlmpl dao=new SeekerDOlmpl();
+		    	SeekerDAOlmpl dao=new SeekerDAOlmpl();
 		    	
 		    	
 		    	
 		    	
-		    	BloodStackDOlmpl bloodStockDao=new BloodStackDOlmpl();
+		    	BloodStackDAOlmpl bloodStockDao=new BloodStackDAOlmpl();
 		    	
-		    	SeekerDOlmpl seekerDao1=new SeekerDOlmpl();
+		    	SeekerDAOlmpl seekerDao1=new SeekerDAOlmpl();
 		    	
 		    	SeekerDetails seeker1=seekerDao1.seekerObject(reqModel.getBloodType(), reqModel.getHospitalName());
                   int seekerId=dao.seekerIdFind(seeker1);
@@ -314,7 +314,7 @@ public class SeekerMainTest {
 		    	
 		    	
 		    	BillingModel bDao1=new BillingModel(reqModel.getBloodType(),seeker1, reqModel.getUnit(),totalPrice);
-		    	BillingDOlmpl billingDao=new BillingDOlmpl();
+		    	BillingDAOlmpl billingDao=new BillingDAOlmpl();
 		    	int n=billingDao.insertBilling(bDao1);
 		    	if(n>0) {
 		    		System.out.println("billing success");
@@ -324,7 +324,7 @@ public class SeekerMainTest {
 		    	
 		    		stackDao.updateStackReduce(reqModel.getBloodType(),reqModel.getUnit());
 		    		
-		    		AdminDOlmpl adminDao=new AdminDOlmpl();
+		    		AdminDAOlmpl adminDao=new AdminDAOlmpl();
 		    		int no1=adminDao.seekerPayment(totalPrice);
 		    		
 		    		if(no1>0) {
@@ -351,7 +351,7 @@ public class SeekerMainTest {
 		    	System.out.println("cancelation");
 		    	
 		    	
-		    	RequestDOlmpl reqDao1=new RequestDOlmpl();
+		    	RequestDAOlmpl reqDao1=new RequestDAOlmpl();
 		    	
 		    	tempNumber=reqDao1.deleteRequest(reqModel.getAdharcard());
 		    	

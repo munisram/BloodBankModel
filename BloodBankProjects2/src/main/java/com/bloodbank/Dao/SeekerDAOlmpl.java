@@ -9,11 +9,11 @@ import java.sql.Statement;
 import com.Interface.Dao.SeekerDAO;
 import com.bloodbank.model.SeekerDetails;
 
-public class SeekerDOlmpl implements SeekerDAO {
+public class SeekerDAOlmpl implements SeekerDAO {
 	int n=0;
 	public int insertSeekerDetails( SeekerDetails details) {
 		ConnectionUtil connection=new ConnectionUtil();
-		String query="insert into seeker_details (first_name,last_name,address,phone_number,patient_id,hospital_name,blood_type,unit)"
+		String query="insert into seeker_details (first_name,last_name,address,phone_number,password,patient_id,hospital_name,blood_type)"
 				+ "values(?,?,?,?,?,?,?,?)";
 		try {
 			Connection con=connection.getConnection();
@@ -22,10 +22,11 @@ public class SeekerDOlmpl implements SeekerDAO {
 			pstmt.setString(2, details.getLastName());
 			pstmt.setString(3, details.getAddress());
 			pstmt.setLong(4, details.getPhoneNumber());
-			pstmt.setLong(5, details.getPatientId());
-			pstmt.setString(6, details.getHospitalName());
-			pstmt.setString(7, details.getBloodType());
-			pstmt.setInt(8, details.getUnit());
+			pstmt.setString(5, details.getPassword());
+			pstmt.setLong(6, details.getPatientId());
+			pstmt.setString(7, details.getHospitalName());
+			pstmt.setString(8, details.getBloodType());
+			
 			n=pstmt.executeUpdate();
 			
 		} catch (ClassNotFoundException e) {
@@ -77,23 +78,23 @@ public class SeekerDOlmpl implements SeekerDAO {
 	
 	
 	
-	public SeekerDetails seekerObject(String bloodType, String hospital) {
+	public SeekerDetails seekerObject(String password,Long phoneNumber) {
 		ConnectionUtil connection=new ConnectionUtil();
 		
 		SeekerDetails seeker=null;
 		
 		try {
 			Connection con=connection.getConnection();
-			String query ="select * from seeker_details where blood_type=? and hospital_name=? ";
+			String query ="select * from seeker_details where PASSWORD=? and PHONE_NUMBER=? ";
 			PreparedStatement pstmt=con.prepareStatement(query);
-			pstmt.setString(1, bloodType);
-			pstmt.setString(2, hospital);
+			pstmt.setString(1, password);
+			pstmt.setLong(2, phoneNumber);
 			ResultSet rs=pstmt.executeQuery();
 			//System.out.println(bloodType);
 			
 			while(rs.next()) {
 				seeker=new SeekerDetails(rs.getString(2),rs.getString(3),rs.getString(4),
-						rs.getLong(5),rs.getLong(6),rs.getString(7),rs.getString(8),rs.getInt(9));
+						rs.getLong(5),rs.getString(6),rs.getLong(7),rs.getString(8),rs.getString(9));
 			}
 			
 		} catch (ClassNotFoundException e) {
@@ -120,7 +121,7 @@ public class SeekerDOlmpl implements SeekerDAO {
 		ResultSet rs=stmt.executeQuery(query);
 			while(rs.next()) {
 				seeker=new SeekerDetails(rs.getString(2),rs.getString(3),rs.getString(4),
-						rs.getLong(5),rs.getLong(6),rs.getString(7),rs.getString(8),rs.getInt(9));
+						rs.getLong(5),rs.getString(6),rs.getLong(7),rs.getString(8),rs.getString(9));
 			}
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block

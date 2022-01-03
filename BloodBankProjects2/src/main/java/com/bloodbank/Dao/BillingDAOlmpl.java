@@ -12,7 +12,7 @@ import com.Interface.Dao.BillingDAO;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.SeekerDetails;
 
-public class BillingDOlmpl  implements BillingDAO{
+public class BillingDAOlmpl  implements BillingDAO{
 	
 	public int insertBilling(BillingModel bill ){
 		int n=0;
@@ -21,7 +21,7 @@ public class BillingDOlmpl  implements BillingDAO{
 		try {
 			Connection con=connection.getConnection();
 			String query="insert into billing (blood_type,seeker_id,quantity,price) values(?,?,?,?)";
-			SeekerDOlmpl seeker=new SeekerDOlmpl();
+			SeekerDAOlmpl seeker=new SeekerDAOlmpl();
 			int seekerId=seeker.seekerIdFind(bill.getSeeker());
 			PreparedStatement pstmt=con.prepareStatement(query);
 			pstmt.setString(1, bill.getBloodType());
@@ -57,7 +57,7 @@ public class BillingDOlmpl  implements BillingDAO{
 			ResultSet rs=stmt.executeQuery(query);
 			
 			while(rs.next()) {
-				SeekerDOlmpl seekerDao=new SeekerDOlmpl();
+				SeekerDAOlmpl seekerDao=new SeekerDAOlmpl();
 				SeekerDetails seeker=null;
 				seeker= seekerDao.SeekerFindId(rs.getInt(5));
 				  

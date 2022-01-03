@@ -9,7 +9,7 @@ public interface DonorDAO {
 	
 	public Donor validNumber(Long number);
 
-	public void insertDonor(Donor donor);
+	public int insertDonor(Donor donor);
 	
 	public int updateDonor(Donor donor);
 	

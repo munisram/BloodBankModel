@@ -11,26 +11,25 @@ import java.util.List;
 import com.Interface.Dao.DonorDAO;
 import com.bloodbank.model.Donor;
 
-public class DonorDOImpl implements DonorDAO {
-	public void insertDonor(Donor donor) {
+public class DonorDAOImpl implements DonorDAO {
+	public int insertDonor(Donor donor) {
 		ConnectionUtil connection = new ConnectionUtil();
 		int tempNumber = 0;
 		try {
 
 			Connection con = connection.getConnection();
 			String query = "insert into donor_details values(?,?,?,?,?,?,?)";
+			
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, donor.getFirstName());
 			pstmt.setString(2, donor.getLastName());
 			pstmt.setString(3, donor.getAddress());
 			pstmt.setLong(4, donor.getAdharcard());
 			pstmt.setLong(5, donor.getNumber());
-			pstmt.setInt(6, donor.getAge());
+			pstmt.setDate(6, new java.sql.Date( donor.getDonorDate().getTime()));
 			pstmt.setString(7, donor.getBloodType());
 			tempNumber = pstmt.executeUpdate();
-			if (tempNumber > 0) {
-				System.out.println("register completed");
-			}
+		
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -38,7 +37,7 @@ public class DonorDOImpl implements DonorDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+return tempNumber;
 	}
 
 	public Donor validAdharcardNumber(Long adharcard) {
@@ -52,7 +51,7 @@ public class DonorDOImpl implements DonorDAO {
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
 				donor = new Donor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getLong(4), rs.getLong(5),
-						rs.getInt(6), rs.getString(7));
+						rs.getDate(6), rs.getString(7));
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -74,7 +73,7 @@ public class DonorDOImpl implements DonorDAO {
 			String query = "update donor_details set address=?,age=?,phone=? where adharcard=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, donor.getAddress());
-			pstmt.setInt(2, donor.getAge());
+			pstmt.setDate(2, new java.sql.Date( donor.getDonorDate().getTime()));
 			pstmt.setLong(3, donor.getNumber());
 			pstmt.setLong(4, donor.getAdharcard());
 			n = pstmt.executeUpdate();
@@ -103,7 +102,7 @@ public class DonorDOImpl implements DonorDAO {
 			while (rs.next()) {
 
 				Donor donor = new Donor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getLong(4), rs.getLong(5),
-						rs.getInt(6), rs.getString(7));
+						rs.getDate(6), rs.getString(7));
 				donorList.add(donor);
 				// donorList=rs.getInt(1),rs.getString(2),rs.getString(3),
 				// rs.getString(4),rs.getLong(5),rs.getLong(6),rs.getInt(7), rs.getString(8);
@@ -160,7 +159,7 @@ public class DonorDOImpl implements DonorDAO {
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {
 				donor1 = new Donor(rs.getString(1), rs.getString(2), rs.getString(3), rs.getLong(4), rs.getLong(5),
-						rs.getInt(6), rs.getString(7));
+						rs.getDate(6), rs.getString(7));
 			}
 
 		} catch (ClassNotFoundException e) {

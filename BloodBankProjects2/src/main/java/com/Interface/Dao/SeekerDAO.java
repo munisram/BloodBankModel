@@ -9,7 +9,7 @@ public interface SeekerDAO  {
 	
 	public int seekerIdFind(SeekerDetails seeker);
 	
-	public SeekerDetails seekerObject(String bloodType, String hospital);
+	public SeekerDetails seekerObject(String password, Long phoneNumber);
 	
 	public SeekerDetails SeekerFindId(int seekerId);
 	

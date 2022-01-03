@@ -9,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.bloodbank.Dao.AdminDAOlmpl;
+import com.bloodbank.model.AdminModel;
+
 /**
- * Servlet implementation class Register
+ * Servlet implementation class AdminController
  */
-@WebServlet("/Register")
-public class Register extends HttpServlet {
+@WebServlet("/AdminController")
+public class AdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Register() {
+    public AdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,28 +33,19 @@ public class Register extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String username=request.getParameter("username");
+		String password=request.getParameter("password");
+		AdminModel model =new AdminModel(username, password, 0);
+		AdminDAOlmpl Dao=new AdminDAOlmpl();
+		Dao.verificationAdmin(model);
+		
 	}
-
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		String firstName =request.getParameter("firstname");
-		String lastName =request.getParameter("lastName");
-		String email = request.getParameter("email");
-		String address = request.getParameter("address");
-		Long phoneNumber =Long.parseLong(request.getParameter("number"));
-		
-		PrintWriter pw =response.getWriter();
-	pw.write(firstName);
-//		System.out.println(firstName);
-//		System.out.println(lastName);
-//		System.out.println(email);
-		
-		
-		
-		//doGet(request, response);
+		// TODO Auto-generated method stub
+		doGet(request, response);
 	}
 
 }
