@@ -11,7 +11,7 @@ public interface SeekerDAO  {
 	
 	public SeekerDetails seekerObject(String password, Long phoneNumber);
 	
-	public SeekerDetails SeekerFindId(int seekerId);
+	public SeekerDetails FindSeekerId(int seekerId);
 	
 	
 	

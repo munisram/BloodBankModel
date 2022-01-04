@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.bloodbank.Dao.BloodStackDAOlmpl;
 import com.bloodbank.Dao.RequestDAOlmpl;
 import com.bloodbank.model.Donor;
 import com.bloodbank.model.RequestModel;
@@ -52,7 +53,6 @@ public class SeekerRequestServlet extends HttpServlet {
 		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-YYYY");
 		String collectorName=request.getParameter("NAME");
 		Long aadharcard=Long.parseLong(request.getParameter("number"));
-		Long phoneNumber=Long.parseLong(request.getParameter("PHONE"));
 		String hospitalName=request.getParameter("HOSPITAL");
 		String bloodtype=request.getParameter("bloodtype");
 		
@@ -67,19 +67,39 @@ public class SeekerRequestServlet extends HttpServlet {
 	
 		
 		HttpSession htp=request.getSession();
-		SeekerDetails seeker= (SeekerDetails) htp.getAttribute("currentSeeker");
-		PrintWriter pw=response.getWriter();
+		SeekerDetails seeker= (SeekerDetails) 
+	     htp.getAttribute("currentSeeker");	
 		
-	RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, phoneNumber, aadharcard,date);
+		
+	RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, seeker.getPhoneNumber(), aadharcard,date);
+	
 	htp.setAttribute("requestModel", model);
+	
 			RequestDAOlmpl Dao=new RequestDAOlmpl();
-		int n=Dao.insertRequest(model);
-		if(n>0) {
 			
+				
+		int n=Dao.insertRequest(model);
+	
+		
+		
+		
+		
+		if(n>0) {
+			BloodStackDAOlmpl stockDao=new BloodStackDAOlmpl();
+			//System.out.println("request insert");
+		if(stockDao.checkOfQuantity(model.getBloodType())>unit) {
+			//System.out.println("unit check");
 		      RequestDispatcher rd=request.getRequestDispatcher("BillingSeekerServlet");
 		      rd.forward(request, response);
 
+		}
+		else {
 			
+			response.sendRedirect("index.jsp");
+			
+		}
+		
+		
 		}
 		
 		

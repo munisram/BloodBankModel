@@ -115,7 +115,8 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			String query="update blood_stack set quantity=? where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
 			
-			pstmt.setInt(1, checkOfQuantity(bloodType)-unit);
+			int totalUnit=checkOfQuantity(bloodType)-unit;
+			pstmt.setInt(1, totalUnit);
 			pstmt.setString(2, bloodType);
 			n=pstmt.executeUpdate();
 			

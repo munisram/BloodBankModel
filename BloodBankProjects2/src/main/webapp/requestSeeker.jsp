@@ -1,3 +1,6 @@
+<%@page import="com.bloodbank.Dao.BloodStackDAOlmpl"%>
+<%@page import="com.bloodbank.model.BloodDetailsModel"%>
+<%@page import="com.bloodbank.model.SeekerDetails"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
@@ -17,10 +20,8 @@
         <div id="login" style="text-align: center;">
             <label for="NAME">BLOOD COLLECTOR NAME:</label> &nbsp;
             <input type="text" id="NAME" name="NAME" required autofocus><br><br>            
-             <label for="number">Aadhar card</label>
-            <input type="text" id="number" name="number" required  pattern="[0-9]{12}"><br><br>
-            <label for="PHONE">PHONE NUMBER</label>            
-           <input type="TEXT" id="PHONE" name="PHONE" required="required" pattern="[0-9]{10}"><br><br>           
+             <label for="number">Aadharcard</label>
+            <input type="text" id="number" name="number" required  pattern="[0-9]{12}"><br><br>                      
            <label for="HOSPITAL">HOSPITAL NAME</label>
            <input type="TEXT" id="HOSPITAL" name="HOSPITAL" required ><br> <br>
          <label for="Date">Date</label>            
@@ -28,17 +29,26 @@
             <label for="blood type">Blood Type:</label>
            <input list="blood type" id="bloodtype" name="bloodtype" required ><br><br>
            <datalist id="blood type" >
-          <option value="a+">A+</option>
-           <option value="a-">A-</option>
-            <option value="b+">B+</option>
-            <option value="b-">B-</option>
-            <option value="ab+">AB+</option>
-            <option value="ab-">AB-</option>
-            <option value="o+">O+</option>
-            <option value="o-">O-</option>
+          <option value="a+">a+</option>
+           <option value="a-">a-</option>
+            <option value="b+">b+</option>
+            <option value="b-">b-</option>
+            <option value="ab+">ab+</option>
+            <option value="ab-">ab-</option>
+            <option value="o+">o+</option>
+            <option value="o-">o-</option>
           </datalist> <br>
          <LABLE FOR=UNIT> BLOOD UNIT</LABLE>
-          <input type="NUMBER" ID="UNIT" NAME ="UNIT" required><br><br>
+         <%
+         
+         HttpSession htp=request.getSession();
+         SeekerDetails seeker= (SeekerDetails) htp.getAttribute("currentSeeker");
+         
+         BloodStackDAOlmpl stock=new BloodStackDAOlmpl();
+       int quantity=  stock.checkOfQuantity(seeker.getBloodType().toLowerCase());       
+          
+         %>
+          <input type="NUMBER" ID="UNIT" NAME ="UNIT" min="0"  max="10"  required><br><br>
             <button type="submit">Submit</button>&nbsp;&nbsp;&nbsp; &nbsp;
           
           <button type="reset">Reset</button>

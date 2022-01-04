@@ -48,22 +48,25 @@ public class BillingSeekerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		   PrintWriter pw=response.getWriter();
-		 SeekerDetails seeker=null;
+		
 		 
 		  
 		   
 		HttpSession hp=request.getSession();
-	RequestModel requestModel= (RequestModel) hp.getAttribute("requestModel");
-		       seeker=  (SeekerDetails) hp.getAttribute("currentSeeker");
+	RequestModel requestModel= (RequestModel) hp.getAttribute("requestModel");	
+	 SeekerDetails  seeker=  (SeekerDetails) hp.getAttribute("currentSeeker");
 		
 		   
 		  BloodStackDAOlmpl stack=new BloodStackDAOlmpl();
-		  double unitPrice= stack.findPrice(requestModel.getBloodType());
+		  
+		  double unitPrice= stack.findPrice(requestModel.getBloodType())*requestModel.getUnit();
 		 
-		  pw.write(""+ unitPrice);
+		
 		  
 		 BillingModel  BillingModel=new  BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(), unitPrice);
 		 
+	 	 hp.setAttribute("biilingProces",BillingModel );
+	 	 
 		 BillingDAOlmpl biiling=new  BillingDAOlmpl();
 		 
 	int n= biiling.insertBilling(BillingModel);
@@ -72,17 +75,16 @@ public class BillingSeekerServlet extends HttpServlet {
 		
 	if(n>0) {
 		
-	int num=	stack.updateStackReduce(requestModel.getBloodType(), requestModel.getUnit());
+	int num=stack.updateStackReduce(requestModel.getBloodType(), requestModel.getUnit());
 	
 	
-	System.out.println(num);
 		if(num>0) {
 			
 			AdminDAOlmpl admin=new AdminDAOlmpl();
 		if(admin.seekerPayment(unitPrice)>0) {
 			
 			
-			
+			response.sendRedirect("seekerbill.jsp");
 			
 		}
 			

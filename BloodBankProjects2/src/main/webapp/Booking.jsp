@@ -16,23 +16,13 @@
 <div id="login" style="text-align: center;">
  <label for="address">Address:</label>&nbsp;
             <textarea id="address" name="address" maxlength="50" required ></textarea><br><br>
- <label for="BIO">BookingDate</label>            
+             <label for="BIO">BookingDate</label>             
            <input type="date" id="bookingDate" name="bookingDate" required="required" ><br><br>   
 <label for="unit">BloodCollectChoice</label>
            <input type="text" id="Choice" name="Choice" required ><br> <br>
-
           </div>
-
-
 <input type="submit" value="submit">
-
-
 </from>
-
-
-
-
-
 </body>
 <script type="text/javascript">
 today();
@@ -49,5 +39,6 @@ console.log(maxdate);
 console.log(mindate);
 document.getElementById("bookingDate").setAttribute("min",mindate);
 } 
+
 </script>
 </html>

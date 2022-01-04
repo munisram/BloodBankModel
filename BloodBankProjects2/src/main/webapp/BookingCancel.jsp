@@ -11,7 +11,7 @@
 <form action="BookingCancelServlet" method="post">
 
 
-<label for="aadharcard">aadharcard</label>
+<label for="aadharcard">Aadharcard</label>
 
 <input type="text" id="aadharcard" name="aadharcard" required="required">
 

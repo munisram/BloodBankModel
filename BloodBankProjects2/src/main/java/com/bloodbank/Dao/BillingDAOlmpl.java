@@ -45,26 +45,30 @@ public class BillingDAOlmpl  implements BillingDAO{
 		
 		
 	}
-	public List<BillingModel> biilingShow(){
+	public List<BillingModel> biilingShow( BillingModel bill){
+		
 		List<BillingModel>billingList=new ArrayList<BillingModel>();
 		
 		
 		ConnectionUtil connection=new ConnectionUtil();
+		SeekerDAOlmpl seekerDao=new SeekerDAOlmpl();
+		int seekerId=seekerDao.seekerIdFind(bill.getSeeker());
 		try {
 			Connection con=connection.getConnection();
-			String query="select * from billing";
-			Statement stmt=con.createStatement();
-			ResultSet rs=stmt.executeQuery(query);
-			
+			String query="select * from billing where SEEKER_ID=?";
+			PreparedStatement pstmt=con.prepareStatement(query);
+			 pstmt.setInt(1,seekerId);
+			 ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
-				SeekerDAOlmpl seekerDao=new SeekerDAOlmpl();
+				
+				 
 				SeekerDetails seeker=null;
-				seeker= seekerDao.SeekerFindId(rs.getInt(5));
+				seeker= seekerDao.FindSeekerId(rs.getInt(5));
 				  
 				
 						
-				BillingModel bill=new BillingModel(rs.getString(2),seeker,rs.getInt(4),rs.getInt(5));
-				billingList.add(bill);
+				BillingModel billing=new BillingModel(rs.getString(2),seeker,rs.getInt(4),rs.getInt(5));
+				billingList.add(billing);
 			}
 			
 			

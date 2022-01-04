@@ -31,19 +31,19 @@
             <input type="text" id="number" name="number" required  pattern="[0-9]{10}"><br><br>
             <label for="BIO">BIO</label>            
            <input type="date" id="bio" name="bio"><br><br>           
-           <label for="password">ADHARCARD</label>
+           <label for="password">AADHARCARD</label>
            <input type="text" id="ADHARCARD" name="ADHARCARD" required pattern="[0-9]{12}" ><br> <br>
             <label for="blood type">Blood Type:</label>
            <input list="blood type" id="bloodtype" name="bloodtype" required ><br><br>
            <datalist id="blood type" >
-          <option value="a+">A+</option>
-           <option value="a-">A-</option>
-            <option value="b+">B+</option>
-            <option value="b-">B-</option>
-            <option value="ab+">AB+</option>
-            <option value="ab-">AB-</option>
-            <option value="o+">O+</option>
-            <option value="o-">O-</option>
+          <option value="a+">a+</option>
+           <option value="a-">a-</option>
+            <option value="b+">b+</option>
+            <option value="b-">b-</option>
+            <option value="ab+">ab+</option>
+            <option value="ab-">ab-</option>
+            <option value="o+">o+</option>
+            <option value="o-">o-</option>
           </datalist> <br>
           <button>Submit</button>&nbsp;&nbsp;&nbsp; &nbsp;
           <button type="reset">Reset</button>

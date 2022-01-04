@@ -58,8 +58,8 @@ public class SeekerLoginServlet extends HttpServlet {
            
 		if(seeker!=null) {
 			
-			pw.write("zxcvbnm,");
-			response.sendRedirect("requestSeeker.jsp");
+			
+			response.sendRedirect("RequestIndex.jsp");
 			  HttpSession htp=request.getSession() ;
 	           htp.setAttribute("currentSeeker", seeker);
 		}

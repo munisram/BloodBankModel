@@ -7,32 +7,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="BillingSeekerServlet" method="post">
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-</form>
+<h1>Request section</h1>
+<div>
+<a href="requestSeeker.jsp">REQUEST</a><br><br>
+<a href="RequestCancel.jsp">REQUEST CANCEL</a><br><br>
+</div>
 </body>
 </html>

@@ -25,7 +25,7 @@
 <form action="Login" method="post">
 
   <div style="text-align: center;">
-  <label for="adharcard">ADHARCARD</label>
+  <label for="adharcard">AADHARCARD</label>
   <input type="text" id="adharcard" name="adharcard"  autofocus required="required" pattern="[0-9]{12}" ><br><br>
     <button>login</button>&nbsp; &nbsp;  
     

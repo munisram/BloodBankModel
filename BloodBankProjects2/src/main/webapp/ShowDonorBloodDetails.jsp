@@ -14,9 +14,9 @@
 <title>Insert title here</title>
 </head>
 <body>
-<table>
+<table style="text-align: center;">
 <tr>
-<th><strong> Aadharcard</strong></th>
+<th><strong>Aadharcard</strong></th>
 <th><strong> BLOODTYPE</strong></th>
   <th><strong> UNIT</strong></th>
   <th><strong>PRICE</strong></th>
@@ -48,19 +48,14 @@
     <td> <%= details.getDonor().getBloodType() %></td>
     <td> <%= details.getUnit()%></td>
      <td> <%= details.getPrice()%></td>
-     <td> <%=book.getAppdate() %></td>
+     <td> <%=book.getAppdate()%></td>
    
     
    </tr> 
    
    <% }%>
   
-  
-  
-  
-  
-  
-  
+
   
 </table>
 <a href="DonorLogoutServlet">logout</a>

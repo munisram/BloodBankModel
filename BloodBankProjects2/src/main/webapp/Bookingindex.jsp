@@ -8,7 +8,6 @@
 </head>
 <body>
 <form action="" style="text-align: center;">
-<label for="booking"><a href="Booking.jsp">booking</a></label><br><br>
 
 <label for="booking" ><a href="BookingChange.jsp">booking change</a></label><br><br>
 

@@ -15,7 +15,7 @@
             <textarea id="address" name="address" maxlength="50" required ></textarea><br><br>
  <label for="BIO">BookingDate</label>            
            <input type="date" id="bookingDate" name="bookingDate" required="required"><br><br>   
-<label for="unit">BloodCollectc</label>
+<label for="unit">BloodCollecterChoice</label>
            <input type="text" id="Choice" name="Choice" required ><br> <br>
      <input type="submit" value="submit">
 

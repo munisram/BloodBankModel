@@ -7,7 +7,7 @@ import com.bloodbank.model.BillingModel;
 public interface BillingDAO {
 		
 	public int insertBilling(BillingModel bill );	
-	public List<BillingModel> biilingShow();
+	public List<BillingModel> biilingShow( BillingModel bill);
 	
 	
 

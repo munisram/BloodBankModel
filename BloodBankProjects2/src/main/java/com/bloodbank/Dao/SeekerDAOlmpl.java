@@ -109,7 +109,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 	
 	}
 	
-	public SeekerDetails SeekerFindId(int seekerId) {
+	public SeekerDetails FindSeekerId(int seekerId) {
 		
 		SeekerDetails seeker=null;
 		
