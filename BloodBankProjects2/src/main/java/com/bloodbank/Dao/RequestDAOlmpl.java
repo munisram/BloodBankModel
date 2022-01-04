@@ -15,7 +15,7 @@ public class RequestDAOlmpl  implements RequestDAO{
 	public int insertRequest(RequestModel request) {
 		int n=0;
 		ConnectionUtil connection=new ConnectionUtil();
-		String query ="insert into request_details (hospital_name,blood_type,unit,blood_collector_name,phone_number,adharcard_number) values(?,?,?,?,?,?)";
+		String query ="insert into request_details (hospital_name,blood_type,unit,blood_collector_name,phone_number,adharcard_number,request_date) values(?,?,?,?,?,?,?)";
 				try {
 					Connection con=connection.getConnection();
 					
@@ -26,6 +26,7 @@ public class RequestDAOlmpl  implements RequestDAO{
 				pstmt.setString(4, request.getBloodCollectorName());
 				pstmt.setLong(5, request.getPhoneNumber());
 				pstmt.setLong(6, request.getAdharcard());
+				pstmt.setDate(7, new java.sql.Date( request.getRequestDate().getTime()));
 				n=pstmt.executeUpdate();
 					
 					
@@ -65,10 +66,7 @@ public class RequestDAOlmpl  implements RequestDAO{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-	
-		
+				
 		
 		
 		

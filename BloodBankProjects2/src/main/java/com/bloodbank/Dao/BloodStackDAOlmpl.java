@@ -22,6 +22,9 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			Connection con=connection.getConnection();
 			
 			int quantity=checkOfQuantity(stack.getBloodType());
+			
+			System.out.println(stack.getBloodType()+""+quantity);
+			
 			String query="update blood_stack set quantity=? where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
 		
@@ -77,8 +80,9 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		ConnectionUtil connection=new ConnectionUtil();
 		int n=0;
 		try {
+		
 			Connection con=connection.getConnection();
-			String query="select quantity from  blood_stack where blood_type=?";
+			String query="select QUANTITY from  blood_stack where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
 			pstmt.setString(1,bloodtype);
 			ResultSet rs= pstmt.executeQuery();
@@ -88,6 +92,7 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 				
 			}
 			
+			System.out.println(n);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -95,7 +100,7 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
+			System.out.println(n+"QUANTITY"+bloodtype);
 		return n;
 	}
 	
@@ -128,19 +133,21 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 		return n;
 	}
 	
-	public int findPrice(String bloodType) {
-		int n=0;
+	public double findPrice(String bloodType) {
+		double n=0;
 		ConnectionUtil connectin=new  ConnectionUtil();
 		try {
 			Connection con=connectin.getConnection();
-			String query="select UNIT_PRICE from blood_stack where blood_type=? ";
+			String query="select UNIT_PRICE from blood_stack where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
+			System.out.println(bloodType);
 			pstmt.setString(1, bloodType);
 		ResultSet rs =pstmt.executeQuery();
 		
 		
 		while(rs.next()) {
-			n=rs.getInt(1);
+			System.out.println(rs.getInt(1));
+			n=rs.getDouble(1);
 			
 			}
 			

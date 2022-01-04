@@ -2,6 +2,9 @@ package com.BloodBankProject.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.servlet.DispatcherType;
 import javax.servlet.RequestDispatcher;
@@ -46,30 +49,36 @@ public class SeekerRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
+		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-YYYY");
 		String collectorName=request.getParameter("NAME");
 		Long aadharcard=Long.parseLong(request.getParameter("number"));
 		Long phoneNumber=Long.parseLong(request.getParameter("PHONE"));
 		String hospitalName=request.getParameter("HOSPITAL");
 		String bloodtype=request.getParameter("bloodtype");
+		
 		int unit=Integer.parseInt(request.getParameter("UNIT"));
+		Date date=null;
+		try {
+			date = sdf.parse(request.getParameter("Date"));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	
 		
 		HttpSession htp=request.getSession();
 		SeekerDetails seeker= (SeekerDetails) htp.getAttribute("currentSeeker");
 		PrintWriter pw=response.getWriter();
 		
-	RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, phoneNumber, aadharcard);
+	RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, phoneNumber, aadharcard,date);
+	htp.setAttribute("requestModel", model);
 			RequestDAOlmpl Dao=new RequestDAOlmpl();
 		int n=Dao.insertRequest(model);
 		if(n>0) {
 			
 		      RequestDispatcher rd=request.getRequestDispatcher("BillingSeekerServlet");
 		      rd.forward(request, response);
-			              
-		
-			
-			
+
 			
 		}
 		

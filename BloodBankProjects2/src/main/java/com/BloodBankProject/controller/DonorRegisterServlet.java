@@ -66,7 +66,7 @@ public class DonorRegisterServlet extends HttpServlet {
 		    
 	   int check= donorDao.insertDonor(donor);
 		if(check>0) {
-		response.sendRedirect("Booking.jsp");
+		response.sendRedirect("DonorLogin.jsp");
 		}else {
 			System.out.println("not insert");
 		}

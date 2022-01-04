@@ -42,7 +42,7 @@ public class AdminDAOlmpl implements AdminDAO {
 	public AdminModel updateWallet() {
 		
 		int n=0;
-		double wallet=0;
+		
 	AdminModel admin=null;
 		ConnectionUtil connection =new  ConnectionUtil();
 		try {
@@ -55,7 +55,8 @@ public class AdminDAOlmpl implements AdminDAO {
 			admin=new AdminModel(rs.getString(2),rs.getString(3), rs.getDouble(4));
 		}
 			//System.out.println(id);
-		double walletTotal=300-wallet;
+		double walletTotal=admin.getWallet()-300;
+	
 		//System.out.println(walletTotal);
 			String query ="update admin set wallet=? where email=?";
 			PreparedStatement pstmt=con.prepareStatement(query);

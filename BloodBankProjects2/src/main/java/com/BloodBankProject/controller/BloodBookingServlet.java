@@ -49,27 +49,51 @@ public class BloodBookingServlet extends HttpServlet {
 		
 		Date date=null;
 		String address=request.getParameter("address");
-		String bloodType =request.getParameter("bloodtype");
-	     String choice =request.getParameter("Choice");     
+		 String choice =request.getParameter("Choice");  
+	     BookingDAOlmpl bookingDao=new BookingDAOlmpl();
+	     
 		try {
 			 date=sdf.parse(request.getParameter("bookingDate"));
+			 
+				HttpSession htp=request.getSession();
+				
+        		Donor donor= (Donor) htp.getAttribute("currentDonor");
+			 
+//			 Date date1=bookingDao.dateCheck(donor);
+//             if(date1!=null && date.after(date1)) {
+            	 
+            	 
+            	
+            		PrintWriter pw=response.getWriter();
+            		
+            		
+            		
+            		BookingModel booking =new BookingModel(donor, address, date,donor.getBloodType(), choice);
+            		htp.setAttribute("bookingDate",booking);
+            		
+            		pw.write(donor.getAddress());
+            	
+            				 
+            		if(bookingDao.booking(booking)>0) {
+            			
+            			response.sendRedirect("PhysicalCheck.jsp");
+            		}
+//            		
+//             }else {
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//            	 
+//             }
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
-		HttpSession htp=request.getSession();
-		Donor donor= (Donor) htp.getAttribute("currentDonor");
-		PrintWriter pw=response.getWriter();
-		
-		
-		
-		BookingModel booking =new BookingModel(donor, address, date, bloodType, choice);
-		BookingDAOlmpl bookingDao=new BookingDAOlmpl();
-		pw.write(donor.getAddress());
-	int n=	bookingDao.booking(booking);
-				 
-		if(n>0) {
-			response.sendRedirect("PhysicalCheck.jsp");
 		}
 		
 		

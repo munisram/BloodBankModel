@@ -66,11 +66,12 @@ public class BookingDAOlmpl implements  BookingDAO {
 	 
 	 try {
 		Connection con =connection.getConnection();
-		String query="update booking set address=?,book_date=? where adharcard=?";
+		String query="update booking set address=?,book_date=?,blood_collect_choice=? where adharcard=?";
 		PreparedStatement pstmt=con.prepareStatement(query);
 		pstmt.setString(1, book.getAddress());
 		pstmt.setDate(2, new java.sql.Date (book.getAppdate().getTime()));
-		pstmt.setLong(3,book.getDonor().getAdharcard());
+		pstmt.setLong(4,book.getDonor().getAdharcard());
+		pstmt.setString(3,book.getBloodCollectChoice());
 		tempNumber=pstmt.executeUpdate();
 		
 	} catch (ClassNotFoundException e) {

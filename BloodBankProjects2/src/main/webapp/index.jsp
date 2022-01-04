@@ -10,7 +10,7 @@
 
     <h1 style="text-align: center;">WELCOME </h1>
  <div style="text-align: center;">
-    <nav style="background: rgb(35, 87, 184);">
+    <nav>
         <a href="DonorLogin.jsp">Donor</a> &nbsp; 
        <a href="SeekerLogin.jsp">Seeker</a>  &nbsp;
        <a href="">Admin</a>&nbsp;

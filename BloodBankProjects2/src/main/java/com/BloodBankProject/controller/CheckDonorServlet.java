@@ -64,26 +64,34 @@ public class CheckDonorServlet extends HttpServlet {
 					int price=300;
 					HttpSession htp=request.getSession();
 					Donor donor= (Donor) htp.getAttribute("currentDonor");	
-					BloodDetailsModel model=new BloodDetailsModel(donor, unit, donor.getBloodType(),price );
-					 BloodDetailsDAOlmpl Dao=new BloodDetailsDAOlmpl();
-					int n= Dao.insertBloodDetails(model);
 					
-					 pw.write(model.getBloodType()+"successs");
+					
+					BloodDetailsModel bloodDetails=new BloodDetailsModel(donor, unit, donor.getBloodType(),price );
+					 BloodDetailsDAOlmpl Dao=new BloodDetailsDAOlmpl();
+					 
+					// htp.setAttribute("currentModel", model);
+					 
+					 
+					int n= Dao.insertBloodDetails(bloodDetails);
+					
+					 System.out.println(n+"bloodDetails insert");
+					 
 					 if(n>0) {
 						 
 						 BloodStackDAOlmpl bloodStock=new BloodStackDAOlmpl();
 						 
-						 BloodStack stack=new BloodStack(model.getUnit(), model.getBloodType(), 0);
+						 BloodStack stack=new BloodStack(bloodDetails.getUnit(),bloodDetails.getBloodType(), 0);
 						 
 						int num= bloodStock.updateStack(stack);
 						
 						 pw.write(num+"successs");
+						 
 						 if(num>0) {
 							 
 						 AdminDAOlmpl admin=new AdminDAOlmpl();
 						 admin.updateWallet();
 						 
-						 pw.write("successs");
+						 response.sendRedirect("ShowDonorBloodDetails.jsp");
 						
 						 
 						 

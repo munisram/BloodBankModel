@@ -18,7 +18,7 @@ public class App
     	
     Actor a=(Actor) bean.getBean("agies");	
    	a.name("munis");
-    	
+    a.printDate();	
     	
     	
       

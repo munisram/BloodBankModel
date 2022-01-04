@@ -114,6 +114,7 @@ unit_price number(20) not null);
 /
 insert into blood_stack (blood_type,quantity,unit_price)values('ab-',1,1200);
 /
+update blood_stack set quantity=30 where blood_type='bombay';
 select * from blood_stack;
 --drop table blood_stack cascade constraints;
 
@@ -144,10 +145,12 @@ blood_type varchar2(50) not null,
 unit number(11) not null,
 blood_collector_name varchar2(50) not null,
 phone_number number(20) not null,
-adharcard_number number(20) not null);
+adharcard_number number(20) not null,
+request_date date not null);
 
 select * from request_details;
-
+/
+drop  table request_details cascade constraints;
 
 desc request_details
 commit;
@@ -196,7 +199,9 @@ select * from billing;
 select * from booking;
 desc booking;
 select * from billing;
+
 ---------------------------
+/
 select * from admin;
 
 desc booking
@@ -204,7 +209,7 @@ select * from blood_details;
 select * from donor_details inner join booking on donor_details.adharcard=booking.adharcard
 where BLOOD_COLLECT_CHOICE='home';
 
-
+select * from blood_details;
 select * from booking;
 --truncate table seeker_details;
 commit;
@@ -214,8 +219,12 @@ select * from  admin;
 select book_date+90 from booking where adharcard=123456789012;
 
 select * from booking where to_char(book_date,'dd-mm-yyyy')between '27-12-2019' and '27-12-2021';
-
-
+/
+select QUANTITY from blood_stack where blood_type='o-';
 --truncate table seeker_details;
 select * from seeker_details;
 desc seeker_details
+update  admin set wallet=10000 where password ='050476ram';
+
+select * from booking;
+select * from blood_details;

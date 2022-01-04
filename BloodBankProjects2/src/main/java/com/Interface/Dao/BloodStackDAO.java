@@ -8,7 +8,7 @@ public interface BloodStackDAO {
 	
 	
 	public int updateStack(BloodStack stack);
-	public int findPrice(String bloodType);
+	public double findPrice(String bloodType);
 	public int updateStackReduce(String bloodType,int unit);
 	public int checkOfQuantity(String bloodtype);
 	public List<BloodStack> showStack();

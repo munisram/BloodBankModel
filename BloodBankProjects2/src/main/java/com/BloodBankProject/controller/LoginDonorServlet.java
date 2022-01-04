@@ -56,7 +56,7 @@ public class LoginDonorServlet extends HttpServlet {
 			   HttpSession htp=request.getSession() ;
 			    htp.setAttribute("currentDonor", donor);
 			    
-			response.sendRedirect("Booking.jsp");
+			response.sendRedirect("Bookingindex.jsp");
 		
 		}else {
 			pw.println("<script type=\"text/javascript\">");

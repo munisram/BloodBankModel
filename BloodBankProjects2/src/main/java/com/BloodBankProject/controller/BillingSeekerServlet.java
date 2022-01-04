@@ -16,6 +16,7 @@ import com.bloodbank.Dao.BillingDAOlmpl;
 import com.bloodbank.Dao.BloodStackDAOlmpl;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.BloodStack;
+import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
 /**
@@ -47,26 +48,34 @@ public class BillingSeekerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		   PrintWriter pw=response.getWriter();
-		 SeekerDetails seeker=new SeekerDetails();
-		   int unit=Integer.parseInt(request.getParameter("UNIT"));
-		   HttpSession hpt=request.getSession();
-		   seeker=  (SeekerDetails) hpt.getAttribute("currentSeeker");
-		   String bloodtype=seeker.getBloodType();
+		 SeekerDetails seeker=null;
 		 
+		  
+		   
+		HttpSession hp=request.getSession();
+	RequestModel requestModel= (RequestModel) hp.getAttribute("requestModel");
+		       seeker=  (SeekerDetails) hp.getAttribute("currentSeeker");
+		
 		   
 		  BloodStackDAOlmpl stack=new BloodStackDAOlmpl();
-		  double unitPrice= stack.findPrice(bloodtype);
+		  double unitPrice= stack.findPrice(requestModel.getBloodType());
+		 
+		  pw.write(""+ unitPrice);
 		  
-		 BillingModel model=new  BillingModel(bloodtype, seeker, unit, unitPrice);
+		 BillingModel  BillingModel=new  BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(), unitPrice);
 		 
 		 BillingDAOlmpl biiling=new  BillingDAOlmpl();
-	int n= biiling.insertBilling(model);
-	pw.write(n+"stack update");
+		 
+	int n= biiling.insertBilling(BillingModel);
+	
+	
 		
 	if(n>0) {
 		
-	int num=	stack.updateStackReduce(bloodtype, unit);
-	pw.write(num+"stack update");
+	int num=	stack.updateStackReduce(requestModel.getBloodType(), requestModel.getUnit());
+	
+	
+	System.out.println(num);
 		if(num>0) {
 			
 			AdminDAOlmpl admin=new AdminDAOlmpl();
@@ -74,7 +83,7 @@ public class BillingSeekerServlet extends HttpServlet {
 			
 			
 			
-			pw.write("stack update");
+			
 		}
 			
 			

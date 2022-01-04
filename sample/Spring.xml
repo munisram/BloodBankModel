@@ -2,8 +2,20 @@
 			"https://www.springframework.org/dtd/spring-beans-2.0.dtd">
 			<beans>
 			<bean id="agies"  class="com.chainsys.sample.Actor">
+		<constructor-arg value="20" type="int" index="0"></constructor-arg>	
+			<constructor-arg value="munis" type="java.lang.String" index="1"></constructor-arg>	
+			
+			<constructor-arg value="21000" type="int" index="2"></constructor-arg>
+			<property name="name" value="muniswaran"></property>
+			<property name="id" value="007"></property>
+				
 			
 			 </bean>
+			<bean id="song" class="com.chainsys.sample.Song">
 			
+			
+			
+			
+			</bean>
 			
 			</beans>
