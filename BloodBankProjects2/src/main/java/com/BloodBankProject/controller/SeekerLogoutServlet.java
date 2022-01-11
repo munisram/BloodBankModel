@@ -1,6 +1,8 @@
 package com.BloodBankProject.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -28,13 +30,20 @@ public class SeekerLogoutServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		
 		HttpSession hpt=request.getSession();
-		hpt.setAttribute("currentSeeker",null);
+		hpt.setAttribute("seeker",null);
 		hpt.setAttribute("requestModel",null);
 		hpt.setAttribute("biilingProces",null);
-		response.sendRedirect("index.jsp");
+		
+		PrintWriter pw=response.getWriter();
+		
+		pw.println("<script type=\"text/javascript\">");
+		 pw.println("alert('Logout success');");
+		 pw.println("location='index.jsp';");
+		 pw.println("</script>");
+		//response.sendRedirect("index.jsp");
 		
 		
 	}

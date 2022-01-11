@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.BookingDAOlmpl;
+import com.bloodbank.DaoImpl.BookingDAOlmpl;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.Donor;
 
@@ -37,7 +37,7 @@ public class BookingChangeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -45,7 +45,7 @@ public class BookingChangeServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Date BookingDate=null;
-		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-YYYY");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String address=request.getParameter("address");
 		String choice=request.getParameter("Choice");
 		
@@ -57,12 +57,15 @@ public class BookingChangeServlet extends HttpServlet {
 		}
 		PrintWriter pw=response.getWriter();
 		HttpSession htp=request.getSession();
-		Donor donor= (Donor) htp.getAttribute("currentDonor");
+		Donor donor= (Donor) htp.getAttribute("Donor");
 		
 		 BookingModel model=new BookingModel(donor, address, BookingDate, donor.getBloodType(), choice);
 		BookingDAOlmpl Dao=new BookingDAOlmpl();
 		if(Dao.updateBooking(model)>0) {
-			response.sendRedirect("PhysicalCheck.jsp");
+			
+			
+			response.sendRedirect("BookingProces.jsp");
+			
 		}
 		
 		

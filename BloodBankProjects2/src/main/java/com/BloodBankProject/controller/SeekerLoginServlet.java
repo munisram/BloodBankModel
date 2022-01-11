@@ -11,7 +11,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.SeekerDAOlmpl;
+import com.bloodbank.DaoImpl.SeekerDAOlmpl;
+import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.SeekerDetails;
 
 /**
@@ -34,7 +35,7 @@ public class SeekerLoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -47,6 +48,8 @@ public class SeekerLoginServlet extends HttpServlet {
 		
 		String password =request.getParameter("PASSWORD");
 		Long phoneNumber=Long.parseLong(request.getParameter("number"));
+		HttpSession session=request.getSession();
+		session.setAttribute("SeekerPhoneNumber", phoneNumber);
 		SeekerDetails seeker =new SeekerDetails();
 		SeekerDAOlmpl dao=new SeekerDAOlmpl();
 		
@@ -55,23 +58,34 @@ public class SeekerLoginServlet extends HttpServlet {
 		
     	
            
-           
+       try {    
 		if(seeker!=null) {
 			
 			
-			response.sendRedirect("RequestIndex.jsp");
-			  HttpSession htp=request.getSession() ;
-	           htp.setAttribute("currentSeeker", seeker);
+			
+			 
+			session.setAttribute("seeker", seeker);
+	         
+			pw.println("<script type=\"text/javascript\">");
+			 pw.println("alert('Login success');");
+			 pw.println("location='RequestIndex.jsp';");
+			 pw.println("</script>");
+			
+	           
 		}
-//		else {
-//			pw.println("<script type=\"text/javascript\">");
-//			pw.println("alert('Not a registered User'):");
-//			pw.println("</script>");
-//			RequestDispatcher rd=request.getRequestDispatcher("SeekerLogin.jsp");
-//			rd.include(request, response);
-//		}
-//		
+		else {
+			
+			throw new ExeceptionHandle ();
+			
+		}
 		
+       }catch (ExeceptionHandle e) {
+    	
+    	   session.setAttribute("SeekerError", e.SeekerMessage());
+    	   
+    	   response.sendRedirect("SeekerLogin.jsp");
+    	   
+       }
 		
 		
 		

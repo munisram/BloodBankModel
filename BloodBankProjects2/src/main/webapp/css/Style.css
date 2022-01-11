@@ -1,0 +1,22 @@
+
+nav.header ul li a {
+    color: white;
+    font-weight: bold;
+    border: none;
+        text-decoration: none;
+}
+nav.header ul li {
+    display: inline-block;
+       padding: 5px 15px;
+    color: white;
+}
+nav.header ul {
+    list-style: none;
+    padding: 10px;
+}
+nav.header {
+    background: red;
+}
+nav.header ul li:hover {
+    background: blue;
+}

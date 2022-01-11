@@ -17,8 +17,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.BloodStackDAOlmpl;
-import com.bloodbank.Dao.RequestDAOlmpl;
+import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
+import com.bloodbank.DaoImpl.RequestDAOlmpl;
 import com.bloodbank.model.Donor;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
@@ -43,14 +43,14 @@ public class SeekerRequestServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-YYYY");
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String collectorName=request.getParameter("NAME");
 		Long aadharcard=Long.parseLong(request.getParameter("number"));
 		String hospitalName=request.getParameter("HOSPITAL");
@@ -59,7 +59,7 @@ public class SeekerRequestServlet extends HttpServlet {
 		int unit=Integer.parseInt(request.getParameter("UNIT"));
 		Date date=null;
 		try {
-			date = sdf.parse(request.getParameter("Date"));
+			date = sdf.parse(request.getParameter("currentdate"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -68,34 +68,59 @@ public class SeekerRequestServlet extends HttpServlet {
 		
 		HttpSession htp=request.getSession();
 		SeekerDetails seeker= (SeekerDetails) 
-	     htp.getAttribute("currentSeeker");	
+	     htp.getAttribute("seeker");
+		
+		//System.out.println(date);
+	//	System.out.println(request.getParameter("currentdate"));
+		
+		BloodStackDAOlmpl stockDao=new BloodStackDAOlmpl();
+		if(stockDao.checkOfQuantity(bloodtype)>unit) {
+			String status="approved";
 		
 		
-	RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, seeker.getPhoneNumber(), aadharcard,date);
+		
+	  RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, seeker.getPhoneNumber(), aadharcard,date,status);
 	
-	htp.setAttribute("requestModel", model);
+	    htp.setAttribute("requestModel", model);
 	
 			RequestDAOlmpl Dao=new RequestDAOlmpl();
 			
 				
 		int n=Dao.insertRequest(model);
-	
-		
-		
-		
-		
+		//System.out.println(n+"insert request");
 		if(n>0) {
-			BloodStackDAOlmpl stockDao=new BloodStackDAOlmpl();
+			
 			//System.out.println("request insert");
-		if(stockDao.checkOfQuantity(model.getBloodType())>unit) {
+			
 			//System.out.println("unit check");
 		      RequestDispatcher rd=request.getRequestDispatcher("BillingSeekerServlet");
 		      rd.forward(request, response);
 
 		}
+		}
 		else {
+			String status="pending";
 			
-			response.sendRedirect("index.jsp");
+			
+			
+			  RequestModel model =new RequestModel(hospitalName, bloodtype,unit , collectorName, seeker.getPhoneNumber(), aadharcard,date,status);
+			
+			    htp.setAttribute("requestModel", model);
+			
+					RequestDAOlmpl Dao=new RequestDAOlmpl();
+					
+						
+			if(Dao.insertRequest(model)>0){
+					PrintWriter pw=response.getWriter();
+				pw.println("<script type=\"text/javascript\">");
+				 pw.println("alert('your request accepted and status is pending');");
+				 pw.println("location='RequestIndex.jsp';");
+				 pw.println("</script>");
+				// response.sendRedirect("RequestIndex.jsp");
+					
+				}
+			
+			
 			
 		}
 		
@@ -104,10 +129,10 @@ public class SeekerRequestServlet extends HttpServlet {
 		
 		
 		
-		
+
 		
 		
 		
 	}
 
-}
+

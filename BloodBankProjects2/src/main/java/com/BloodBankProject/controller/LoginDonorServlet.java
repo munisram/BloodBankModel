@@ -11,14 +11,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.Interface.Dao.DonorDAO;
-import com.bloodbank.Dao.DonorDAOImpl;
+import com.bloodbank.Dao.DonorDAO;
+import com.bloodbank.DaoImpl.DonorDAOImpl;
+import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.Donor;
 
 /**
  * Servlet implementation class Login
  */
-@WebServlet("/Login")
+@WebServlet("/login")
 public class LoginDonorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -35,7 +36,7 @@ public class LoginDonorServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -45,27 +46,36 @@ public class LoginDonorServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		PrintWriter pw=response.getWriter();
 		
-		Long adharcard=Long.parseLong(request.getParameter("adharcard"));
-		Donor donor =new Donor();
+		Long aadharcard=Long.parseLong(request.getParameter("aadharcard"));
+		//Donor donor =new Donor();
 		DonorDAOImpl donorDao=new DonorDAOImpl();
-		
-	    donor= donorDao.validAdharcardNumber(adharcard);
-	 
+		//System.out.println(aadharcard);
+	   Donor donor= donorDao.validAdharcardNumber(aadharcard);
+	 try {
 	    
 		if(donor!=null) {
-			   HttpSession htp=request.getSession() ;
-			    htp.setAttribute("currentDonor", donor);
-			    
-			response.sendRedirect("Bookingindex.jsp");
-		
-		}else {
+			HttpSession session=request.getSession();
+			session.setAttribute("Donor", donor);
+			
 			pw.println("<script type=\"text/javascript\">");
-			pw.println("alert('Not a registered User'):");
-			pw.println("</script>");
-			RequestDispatcher rd=request.getRequestDispatcher("DonorLogin.jsp");
-			rd.include(request, response);
+			 pw.println("alert('Login success');");
+			 pw.println("location='PhysicalCheck.jsp';");
+			 pw.println("</script>");
+			    
+			
 		}
-		
+		else {
+			
+			throw new ExeceptionHandle();
+			
+			
+		}
+	 }catch (ExeceptionHandle e){
+		 
+		 HttpSession session=request.getSession(); 
+		 session.setAttribute("DonorError", e.DonorMessage());
+		 response.sendRedirect("DonorLogin.jsp");
+	 }
 	}
 
 }

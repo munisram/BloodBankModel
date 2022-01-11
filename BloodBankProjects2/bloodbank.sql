@@ -91,7 +91,7 @@ adharcard number(20) not null,
  select * from admin;
  select * from blood_details;
  
-drop table  blood_bank_admin cascade constraints;
+--drop table  blood_bank_admin cascade constraints;
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
@@ -112,8 +112,9 @@ blood_type varchar2(20)unique ,
 quantity number(11) not null,
 unit_price number(20) not null);
 /
-insert into blood_stack (blood_type,quantity,unit_price)values('ab-',1,1200);
+update blood_stack set blood_stack.quantity=100  where blood_stack.blood_type='a-';
 /
+update blood_stack set quantity=30 where blood_type='bombay';
 select * from blood_stack;
 --drop table blood_stack cascade constraints;
 
@@ -125,7 +126,7 @@ create table seeker_details(id number(12)GENERATED ALWAYS AS IDENTITY START WITH
 first_name varchar2(50)not null,
 last_name varchar2(50) not null,
 address varchar2(100) not null,
-phone_number number(20) not null,
+phone_number number(20) not null unique,
 password varchar2(100) not null,
 patient_id number(20) not null ,
 hospital_name varchar2(100) not null,
@@ -144,10 +145,13 @@ blood_type varchar2(50) not null,
 unit number(11) not null,
 blood_collector_name varchar2(50) not null,
 phone_number number(20) not null,
-adharcard_number number(20) not null);
+aadharcard_number number(20) not null ,
+request_date date not null,
+status varchar2 (100) default 'pending');
 
 select * from request_details;
-
+/
+--drop  table request_details cascade constraints;
 
 desc request_details
 commit;
@@ -156,8 +160,10 @@ create table billing (bill_id number(20) GENERATED ALWAYS AS IDENTITY START WITH
 blood_type varchar2(20) not null,
 seeker_id number(20)not null,
 quantity number(11) not null,
-price number(20) not null);
+price number(20) not null,
+billing_Date Date default SYSDATE);
 
+--drop table billing cascade constraints;
 
 
 
@@ -182,40 +188,58 @@ insert into admin (email,password)values('munisram6@gmail.com','050476ram',);
 
 update  admin set wallet=2000 where email='munisram6@gmail.com';
 select * from admin;
-drop table admin cascade CONSTRAINT ;
+--drop table admin cascade CONSTRAINT ;
 
 select* from blood_stack;
 insert into blood_stack v;
 select * from blood_stack;
 desc blood_stack
+select * from admin;
 select * from seeker_details;
 --desc seeker_details;
 select * from donor_details;
 select * from request_details;
 select * from billing;
+desc billing
+desc seeker_details
 select * from booking;
 desc booking;
 select * from billing;
+desc request_details
 ---------------------------
+/
 select * from admin;
 
 desc booking
 select * from blood_details;
 select * from donor_details inner join booking on donor_details.adharcard=booking.adharcard
 where BLOOD_COLLECT_CHOICE='home';
-
-
+select * from billing where '1-1-2022'<=billing_date;
+select * from blood_details;
 select * from booking;
---truncate table seeker_details;
+truncate table booking;
 commit;
+select * from  blood_stack;
 select * from  admin;
 
-
 select book_date+90 from booking where adharcard=123456789012;
-
+/
+select donor_date from donor_details where adharcard=98378837938;
 select * from booking where to_char(book_date,'dd-mm-yyyy')between '27-12-2019' and '27-12-2021';
-
-
+/
+select QUANTITY from blood_stack where blood_type='o-';
 --truncate table seeker_details;
 select * from seeker_details;
 desc seeker_details
+update  admin set wallet=10000 where password ='050476ram';
+
+select * from booking;
+
+
+
+select * from blood_details;
+delete  from booking where blood_collect_choice='home';
+select * from billing where TO_CHAR(billing_date,'YYYY-MM-DD') between TO_CHAR(SYSDATE,'YYYY-MM-DD') AND '26-12-21';
+
+select  from  billing where billing_date='';
+commit;

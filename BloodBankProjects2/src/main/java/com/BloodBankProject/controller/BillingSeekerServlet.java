@@ -11,9 +11,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.AdminDAOlmpl;
-import com.bloodbank.Dao.BillingDAOlmpl;
-import com.bloodbank.Dao.BloodStackDAOlmpl;
+import com.bloodbank.DaoImpl.AdminDAOlmpl;
+import com.bloodbank.DaoImpl.BillingDAOlmpl;
+import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.RequestModel;
@@ -39,7 +39,7 @@ public class BillingSeekerServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -54,7 +54,7 @@ public class BillingSeekerServlet extends HttpServlet {
 		   
 		HttpSession hp=request.getSession();
 	RequestModel requestModel= (RequestModel) hp.getAttribute("requestModel");	
-	 SeekerDetails  seeker=  (SeekerDetails) hp.getAttribute("currentSeeker");
+	 SeekerDetails  seeker=  (SeekerDetails) hp.getAttribute("seeker");
 		
 		   
 		  BloodStackDAOlmpl stack=new BloodStackDAOlmpl();
@@ -63,9 +63,9 @@ public class BillingSeekerServlet extends HttpServlet {
 		 
 		
 		  
-		 BillingModel  BillingModel=new  BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(), unitPrice);
+		 BillingModel  BillingModel=new  BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(), unitPrice,null);
 		 
-	 	 hp.setAttribute("biilingProces",BillingModel );
+	 	 hp.setAttribute("billingProces",BillingModel );
 	 	 
 		 BillingDAOlmpl biiling=new  BillingDAOlmpl();
 		 
@@ -83,8 +83,12 @@ public class BillingSeekerServlet extends HttpServlet {
 			AdminDAOlmpl admin=new AdminDAOlmpl();
 		if(admin.seekerPayment(unitPrice)>0) {
 			
-			
-			response.sendRedirect("seekerbill.jsp");
+			//PrintWriter pw=response.getWriter();
+			pw.println("<script type=\"text/javascript\">");
+			 pw.println("alert('your request success');");
+			 pw.println("location='seekerbill.jsp';");
+			 pw.println("</script>");
+			//response.sendRedirect("seekerbill.jsp");
 			
 		}
 			

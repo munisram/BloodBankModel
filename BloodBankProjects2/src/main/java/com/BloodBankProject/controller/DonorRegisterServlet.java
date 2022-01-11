@@ -11,8 +11,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.DonorDAOImpl;
+import com.bloodbank.DaoImpl.DonorDAOImpl;
+import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.Donor;
 
 /**
@@ -35,18 +37,18 @@ public class DonorRegisterServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new  SimpleDateFormat("dd-MM-YYYY");
+		SimpleDateFormat sdf=new  SimpleDateFormat("yyyy-MM-dd");
 		Date date=null;
 		String firstName =request.getParameter("firstname");
 		String lastName =request.getParameter("lastName");
-		String email = request.getParameter("email");
+		//String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		Long phoneNumber =Long.parseLong(request.getParameter("number"));
 		Long adharcard=Long.parseLong(request.getParameter("ADHARCARD"));
@@ -55,28 +57,58 @@ public class DonorRegisterServlet extends HttpServlet {
 	
 		
 		try {
+			
+			
 			 date=sdf.parse(request.getParameter("bio"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	Donor donor=new Donor(firstName, lastName, address, adharcard, phoneNumber, date, bloodType);
 		
 		DonorDAOImpl donorDao=new DonorDAOImpl();
+		Donor donor1=donorDao.validAdharcardNumber(adharcard);
+		try {
+		if(donor1==null) {
+		
+	    Donor donor=new Donor(firstName, lastName, address, adharcard, phoneNumber, date, bloodType);
+		
+		
 		    
 	   int check= donorDao.insertDonor(donor);
+	   
+	   
 		if(check>0) {
-		response.sendRedirect("DonorLogin.jsp");
-		}else {
-			System.out.println("not insert");
+			
+			PrintWriter pw=response.getWriter();
+			pw.println("<script type=\"text/javascript\">");
+			 pw.println("alert('Rigester success');");
+			 pw.println("location='DonorLogin.jsp';");
+			 pw.println("</script>");
+		//response.sendRedirect("DonorLogin.jsp");
+		
 		}
-	
-	
+			
 		
+		}else {
+			
+			
+			
+			throw new ExeceptionHandle();
+			
+			
+			
+			
+		}
 		
+		}catch (ExeceptionHandle e) {
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("aadharcardNumber", e.AadharcardNumber());
+			
+			
+			response.sendRedirect("DonorRegister.jsp");
+		}
 		
-		
-		doGet(request, response);
 	}
 
 }

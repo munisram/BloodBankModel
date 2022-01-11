@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.bloodbank.Dao.SeekerDAOlmpl;
+import com.bloodbank.DaoImpl.SeekerDAOlmpl;
+import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.SeekerDetails;
 
 /**
@@ -51,16 +52,34 @@ public class SeekerRegisterServlet extends HttpServlet {
 		
 		SeekerDetails seeker=new SeekerDetails(firstname, lastname, address, phoneNumber,password, PATIENT, HOSPITAL, bloodtype);
 		SeekerDAOlmpl Dao=new SeekerDAOlmpl();
-	int n=	Dao.insertSeekerDetails(seeker);
-		PrintWriter pw =response.getWriter();
 		
-		if(n>0)
+		SeekerDetails Seekervalid= Dao.FindSeekerObjectId(phoneNumber);
+		try {
+		if(Seekervalid==null) {
+		
+		if(Dao.insertSeekerDetails(seeker)>0)
 		{
 		
 			
-			
+			PrintWriter pw=response.getWriter();
+				
+				pw.println("<script type=\"text/javascript\">");
+				 pw.println("alert('Register success');");
+				 pw.println("location='SeekerLogin.jsp';");
+				 pw.println("</script>");
+			// response.sendRedirect("SeekerLogin.jsp");		
 			    
-			    response.sendRedirect("SeekerLogin.jsp");
+		}	   
+		}else {
+			
+			throw new ExeceptionHandle();
+			
+			}
+		}catch (ExeceptionHandle e) {
+			
+			HttpSession session=request.getSession();
+			session.setAttribute("phoneNumber", e.PhoneNumber());
+			response.sendRedirect("Seeker.jsp");
 		}
 		
 		

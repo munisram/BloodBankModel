@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.bloodbank.Dao.BookingDAOlmpl;
+import com.bloodbank.DaoImpl.BookingDAOlmpl;
 
 /**
  * Servlet implementation class BookingCancelServlet
@@ -31,7 +31,7 @@ public class BookingCancelServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
@@ -44,8 +44,14 @@ public class BookingCancelServlet extends HttpServlet {
 		BookingDAOlmpl Dao=new BookingDAOlmpl();
 		
 		if(Dao.deleteBooking(aadharcard)>0) {
-			PrintWriter pw=response.getWriter();
-			pw.write("Booking cancel");
+			
+			
+			 PrintWriter out=response.getWriter();  
+        	 
+        	 out.println("<script type=\"text/javascript\">");
+				out.println("alert('Request deleted ');");
+				out.println("location='index.jsp';");
+				out.println("</script>");
 		}
 		
 		

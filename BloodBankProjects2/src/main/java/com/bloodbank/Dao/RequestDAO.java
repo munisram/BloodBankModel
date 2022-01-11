@@ -1,0 +1,27 @@
+package com.bloodbank.Dao;
+
+import java.util.List;
+
+import com.bloodbank.model.RequestModel;
+
+public interface RequestDAO {
+
+	
+	public int insertRequest(RequestModel request);
+	
+	public int deleteRequest(Long adharcard);
+	
+	public List<RequestModel> ShowRequest();
+	
+	
+	public List<RequestModel> ShowRequestSeeker(Long phoneNumber);
+	
+	public RequestModel RequestObject(Long phoneNumber);
+	
+	
+	
+	
+	
+	
+	
+}

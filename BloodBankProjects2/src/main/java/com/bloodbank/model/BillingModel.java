@@ -1,5 +1,6 @@
 package com.bloodbank.model;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class BillingModel {
@@ -7,6 +8,7 @@ public class BillingModel {
 	private SeekerDetails seeker;
 	private int unit;
 	private double totalprice;
+	private LocalDate billDate;
 	public String getBloodType() {
 		return bloodType;
 	}
@@ -31,9 +33,15 @@ public class BillingModel {
 	public void setTotalprice(double totalprice) {
 		this.totalprice = totalprice;
 	}
+	public LocalDate getBillDate() {
+		return billDate;
+	}
+	public void setBillDate(LocalDate billDate) {
+		this.billDate = billDate;
+	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(bloodType, seeker, totalprice, unit);
+		return Objects.hash(billDate, bloodType, seeker, totalprice, unit);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -44,26 +52,30 @@ public class BillingModel {
 		if (getClass() != obj.getClass())
 			return false;
 		BillingModel other = (BillingModel) obj;
-		return Objects.equals(bloodType, other.bloodType) && Objects.equals(seeker, other.seeker)
+		return Objects.equals(billDate, other.billDate) && Objects.equals(bloodType, other.bloodType)
+				&& Objects.equals(seeker, other.seeker)
 				&& Double.doubleToLongBits(totalprice) == Double.doubleToLongBits(other.totalprice)
 				&& unit == other.unit;
 	}
 	@Override
 	public String toString() {
 		return "BillingModel [bloodType=" + bloodType + ", seeker=" + seeker + ", unit=" + unit + ", totalprice="
-				+ totalprice + "]";
+				+ totalprice + ", billDate=" + billDate + "]";
 	}
-	public BillingModel(String bloodType, SeekerDetails seeker, int unit, double totalprice) {
+	public BillingModel(String bloodType, SeekerDetails seeker, int unit, double totalprice, LocalDate billDate) {
 		super();
 		this.bloodType = bloodType;
 		this.seeker = seeker;
 		this.unit = unit;
 		this.totalprice = totalprice;
+		this.billDate = billDate;
 	}
 	public BillingModel() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	
+	
+
 	
 }
