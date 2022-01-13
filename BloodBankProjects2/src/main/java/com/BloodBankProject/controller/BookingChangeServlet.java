@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -44,14 +45,15 @@ public class BookingChangeServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Date BookingDate=null;
-		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		LocalDate BookingDate=null;
+		//SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String address=request.getParameter("address");
 		String choice=request.getParameter("Choice");
 		
 		try {
-			 BookingDate=sdf.parse(request.getParameter("bookingDate"));
-		} catch (ParseException e) {
+			String BookingDateStr= request.getParameter("bookingDate");
+			BookingDate = LocalDate.parse(BookingDateStr);
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -64,7 +66,7 @@ public class BookingChangeServlet extends HttpServlet {
 		if(Dao.updateBooking(model)>0) {
 			
 			
-			response.sendRedirect("BookingProces.jsp");
+			response.sendRedirect("BookingProcess.jsp");
 			
 		}
 		

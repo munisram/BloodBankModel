@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bloodbank.Dao.DonorDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.Donor;
 
 public class DonorDAOImpl implements DonorDAO {
@@ -19,17 +20,17 @@ public class DonorDAOImpl implements DonorDAO {
 
 			Connection con = connection.getConnection();
 			String query = "insert into donor_details values(?,?,?,?,?,?,?)";
-			
+			String commit="commit";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, donor.getFirstName());
 			pstmt.setString(2, donor.getLastName());
 			pstmt.setString(3, donor.getAddress());
-			pstmt.setLong(4, donor.getAdharcard());
+			pstmt.setLong(4, donor.getAadharcard());
 			pstmt.setLong(5, donor.getNumber());
 			pstmt.setDate(6, new java.sql.Date( donor.getDonorDate().getTime()));
 			pstmt.setString(7, donor.getBloodType());
 			tempNumber = pstmt.executeUpdate();
-		
+		     pstmt.executeQuery(commit);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -40,13 +41,13 @@ public class DonorDAOImpl implements DonorDAO {
 return tempNumber;
 	}
 
-	public Donor validAdharcardNumber(Long adharcard) {
+	public Donor validAadharcardNumber(Long aadharcard) {
 		Donor donor = null;
 		ConnectionUtil connection = new ConnectionUtil();
 		try {
 		
 			Connection con = connection.getConnection();
-			String query = "select * from donor_details where adharcard=" + adharcard ;
+			String query = "select * from donor_details where aadharcard=" + aadharcard ;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {
@@ -70,14 +71,15 @@ return tempNumber;
 		int n = 0;
 		try {
 			Connection con = connection.getConnection();
-			String query = "update donor_details set address=?,age=?,phone=? where adharcard=?";
+			String commit="commit";
+			String query = "update donor_details set address=?,age=?,phone=? where aadharcard=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 			pstmt.setString(1, donor.getAddress());
 			pstmt.setDate(2, new java.sql.Date( donor.getDonorDate().getTime()));
 			pstmt.setLong(3, donor.getNumber());
-			pstmt.setLong(4, donor.getAdharcard());
+			pstmt.setLong(4, donor.getAadharcard());
 			n = pstmt.executeUpdate();
-
+			 pstmt.executeQuery(commit);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -120,12 +122,12 @@ return tempNumber;
 
 	}
 
-	public Long adharcardNumber(Donor donor) {
-		Long adharcardNumber = null;
+	public Long aadharcardNumber(Donor donor) {
+		Long aadharcardNumber = null;
 		ConnectionUtil connection = new ConnectionUtil();
 		try {
 			Connection con = connection.getConnection();
-			String query = "select ADHARCARD from donor_details where PHONE=? and FIRST_NAME=? and LAST_NAME=?";
+			String query = "select AADHARCARD from donor_details where PHONE=? and FIRST_NAME=? and LAST_NAME=?";
 			PreparedStatement pstmt = con.prepareStatement(query);
 
 			pstmt.setLong(1, donor.getNumber());
@@ -135,7 +137,7 @@ return tempNumber;
 
 			while (rs.next()) {
 
-				adharcardNumber = rs.getLong(4);
+				aadharcardNumber = rs.getLong(4);
 			}
 
 		} catch (ClassNotFoundException e) {
@@ -146,7 +148,7 @@ return tempNumber;
 			e.printStackTrace();
 		}
 
-		return adharcardNumber;
+		return aadharcardNumber;
 	}
 
 	public Donor validNumber(Long number) {
@@ -154,7 +156,7 @@ return tempNumber;
 		ConnectionUtil connection = new ConnectionUtil();
 		try {
 			Connection con = connection.getConnection();
-			String query = "select * from donor_details where adharcard='" + number + "'";
+			String query = "select * from donor_details where aadharcard='" + number + "'";
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			while (rs.next()) {

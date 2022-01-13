@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Check-up</title>
 <style type="text/css">
 
 a{
@@ -115,7 +115,7 @@ p {
 <form action="CheckDonorServlet"  style="text-align: center;" method="post">
 
 
-<h1>PHYSICAL CHECK</h1>
+<h1>CHECK-UP</h1>
 <div class="formcontrol" >
 <input type="text " id="Height" name="Height" required="required" autofocus="autofocus" pattern="[0-9]{2,}" placeholder="Height" title="it should be in number"><br><br>
  </div><div class="formcontrol" >

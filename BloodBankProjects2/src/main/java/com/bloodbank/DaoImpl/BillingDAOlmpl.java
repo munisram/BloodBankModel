@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.bloodbank.Dao.BillingDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BillingModel;
 import com.bloodbank.model.BookingModel;
 import com.bloodbank.model.RequestModel;
@@ -28,6 +29,7 @@ public class BillingDAOlmpl  implements BillingDAO{
 			
 			Connection con=connection.getConnection();
 			String query="insert into billing (blood_type,seeker_id,quantity,price) values(?,?,?,?)";
+			String commit="commit";
 			SeekerDAOlmpl seeker=new SeekerDAOlmpl();
 			int seekerId=seeker.seekerIdFind(bill.getSeeker());
 			PreparedStatement pstmt=con.prepareStatement(query);
@@ -36,6 +38,7 @@ public class BillingDAOlmpl  implements BillingDAO{
 			pstmt.setInt(3, bill.getUnit());
 			pstmt.setDouble(4,bill.getTotalprice() );
 			n=pstmt.executeUpdate();
+			pstmt.executeQuery(commit);
 			
 		
 		} catch (ClassNotFoundException e) {
@@ -104,7 +107,7 @@ public List<BillingModel> biilingShowAdmin(){
 		
 		try {
 			Connection con=connection.getConnection();
-			String query="select * from billing ";
+			String query="select * from billing order by bill_id desc ";
 			Statement stmt=con.createStatement();
 			
 			 ResultSet rs=stmt.executeQuery(query);
@@ -145,7 +148,7 @@ public List<BillingModel> biilingShowAdminDate(Date date){
 	try {
 		Connection con=connection.getConnection();
 		//String query="select * from billing where TO_CHAR(billing_date=?,'YYYY-MM-DD') between TO_CHAR(SYSDATE,'YYYY-MM-DD')";
-		String query="select * from billing where ?<=billing_date";
+		String query="select * from billing where ?<=billing_date order by bill_id desc";
 		PreparedStatement pstmt=con.prepareStatement(query);
 		
 		pstmt.setString(1, sdf.format(date));

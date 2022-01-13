@@ -9,7 +9,7 @@ public interface RequestDAO {
 	
 	public int insertRequest(RequestModel request);
 	
-	public int deleteRequest(Long adharcard);
+	public int deleteRequest(Long aadharcard);
 	
 	public List<RequestModel> ShowRequest();
 	

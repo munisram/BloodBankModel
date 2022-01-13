@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Seeker Request</title>
 
 <style type="text/css">
 
@@ -159,6 +159,7 @@ p {
             <option value="ab-">ab-</option>
             <option value="o+">o+</option>
             <option value="o-">o-</option>
+             <option value="bombay">bombay</option>
           </datalist> 
          
              <div class="formcontrol" >

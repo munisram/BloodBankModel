@@ -51,7 +51,7 @@ public class DonorRegisterServlet extends HttpServlet {
 		//String email = request.getParameter("email");
 		String address = request.getParameter("address");
 		Long phoneNumber =Long.parseLong(request.getParameter("number"));
-		Long adharcard=Long.parseLong(request.getParameter("ADHARCARD"));
+		Long aadharcard=Long.parseLong(request.getParameter("ADHARCARD"));
 		String bloodType =request.getParameter("bloodtype");
 		
 	
@@ -66,11 +66,11 @@ public class DonorRegisterServlet extends HttpServlet {
 		}
 		
 		DonorDAOImpl donorDao=new DonorDAOImpl();
-		Donor donor1=donorDao.validAdharcardNumber(adharcard);
+		Donor donor1=donorDao.validAadharcardNumber(aadharcard);
 		try {
 		if(donor1==null) {
 		
-	    Donor donor=new Donor(firstName, lastName, address, adharcard, phoneNumber, date, bloodType);
+	    Donor donor=new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
 		
 		
 		    
@@ -81,7 +81,7 @@ public class DonorRegisterServlet extends HttpServlet {
 			
 			PrintWriter pw=response.getWriter();
 			pw.println("<script type=\"text/javascript\">");
-			 pw.println("alert('Rigester success');");
+			 pw.println("alert('Register success');");
 			 pw.println("location='DonorLogin.jsp';");
 			 pw.println("</script>");
 		//response.sendRedirect("DonorLogin.jsp");

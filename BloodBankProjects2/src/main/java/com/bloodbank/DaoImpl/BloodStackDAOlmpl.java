@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bloodbank.Dao.BloodStackDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BloodStack;
 import com.bloodbank.model.RequestModel;
 
@@ -23,15 +24,15 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			
 			int quantity=checkOfQuantity(stack.getBloodType().toLowerCase());
 			
-			System.out.println(stack.getBloodType()+""+quantity);
+			//System.out.println(stack.getBloodType()+""+quantity);
 			
 			String query="update blood_stack set quantity=? where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
-		
+		String commit="commit";
 			pstmt.setInt(1, quantity+stack.getQuantity());
 			pstmt.setString(2,stack.getBloodType());
 			n=pstmt.executeUpdate();
-			
+			pstmt.executeQuery(commit);
 			
 		} catch (ClassNotFoundException e) {
 			
@@ -114,11 +115,12 @@ public class BloodStackDAOlmpl implements BloodStackDAO {
 			
 			String query="update blood_stack set quantity=? where blood_type=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
-			
+			String commit="commit";
 			int totalUnit=checkOfQuantity(bloodType)-unit;
 			pstmt.setInt(1, totalUnit);
 			pstmt.setString(2, bloodType);
 			n=pstmt.executeUpdate();
+			pstmt.executeQuery(commit);
 			
 			
 		} catch (ClassNotFoundException e) {

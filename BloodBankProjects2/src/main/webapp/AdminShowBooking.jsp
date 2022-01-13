@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>AdminShowBooking</title>
 <style type="text/css">
 body {
     height: 100vh;
@@ -109,7 +109,7 @@ for(int i=0;i<bookingList.size();i++){
 	BookingModel booking=bookingList.get(i);
 	%>
  	<tr>
-	<td><%=booking.getDonor().getAdharcard() %></td>
+	<td><%=booking.getDonor().getAadharcard() %></td>
 		<td><%=booking.getAddress()%></td>
 		<td><%=booking.getAppdate()%></td>
 		<td><%=booking.getBloodType()%></td>

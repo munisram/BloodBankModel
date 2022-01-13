@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Donor Login</title>
 
 <style>
 a{
@@ -76,7 +76,7 @@ p {
 }
 .formbtn {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
 }
 
 .formcard {
@@ -110,13 +110,13 @@ p {
 	<form action="login" method="post">
 <h1 >login</h1>
   <div class="formcontrol" >
-  <input type="text" id="aadharcard" name="aadharcard"  autofocus required="required" pattern="[0-9]{12}" placeholder="aadhacard Number" title="enter the valid Aadharcard number"><br><br>
+  <input type="text" id="aadharcard" name="aadharcard"  autofocus required="required" pattern="[0-9]{12}" placeholder="Aadharcard Number" title="enter the valid Aadharcard number"><br><br>
   
 </div> 
 
 <div  class="formbtn">
 	<input type="submit" value="login">
-	<button ><a href="DonorRegister.jsp">Register</a></button>
+	
  </div>
     <%
     

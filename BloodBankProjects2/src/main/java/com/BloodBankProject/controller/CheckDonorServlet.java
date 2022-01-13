@@ -65,7 +65,7 @@ public class CheckDonorServlet extends HttpServlet {
 					//PrintWriter pw=response.getWriter();
 					
 					pw.println("<script type=\"text/javascript\">");
-					 pw.println("alert('your eligible to blood donate');");
+					 pw.println("alert('you are eligible to blood donate');");
 					 pw.println("location='BookingIndex.jsp';");
 					 pw.println("</script>");
 					
@@ -83,7 +83,7 @@ public class CheckDonorServlet extends HttpServlet {
 		}
 			
 		}else {
-			response.sendRedirect("NotQualification.jsp");
+			response.sendRedirect("NotQualified.jsp");
 			// pw.write("you not eligible");
 				
 		}

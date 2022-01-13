@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Show Stock</title>
 <style type="text/css">
 body {
     height: 100vh;

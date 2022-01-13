@@ -50,7 +50,7 @@ public class LoginDonorServlet extends HttpServlet {
 		//Donor donor =new Donor();
 		DonorDAOImpl donorDao=new DonorDAOImpl();
 		//System.out.println(aadharcard);
-	   Donor donor= donorDao.validAdharcardNumber(aadharcard);
+	   Donor donor= donorDao.validAadharcardNumber(aadharcard);
 	 try {
 	    
 		if(donor!=null) {

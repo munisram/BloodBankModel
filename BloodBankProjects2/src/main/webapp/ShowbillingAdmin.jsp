@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>show Billing Admin</title>
 <style type="text/css">
 body {
     height: 100vh;
@@ -24,8 +24,11 @@ body {
     box-shadow: 0px 0px 6px 0px black;
     color: white;
     margin: 50px;
-    display: flex;
         width: 100%;
+}
+.flexbox{
+
+    display: flex;
 }
 .adminImage {
     width: 75%;
@@ -90,7 +93,6 @@ tbody {
 .backBtn a {
         text-decoration: none;
     color: white;
-    margin-right: 14px;
     background: black;
     padding: 5px 10px;
     border-radius: 3px
@@ -101,13 +103,14 @@ tbody {
     margin-top: 10px;
     font-size: 19px;
     
-    padding: 5px 20px;
+    padding: 5px 0px;
 }
 </style>
 </head>
 <body>
 
 <div class="adminCard">
+<div class="flexbox">
 <div class="adminImage">
 <table style="text-align: center;" class="center">
 <tr>
@@ -166,6 +169,11 @@ for(int i=0;i<billingList.size();i++){
 
 </div>
 </div>
+<div class="backBtn">
+<a href="ShowbillingAdmin.jsp">back</a>
+</div>
+</div>
+
 <script type="text/javascript">
 today();
 function today(){
@@ -181,6 +189,7 @@ console.log(maxdate);
 
 } 
 </script>
+
 </body>
 
 

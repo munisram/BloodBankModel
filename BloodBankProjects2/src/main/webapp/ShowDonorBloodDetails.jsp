@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>ShowDonorBloodDetails</title>
 <style type="text/css">
 body {
     height: 100vh;
@@ -120,7 +120,7 @@ width: 100%;
 
    <tr>
    
-   <td> <%= details.getDonor().getAdharcard() %></td>
+   <td> <%= details.getDonor().getAadharcard() %></td>
     <td> <%= details.getDonor().getBloodType() %></td>
     <td> <%= details.getUnit()%></td>
      <td> <%= details.getPrice()%></td>

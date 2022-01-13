@@ -1,13 +1,16 @@
 package com.bloodbank.model;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.Objects;
+
+import org.apache.tomcat.jni.Local;
 
 public class BookingModel {
 
 	private Donor donor;
 	private String address;
-	private Date appdate;
+	private LocalDate appdate;
 	private  String bloodType;
 	private String bloodCollectChoice;
 	public Donor getDonor() {
@@ -22,10 +25,10 @@ public class BookingModel {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Date getAppdate() {
+	public LocalDate getAppdate() {
 		return appdate;
 	}
-	public void setAppdate(Date appdate) {
+	public void setAppdate(LocalDate appdate) {
 		this.appdate = appdate;
 	}
 	public String getBloodType() {
@@ -62,7 +65,7 @@ public class BookingModel {
 		return "BookingModel [donor=" + donor + ", address=" + address + ", appdate=" + appdate + ", bloodType="
 				+ bloodType + ", bloodCollectChoice=" + bloodCollectChoice + "]";
 	}
-	public BookingModel(Donor donor, String address, Date appdate, String bloodType, String bloodCollectChoice) {
+	public BookingModel(Donor donor, String address, LocalDate appdate, String bloodType, String bloodCollectChoice) {
 		super();
 		this.donor = donor;
 		this.address = address;

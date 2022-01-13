@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Seeker Bill</title>
 <style type="text/css">
 body {
     height: 100vh;

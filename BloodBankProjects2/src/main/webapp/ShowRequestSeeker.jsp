@@ -8,7 +8,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Show Request Seeker</title>
 <style type="text/css">
 body {
     height: 100vh;
@@ -117,7 +117,7 @@ SeekerDetails seeker=(SeekerDetails) hpt.getAttribute("seeker");
       <td> <%= requestModel.getUnit()%></td>
       <td> <%= requestModel.getBloodCollectorName()%></td>
       <td> <%= requestModel.getPhoneNumber()%></td>
-      <td> <%=requestModel.getAdharcard() %></td>
+      <td> <%=requestModel.getAadharcard() %></td>
       <td> <%= requestModel.getRequestDate()%></td>
       <td> <%= requestModel.getStatus()%></td>
 </tr>

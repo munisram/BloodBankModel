@@ -7,7 +7,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Request Show And Delete</title>
 <style type="text/css">
 body {
     height: 100vh;
@@ -104,11 +104,11 @@ RequestDAOlmpl Dao=new RequestDAOlmpl();
       <td> <%= requestModel.getUnit()%></td>
       <td> <%= requestModel.getBloodCollectorName()%></td>
       <td> <%= requestModel.getPhoneNumber()%></td>
-      <td> <%=requestModel.getAdharcard() %></td>
+      <td> <%=requestModel.getAadharcard() %></td>
       <td> <%= requestModel.getRequestDate()%></td>
       <td> <%= requestModel.getStatus()%></td>
       <td class="rowlink"><a href="RequestUpdateAdmin.jsp?phoneNumber=<%=requestModel.getPhoneNumber() %>">RequestUpdate </a> </td>
-      <td class="rowlink"><a href="RequestDeleteAdmin.jsp?Aadharcard=<%=requestModel.getAdharcard() %>">request delete </a></td>    
+      <td class="rowlink"><a href="RequestDeleteAdmin.jsp?Aadharcard=<%=requestModel.getAadharcard() %>">request delete </a></td>    
       
 </tr>
 

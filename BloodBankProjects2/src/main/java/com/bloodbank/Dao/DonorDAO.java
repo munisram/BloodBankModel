@@ -15,7 +15,7 @@ public interface DonorDAO {
 	
 	public List<Donor> showDonor();
 	
-	public Long adharcardNumber(Donor donor);
+	public Long aadharcardNumber(Donor donor);
 	
-	public Donor validAdharcardNumber(Long adharcard);
+	public Donor validAadharcardNumber(Long aaaadharcard);
 }

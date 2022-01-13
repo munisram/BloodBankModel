@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Seeker Login</title>
 
 
 <style>
@@ -125,8 +125,8 @@ p {
   <div  class="formbtn">
                <button>Submit</button>
              
-                <button ><a href="ForgetPassword.jsp">Forgetpassword</a></button>
-               <button ><a href="Seeker.jsp">Register</a></button>
+                <button ><a href="ForgotPassword.jsp">Forgot password</a></button>
+              
 </div>
 
 

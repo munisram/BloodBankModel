@@ -51,12 +51,13 @@ public class SeekerRegisterServlet extends HttpServlet {
 	String password=request.getParameter("PASSWORD");
 		
 		SeekerDetails seeker=new SeekerDetails(firstname, lastname, address, phoneNumber,password, PATIENT, HOSPITAL, bloodtype);
+		System.out.println("Seeker register"+seeker);
 		SeekerDAOlmpl Dao=new SeekerDAOlmpl();
 		
-		SeekerDetails Seekervalid= Dao.FindSeekerObjectId(phoneNumber);
+		Long phone= Dao.PhoneNumberValid(phoneNumber);
 		try {
-		if(Seekervalid==null) {
-		
+		if(phone==null) {
+			//Dao.insertSeekerDetails(seeker);
 		if(Dao.insertSeekerDetails(seeker)>0)
 		{
 		
@@ -79,6 +80,7 @@ public class SeekerRegisterServlet extends HttpServlet {
 			
 			HttpSession session=request.getSession();
 			session.setAttribute("phoneNumber", e.PhoneNumber());
+			
 			response.sendRedirect("Seeker.jsp");
 		}
 		

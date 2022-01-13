@@ -15,7 +15,7 @@ public interface SeekerDAO  {
 	
 	public int ForgetPassword(Long phoneNumber ,String password); 
 	
-	
+	public SeekerDetails FindSeekerObjectId(long phoneNumber);
 	
 	
 	

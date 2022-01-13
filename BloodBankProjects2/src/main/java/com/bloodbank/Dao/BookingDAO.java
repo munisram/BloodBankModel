@@ -1,5 +1,6 @@
 package com.bloodbank.Dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -13,16 +14,16 @@ public interface BookingDAO {
 	 public int updateBooking(BookingModel book);
 	
 	
-	 public int deleteBooking(Long adharcard);
+	 public int deleteBooking(Long aadharcard);
 	
 	 public List<BookingModel> HomeCollection();
 	
-	 public Date dateCheck(Donor donor);
+	 public LocalDate dateCheck(Donor donor);
 	
 	 public int updateDateForDonor(BookingModel book);
 	 public List<BookingModel> ShowBookingAdmin();
 	
-	
+	 public List<BookingModel> ShowBookingDonor(Donor donor);
 	
 	
 	

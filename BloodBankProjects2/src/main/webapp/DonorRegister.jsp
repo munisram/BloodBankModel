@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Register</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <style type="text/css">
 
@@ -129,7 +129,7 @@ p {
             <textarea id="address" name="address" maxlength="50" required placeholder="Address:"></textarea>           
            
                 </div><div class="formcontrol" >
-            <input type="text" id="number" name="number" required  pattern="[987][0-9]{9}" placeholder="PhoneNumber" title=" mininum 10characters">
+            <input type="text" id="number" name="number" required  pattern="[9876][0-9]{9}" placeholder="PhoneNumber" title=" mininum 10characters">
                </div><div class="formcontrol" >
            <input type="date" id="bio" name="bio" required="required" placeholder="BIO"> 
                     
@@ -147,6 +147,7 @@ p {
             <option value="ab-">ab-</option>
             <option value="o+">o+</option>
             <option value="o-">o-</option>
+             <option value="bombay">bombay</option>
           </datalist> 
           
           <%
@@ -160,7 +161,7 @@ p {
           
            </div>
           <div  class="formbtn">
-          <button>Submit</button>&nbsp;&nbsp;&nbsp; &nbsp;
+          <button>Submit</button>
           <button type="reset">Reset</button>         
            
         </div>

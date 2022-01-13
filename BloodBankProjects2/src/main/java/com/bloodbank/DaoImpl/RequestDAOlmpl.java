@@ -10,6 +10,7 @@ import java.util.Date;
 import java.util.List;
 
 import com.bloodbank.Dao.RequestDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
 
@@ -20,7 +21,9 @@ public class RequestDAOlmpl  implements RequestDAO{
 		int n=0;
 		ConnectionUtil connection=new ConnectionUtil();
 		String query ="insert into request_details (hospital_name,blood_type,unit,blood_collector_name,phone_number,aadharcard_number,request_date,status) values(?,?,?,?,?,?,?,?)";
-				try {
+		String commit="commit";	
+		
+		try {
 					Connection con=connection.getConnection();
 					System.out.println( new java.sql.Date( request.getRequestDate().getTime()));
 				PreparedStatement pstmt=con.prepareStatement(query);
@@ -29,11 +32,11 @@ public class RequestDAOlmpl  implements RequestDAO{
 				pstmt.setInt(3,request.getUnit());
 				pstmt.setString(4, request.getBloodCollectorName());
 				pstmt.setLong(5, request.getPhoneNumber());
-				pstmt.setLong(6, request.getAdharcard());
+				pstmt.setLong(6, request.getAadharcard());
 				pstmt.setDate(7, new java.sql.Date( request.getRequestDate().getTime()));
 				pstmt.setString(8, request.getStatus());
 				n=pstmt.executeUpdate();
-					
+				 pstmt.executeQuery(commit);
 					
 					
 					
@@ -59,10 +62,11 @@ public class RequestDAOlmpl  implements RequestDAO{
 		
 		try {
 			Connection con=connection.getConnection();
+			String commit="commit";	
 			String query="delete from request_details where aadharcard_number ="+aadharcard;
 			Statement stmt=con.createStatement();
 			tempNumber=stmt.executeUpdate(query);
-			
+			stmt.executeQuery(commit);
 			
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
@@ -111,7 +115,8 @@ public class RequestDAOlmpl  implements RequestDAO{
 		ConnectionUtil connection=new ConnectionUtil();
 		try {
 			Connection con=connection.getConnection();
-			String query="select * from request_details";
+			String query="select * from request_details order by request_id desc";
+			
 			Statement stmt=con.createStatement();
 	ResultSet  rs=stmt.executeQuery(query);
 			

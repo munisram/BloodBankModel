@@ -8,7 +8,7 @@ public class Donor {
 	private String firstName;
 	private String lastName;
 	private String address;
-	private Long adharcard;
+	private Long aadharcard;
 	private long number;
 	private Date donorDate;
 	private String bloodType;
@@ -30,11 +30,11 @@ public class Donor {
 	public void setAddress(String address) {
 		this.address = address;
 	}
-	public Long getAdharcard() {
-		return adharcard;
+	public Long getAadharcard() {
+		return aadharcard;
 	}
-	public void setAdharcard(Long adharcard) {
-		this.adharcard = adharcard;
+	public void setAadharcard(Long aadharcard) {
+		this.aadharcard = aadharcard;
 	}
 	public long getNumber() {
 		return number;
@@ -56,7 +56,7 @@ public class Donor {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(address, adharcard, bloodType, donorDate, firstName, lastName, number);
+		return Objects.hash(aadharcard, address, bloodType, donorDate, firstName, lastName, number);
 	}
 	@Override
 	public boolean equals(Object obj) {
@@ -67,23 +67,23 @@ public class Donor {
 		if (getClass() != obj.getClass())
 			return false;
 		Donor other = (Donor) obj;
-		return Objects.equals(address, other.address) && Objects.equals(adharcard, other.adharcard)
+		return Objects.equals(aadharcard, other.aadharcard) && Objects.equals(address, other.address)
 				&& Objects.equals(bloodType, other.bloodType) && Objects.equals(donorDate, other.donorDate)
 				&& Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 				&& number == other.number;
 	}
 	@Override
 	public String toString() {
-		return "Donor [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", adharcard="
-				+ adharcard + ", number=" + number + ", donorDate=" + donorDate + ", bloodType=" + bloodType + "]";
+		return "Donor [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", aadharcard="
+				+ aadharcard + ", number=" + number + ", donorDate=" + donorDate + ", bloodType=" + bloodType + "]";
 	}
-	public Donor(String firstName, String lastName, String address, Long adharcard, long number, Date donorDate,
+	public Donor(String firstName, String lastName, String address, Long aadharcard, long number, Date donorDate,
 			String bloodType) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
 		this.address = address;
-		this.adharcard = adharcard;
+		this.aadharcard = aadharcard;
 		this.number = number;
 		this.donorDate = donorDate;
 		this.bloodType = bloodType;
@@ -92,5 +92,7 @@ public class Donor {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
+	
+	
+	
 }

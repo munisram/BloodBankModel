@@ -10,7 +10,7 @@ public class RequestModel {
 	private int unit;
 	private String bloodCollectorName;
 	private Long phoneNumber;
-	private Long adharcard;
+	private Long aadharcard;
 	private Date requestDate;
 	private String status;
 	public String getHospitalName() {
@@ -43,11 +43,11 @@ public class RequestModel {
 	public void setPhoneNumber(Long phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	public Long getAdharcard() {
-		return adharcard;
+	public Long getAadharcard() {
+		return aadharcard;
 	}
-	public void setAdharcard(Long adharcard) {
-		this.adharcard = adharcard;
+	public void setAadharcard(Long aadharcard) {
+		this.aadharcard = aadharcard;
 	}
 	public Date getRequestDate() {
 		return requestDate;
@@ -63,7 +63,7 @@ public class RequestModel {
 	}
 	@Override
 	public int hashCode() {
-		return Objects.hash(adharcard, bloodCollectorName, bloodType, hospitalName, phoneNumber, requestDate, status,
+		return Objects.hash(aadharcard, bloodCollectorName, bloodType, hospitalName, phoneNumber, requestDate, status,
 				unit);
 	}
 	@Override
@@ -75,7 +75,7 @@ public class RequestModel {
 		if (getClass() != obj.getClass())
 			return false;
 		RequestModel other = (RequestModel) obj;
-		return Objects.equals(adharcard, other.adharcard)
+		return Objects.equals(aadharcard, other.aadharcard)
 				&& Objects.equals(bloodCollectorName, other.bloodCollectorName)
 				&& Objects.equals(bloodType, other.bloodType) && Objects.equals(hospitalName, other.hospitalName)
 				&& Objects.equals(phoneNumber, other.phoneNumber) && Objects.equals(requestDate, other.requestDate)
@@ -84,18 +84,18 @@ public class RequestModel {
 	@Override
 	public String toString() {
 		return "RequestModel [hospitalName=" + hospitalName + ", bloodType=" + bloodType + ", unit=" + unit
-				+ ", bloodCollectorName=" + bloodCollectorName + ", phoneNumber=" + phoneNumber + ", adharcard="
-				+ adharcard + ", requestDate=" + requestDate + ", status=" + status + "]";
+				+ ", bloodCollectorName=" + bloodCollectorName + ", phoneNumber=" + phoneNumber + ", aadharcard="
+				+ aadharcard + ", requestDate=" + requestDate + ", status=" + status + "]";
 	}
 	public RequestModel(String hospitalName, String bloodType, int unit, String bloodCollectorName, Long phoneNumber,
-			Long adharcard, Date requestDate, String status) {
+			Long aadharcard, Date requestDate, String status) {
 		super();
 		this.hospitalName = hospitalName;
 		this.bloodType = bloodType;
 		this.unit = unit;
 		this.bloodCollectorName = bloodCollectorName;
 		this.phoneNumber = phoneNumber;
-		this.adharcard = adharcard;
+		this.aadharcard = aadharcard;
 		this.requestDate = requestDate;
 		this.status = status;
 	}
@@ -103,6 +103,8 @@ public class RequestModel {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	
+	
 	
 
 }

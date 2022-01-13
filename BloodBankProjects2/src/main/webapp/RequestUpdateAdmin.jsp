@@ -13,7 +13,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>Request Update Admin</title>
 </head>
 <body>
 <%
@@ -26,9 +26,9 @@ RequestDAOlmpl requestModelDao=new RequestDAOlmpl();
    String status="approved";
 	HttpSession hp=request.getSession();
 	
-System.out.println(phoneNumber);
+//System.out.println(phoneNumber);
  
- RequestModel requestMoel=new RequestModel(requestModel.getHospitalName(), requestModel.getBloodType(), requestModel.getUnit(), requestModel.getBloodCollectorName(), requestModel.getPhoneNumber(),requestModel.getAdharcard() , requestModel.getRequestDate(),status);
+ RequestModel requestMoel=new RequestModel(requestModel.getHospitalName(), requestModel.getBloodType(), requestModel.getUnit(), requestModel.getBloodCollectorName(), requestModel.getPhoneNumber(),requestModel.getAadharcard() , requestModel.getRequestDate(),status);
 		 
 	
 	   

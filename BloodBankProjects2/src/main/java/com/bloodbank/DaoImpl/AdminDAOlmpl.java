@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.bloodbank.Dao.AdminDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.AdminModel;
 
 public class AdminDAOlmpl implements AdminDAO {
@@ -59,10 +60,12 @@ public class AdminDAOlmpl implements AdminDAO {
 	
 		//System.out.println(walletTotal);
 			String query ="update admin set wallet=? where email=?";
+			//String commit="commit";
 			PreparedStatement pstmt=con.prepareStatement(query);
 			pstmt.setDouble(1, walletTotal);
 			pstmt.setString(2, admin.getEmail());
 		   n=  pstmt.executeUpdate();
+		  // pstmt.executeQuery(commit);
 			
 			
 		} catch (ClassNotFoundException e) {
@@ -88,12 +91,13 @@ public int seekerPayment(double totalPrice) {
 	ConnectionUtil connection=new ConnectionUtil();
 	try {
 		Connection con=connection.getConnection();
+		String commit="commit";
 		String query="update admin set wallet=? where email=?";
 		PreparedStatement pstmt=con.prepareStatement(query);
 		pstmt.setDouble(1, total);
 		pstmt.setString(2, admin.getEmail());
 		n=pstmt.executeUpdate();
-		
+		  pstmt.executeQuery(commit);
 		
 		
 	} catch (ClassNotFoundException e) {

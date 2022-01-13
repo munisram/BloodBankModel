@@ -4,16 +4,17 @@ select * from donor;
 alter table client_side rename column las_tname to last_name ;
 
 select * from medicalperson;
-
+select book_date+90 from booking where aadharcard=
+commit;
 desc medicalperson
 select * from blood_transaction;
 select * from blooddonor;
 select * from client_side;
-
+select * from booking;
 select * from blood_details;
 select * from blood_bank_admin;
 
-drop table donor cascade constraints;
+--drop table donor_details cascade constraints;
 
 
 create table donor_details(
@@ -21,10 +22,10 @@ create table donor_details(
 first_name varchar2(50) not null,
 last_name varchar2(50) not null,
 address varchar2(100) not null,
-adharcard number(20)  primary key,
+aadharcard number(20)  primary key,
 phone varchar2(20) not null,
 donor_date date not null,
-blood_type varchar2(5) not null);
+blood_type varchar2(10) not null);
 
 
 -----------------------
@@ -76,14 +77,14 @@ insert into donor (first_name,last_name,address,email,phone,age,blood_type,passw
 
 -------------------------
 create table booking (book_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key,
-adharcard number(20) not null,
+aadharcard number(20) not null,
  address varchar2(100) not null,
   book_date date not null ,
   blood_type varchar2(10) not null,
   blood_collect_choice varchar2(100) not null,
-  foreign key (adharcard) references donor_details(adharcard) );
+  foreign key (aadharcard) references donor_details(aadharcard) );
  ----------------------------
- 
+
  select * from donor_details;
  
  select * from booking;
@@ -95,16 +96,16 @@ adharcard number(20) not null,
 
 create table blood_details (blood_id number(12)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
 blood_type varchar2(20) not null ,
-adharcard number(20) not null ,
+aadharcard number(20) not null ,
 unit number(10) not null,
 price number(11)not null);
-
+ 
 desc blood_details
 select * from blood_details;
 
 select * from blood_stack;
 select * from booking;
-
+select book_date+90 from booking where aadharcard=637482870912;
 
 
 create table blood_stack(stack_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
@@ -137,6 +138,7 @@ drop table seeker_details cascade constraints;
 select * from seeker_details;
 desc seeker_details
 
+insert into seeker_details(first_name,last_name,address,PHONE_NUMBER,PASSWORD,PATIENT_ID,HOSPITAL_NAME,BLOOD_TYPE)values('munis','waran','sdfdfds',01987654321,'sarmila',12345,'goverment','o-');
 
 
 create table request_details (request_id number(11)GENERATED ALWAYS AS IDENTITY START WITH 1 primary key ,
@@ -145,13 +147,13 @@ blood_type varchar2(50) not null,
 unit number(11) not null,
 blood_collector_name varchar2(50) not null,
 phone_number number(20) not null,
-aadharcard_number number(20) not null ,
+aadharcard_number number(20) not null unique ,
 request_date date not null,
 status varchar2 (100) default 'pending');
 
-select * from request_details;
+select * from donor_details;
 /
---drop  table request_details cascade constraints;
+drop  table request_details cascade constraints;
 
 desc request_details
 commit;
@@ -188,7 +190,7 @@ insert into admin (email,password)values('munisram6@gmail.com','050476ram',);
 
 update  admin set wallet=2000 where email='munisram6@gmail.com';
 select * from admin;
---drop table admin cascade CONSTRAINT ;
+drop table seeker_details cascade CONSTRAINT ;
 
 select* from blood_stack;
 insert into blood_stack v;
@@ -198,7 +200,7 @@ select * from admin;
 select * from seeker_details;
 --desc seeker_details;
 select * from donor_details;
-select * from request_details;
+select * from request_details order by request_id desc ;
 select * from billing;
 desc billing
 desc seeker_details
@@ -212,7 +214,11 @@ select * from admin;
 
 desc booking
 select * from blood_details;
-select * from donor_details inner join booking on donor_details.adharcard=booking.adharcard
+select * from donor_details;
+select * from seeker_details;
+commit;
+
+inner join booking on donor_details.adharcard=booking.adharcard
 where BLOOD_COLLECT_CHOICE='home';
 select * from billing where '1-1-2022'<=billing_date;
 select * from blood_details;
@@ -233,7 +239,7 @@ select * from seeker_details;
 desc seeker_details
 update  admin set wallet=10000 where password ='050476ram';
 
-select * from booking;
+select * from billing;
 
 
 
@@ -243,3 +249,7 @@ select * from billing where TO_CHAR(billing_date,'YYYY-MM-DD') between TO_CHAR(S
 
 select  from  billing where billing_date='';
 commit;
+
+
+select * from billing order by bill_id desc;
+select * from billing where sysdate <=billing_date order by bill_id desc;

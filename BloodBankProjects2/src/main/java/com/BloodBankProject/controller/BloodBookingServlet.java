@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.zone.ZoneRulesException;
 import java.util.Date;
 
@@ -29,45 +30,39 @@ import com.bloodbank.model.Donor;
  */
 @WebServlet("/BloodBookingServlet")
 public class BloodBookingServlet extends HttpServlet {
-	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BloodBookingServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new  SimpleDateFormat("yyyy-MM-dd");
+	//SimpleDateFormat sdf=new  SimpleDateFormat("yyyy-MM-dd");
 		//PrintWriter pw=response.getWriter();
-		Date date=null;
+		LocalDate date=null;
 		String address=request.getParameter("address");
+		System.out.println("helo"+address);
 		 String choice =request.getParameter("Choice");  
-	     BookingDAOlmpl bookingDao=new BookingDAOlmpl();
+	     System.out.println(choice);
+		 BookingDAOlmpl bookingDao=new BookingDAOlmpl();
 	     
 		try {
-			 date=sdf.parse(request.getParameter("bookingDate"));
+			 date=LocalDate.parse(request.getParameter("bookingDate"));
+			 System.out.println(date);
 			 
 				HttpSession htp=request.getSession();
 				
         		Donor donor= (Donor) htp.getAttribute("Donor");
-			 			 Date date1=bookingDao.dateCheck(donor);
-			 			 AdminDAOlmpl admin=new AdminDAOlmpl();
-                   if(date1!=null && date.after(date1)&& admin.CheckWallet()>300) {
-            	 
+        		 AdminDAOlmpl admin=new AdminDAOlmpl();
+        		  LocalDate  date1=bookingDao.dateCheck(donor);
+			 			 System.out.println("fr"+donor);
+			 			// if(date1!=null) {
+			 			 //LocalDate dateLocal=LocalDate.parse(date1);
+			 			 System.out.println(date1);
+			 			
+			 			System.out.println("John Wick @");
+			 			 if(date1!=null && date.isAfter(date1)&& admin.CheckWallet()>300) {
+            	 System.out.println("Hello Peter");
             	 
             	
             		PrintWriter out=response.getWriter();
@@ -76,19 +71,21 @@ public class BloodBookingServlet extends HttpServlet {
             		
             		BookingModel booking =new BookingModel(donor, address, date,donor.getBloodType(), choice);
             		htp.setAttribute("bookingDate",booking);
+            		int i=bookingDao.booking(booking)	;
             		
-            		
-            	
+			 			
             				 
-            		if(bookingDao.booking(booking)>0) {
+            		if(i>0) {
             			
             			out.println("<script type=\"text/javascript\">");
             			out.println("alert('Booking Successfully');");
-            			out.println("location='BookingProces.jsp';");
+            			out.println("location='BookingProcess.jsp';");
             			out.println("</script>");
             			//response.sendRedirect("");
+            			System.out.println("Hello Peter");	
+            			response.sendRedirect("BookingProcess.jsp"); 
             			
-            			
+            		
             		}
             			
             			
@@ -96,7 +93,7 @@ public class BloodBookingServlet extends HttpServlet {
             			
             			
             		}
-            		
+			 			 //}
                         else if(date1==null&& admin.CheckWallet()>300){
             		        	  
                 	   BookingModel booking =new BookingModel(donor, address, date,donor.getBloodType(), choice);
@@ -111,9 +108,10 @@ public class BloodBookingServlet extends HttpServlet {
 
                    			out.println("<script type=\"text/javascript\">");
                    			out.println("alert('Booking Successfully');");
-                   			out.println("location='BookingProces.jsp';");
+                   			//out.println("location='BookingProcess.jsp';");
                    			out.println("</script>");
-                        	   
+                   			System.out.println("Hello Peter");
+                        	response.sendRedirect("BookingProcess.jsp");   
                        		
            					
             			
@@ -130,11 +128,12 @@ public class BloodBookingServlet extends HttpServlet {
 					out.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
 					out.println("location='index.jsp';");
 					out.println("</script>");
-            	          	 
+					System.out.println("Joh Wick");
+					response.sendRedirect("BookingProcess.jsp");             	 
             	
             	 
              }
-		} catch (ParseException e) {
+		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Insert title here</title>
+<title>AdminLogin</title>
 
 <style>
 a{
@@ -114,7 +114,7 @@ p {
    
      <h1>Admin login</h1>
    <div class="formcontrol" >
-  <input type="email" id="email" name="email" required="required" placeholder="email">
+  <input type="email" id="email" name="email" required="required" placeholder="Enter the Email">
   
   </div>
    <div class="formcontrol" >

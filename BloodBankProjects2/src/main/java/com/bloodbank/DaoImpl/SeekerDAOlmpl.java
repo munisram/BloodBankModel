@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 import com.bloodbank.Dao.SeekerDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.SeekerDetails;
 
 public class SeekerDAOlmpl implements SeekerDAO {
@@ -15,6 +16,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		ConnectionUtil connection=new ConnectionUtil();
 		String query="insert into seeker_details (first_name,last_name,address,phone_number,password,patient_id,hospital_name,blood_type)"
 				+ "values(?,?,?,?,?,?,?,?)";
+		String commit="commit";
 		try {
 			Connection con=connection.getConnection();
 			PreparedStatement pstmt=con.prepareStatement(query);
@@ -28,7 +30,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 			pstmt.setString(8, details.getBloodType());
 			
 			n=pstmt.executeUpdate();
-			
+			pstmt.executeQuery(commit);
 		} catch (ClassNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -136,6 +138,7 @@ public class SeekerDAOlmpl implements SeekerDAO {
 		return seeker;
 		
 	}
+	
 public SeekerDetails FindSeekerObjectId(long phoneNumber) {
 		
 		SeekerDetails seeker=null;
@@ -143,7 +146,7 @@ public SeekerDetails FindSeekerObjectId(long phoneNumber) {
 		ConnectionUtil connection=new ConnectionUtil();
 		try {
 			Connection con=connection.getConnection();
-			String query="select * from seeker_details";
+			String query="select * from seeker_details where PHONE_NUMBER ='"+phoneNumber+"'";
 			Statement stmt=con.createStatement();
 		ResultSet rs=stmt.executeQuery(query);
 			while(rs.next()) {
@@ -163,18 +166,50 @@ public SeekerDetails FindSeekerObjectId(long phoneNumber) {
 		return seeker;
 		
 	}
+
+
+
+
+
+
+public Long PhoneNumberValid(long phoneNumber) {
+	
+	Long number=null;
+	
+	ConnectionUtil connection=new ConnectionUtil();
+	try {
+		Connection con=connection.getConnection();
+		String query="select * from seeker_details where PHONE_NUMBER ='"+phoneNumber+"'";
+		Statement stmt=con.createStatement();
+	ResultSet rs=stmt.executeQuery(query);
+		while(rs.next()) {
+			number=rs.getLong(7);
+		}
+	} catch (ClassNotFoundException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	} catch (SQLException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	
+	
+	
+	return number;
+	
+}
 public  int ForgetPassword(Long phoneNumber  ,String password) {
 	int n=0;
 	ConnectionUtil connection=new ConnectionUtil();
 	
 	try {
 		Connection con=connection.getConnection();
-		
+		String commit="commit";
 		String query="update  seeker_details  set password=?  where phone_number=?";
 		
 		PreparedStatement pstmt=con.prepareStatement(query);
 		n=pstmt.executeUpdate();
-		
+		pstmt.executeQuery(commit);
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block

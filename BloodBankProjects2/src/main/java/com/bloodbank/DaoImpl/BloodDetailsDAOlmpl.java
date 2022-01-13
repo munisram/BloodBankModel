@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.bloodbank.Dao.BloodDetailsDAO;
+import com.bloodbank.Util.ConnectionUtil;
 import com.bloodbank.model.BloodDetailsModel;
 import com.bloodbank.model.Donor;
 
@@ -24,13 +25,15 @@ public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 		
 			
 			
-			String query="insert into blood_details(blood_type,adharcard,unit,price) values(?,?,?,?)";
+			String query="insert into blood_details(blood_type,aadharcard,unit,price) values(?,?,?,?)";
 			PreparedStatement pstmt=con.prepareStatement(query);
+			String commit="commit";
 			pstmt.setString(1, details.getBloodType());
-			pstmt.setLong(2, details.getDonor().getAdharcard());
+			pstmt.setLong(2, details.getDonor().getAadharcard());
 			pstmt.setInt(3, details.getUnit());
 			pstmt.setInt(4, details.getPrice());
 			tempNumber=pstmt.executeUpdate();
+			pstmt.executeQuery(commit);
 			
 			
 			
@@ -56,9 +59,9 @@ public class BloodDetailsDAOlmpl implements BloodDetailsDAO {
 		
 		try {
 			Connection  con=connection.getConnection();
-			String query="select * from blood_details where adharcard=?";
+			String query="select * from blood_details where aadharcard=?";
 			PreparedStatement pstmt=con.prepareStatement(query);
-			pstmt.setLong(1,donor.getAdharcard());
+			pstmt.setLong(1,donor.getAadharcard());
 		ResultSet rs=pstmt.executeQuery();
 			while(rs.next()) {
 				
