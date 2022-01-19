@@ -19,6 +19,7 @@ import javax.servlet.http.HttpSession;
 
 import com.bloodbank.DaoImpl.BloodStackDAOlmpl;
 import com.bloodbank.DaoImpl.RequestDAOlmpl;
+import com.bloodbank.exception.ExeceptionHandle;
 import com.bloodbank.model.Donor;
 import com.bloodbank.model.RequestModel;
 import com.bloodbank.model.SeekerDetails;
@@ -50,6 +51,8 @@ public class SeekerRequestServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
 		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 		String collectorName=request.getParameter("NAME");
 		Long aadharcard=Long.parseLong(request.getParameter("number"));
@@ -58,13 +61,19 @@ public class SeekerRequestServlet extends HttpServlet {
 		
 		int unit=Integer.parseInt(request.getParameter("UNIT"));
 		Date date=null;
+		//System.out.println(aadharcard);
+		try {
+			
+			
 		try {
 			date = sdf.parse(request.getParameter("currentdate"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	
+		
+		
+		RequestDAOlmpl Dao=new RequestDAOlmpl();
 		
 		HttpSession htp=request.getSession();
 		SeekerDetails seeker= (SeekerDetails) 
@@ -74,7 +83,13 @@ public class SeekerRequestServlet extends HttpServlet {
 	//	System.out.println(request.getParameter("currentdate"));
 		
 		BloodStackDAOlmpl stockDao=new BloodStackDAOlmpl();
+		
+		if(Dao.AadharcardValid(aadharcard)==null) {
+			
+			
+		
 		if(stockDao.checkOfQuantity(bloodtype)>unit) {
+			
 			String status="approved";
 		
 		
@@ -83,7 +98,7 @@ public class SeekerRequestServlet extends HttpServlet {
 	
 	    htp.setAttribute("requestModel", model);
 	
-			RequestDAOlmpl Dao=new RequestDAOlmpl();
+			
 			
 				
 		int n=Dao.insertRequest(model);
@@ -107,7 +122,7 @@ public class SeekerRequestServlet extends HttpServlet {
 			
 			    htp.setAttribute("requestModel", model);
 			
-					RequestDAOlmpl Dao=new RequestDAOlmpl();
+					//RequestDAOlmpl Dao=new RequestDAOlmpl();
 					
 						
 			if(Dao.insertRequest(model)>0){
@@ -125,10 +140,24 @@ public class SeekerRequestServlet extends HttpServlet {
 		}
 		
 		
-		}
+		
+	}else {
 		
 		
 		
+		 throw new ExeceptionHandle();
+		
+	}
+		}catch (ExeceptionHandle e){
+		
+		 HttpSession session=request.getSession(); 
+		 session.setAttribute("Aadharcard", e.AadharcardNumber());
+		 response.sendRedirect("requestSeeker.jsp");
+		
+	}
+		
+		
+	}	
 
 		
 		

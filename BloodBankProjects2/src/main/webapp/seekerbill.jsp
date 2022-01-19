@@ -128,7 +128,7 @@ for(int i=0;i<billingList.size();i++){
 </table>
 
 <div class="backBtn">
-<a href="SeekerLogoutServlet">logout</a>
+<a href="index.jsp">Back</a>
 
 </div>
 

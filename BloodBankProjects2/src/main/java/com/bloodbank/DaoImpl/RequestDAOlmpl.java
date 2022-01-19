@@ -21,11 +21,11 @@ public class RequestDAOlmpl  implements RequestDAO{
 		int n=0;
 		ConnectionUtil connection=new ConnectionUtil();
 		String query ="insert into request_details (hospital_name,blood_type,unit,blood_collector_name,phone_number,aadharcard_number,request_date,status) values(?,?,?,?,?,?,?,?)";
-		String commit="commit";	
+		//String commit="commit";	
 		
 		try {
 					Connection con=connection.getConnection();
-					System.out.println( new java.sql.Date( request.getRequestDate().getTime()));
+					//System.out.println( new java.sql.Date( request.getRequestDate().getTime()));
 				PreparedStatement pstmt=con.prepareStatement(query);
 				pstmt.setString(1, request.getHospitalName());
 				pstmt.setString(2, request.getBloodType());
@@ -36,7 +36,7 @@ public class RequestDAOlmpl  implements RequestDAO{
 				pstmt.setDate(7, new java.sql.Date( request.getRequestDate().getTime()));
 				pstmt.setString(8, request.getStatus());
 				n=pstmt.executeUpdate();
-				 pstmt.executeQuery(commit);
+				// pstmt.executeQuery(commit);
 					
 					
 					
@@ -59,7 +59,7 @@ public class RequestDAOlmpl  implements RequestDAO{
 	public int deleteRequest(Long aadharcard) {
 		ConnectionUtil connection=new ConnectionUtil();
 		int tempNumber=0;
-		
+		System.out.println(aadharcard);
 		try {
 			Connection con=connection.getConnection();
 			String commit="commit";	
@@ -116,7 +116,6 @@ public class RequestDAOlmpl  implements RequestDAO{
 		try {
 			Connection con=connection.getConnection();
 			String query="select * from request_details order by request_id desc";
-			
 			Statement stmt=con.createStatement();
 	ResultSet  rs=stmt.executeQuery(query);
 			
@@ -198,4 +197,83 @@ public class RequestDAOlmpl  implements RequestDAO{
 		
 		return request;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public Long AadharcardValid(Long aadharcard) {
+		ConnectionUtil connection=new ConnectionUtil();
+		Long tempNumber=null;
+		
+		try {
+			Connection con=connection.getConnection();
+			//String commit="commit";	
+			String query="select * from request_details where aadharcard_number ="+aadharcard;
+			Statement stmt=con.createStatement();
+			ResultSet rs=stmt.executeQuery(query);
+					
+			//stmt.executeQuery(commit);
+			while(rs.next()) {
+				
+				tempNumber=rs.getLong(6);
+			}
+			
+			
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+				
+		
+		
+		
+		return tempNumber;
+		
+	}
+	
+	
+	
+
+	
+	public List<RequestModel> RequestUpdateAndDelete(){
+		List<RequestModel> requestList=new ArrayList<RequestModel>();
+		ConnectionUtil connection=new ConnectionUtil();
+		try {
+			Connection con=connection.getConnection();
+			String query="select * from request_details where status=pending order by request_id desc";
+			Statement stmt=con.createStatement();
+	ResultSet  rs=stmt.executeQuery(query);
+			
+	while(rs.next()) {
+		
+		RequestModel request=new RequestModel(rs.getString(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getLong(6), rs.getLong(7), rs.getDate(8),rs.getString(9));
+		requestList.add(request);
+				
+		
+	}
+	
+	
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return requestList;
+	}
+	
+	
+	
+	
+	
 }

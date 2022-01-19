@@ -170,7 +170,7 @@ for(int i=0;i<billingList.size();i++){
 </div>
 </div>
 <div class="backBtn">
-<a href="ShowbillingAdmin.jsp">back</a>
+<a href="AdminWork.jsp">back</a>
 </div>
 </div>
 

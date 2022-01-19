@@ -1,3 +1,4 @@
+
 <%@page import="com.bloodbank.model.RequestModel"%>
 <%@page import="java.util.List"%>
 <%@page import="com.bloodbank.DaoImpl.RequestDAOlmpl"%>
@@ -7,7 +8,8 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>Request Show And Delete</title>
+<title>Insert title here</title>
+
 <style type="text/css">
 body {
     height: 100vh;
@@ -73,6 +75,8 @@ table, th {
 </style>
 </head>
 <body>
+
+
 <div class="adminCard">
 <table class="center">
 
@@ -85,14 +89,14 @@ table, th {
 <th>AADHARCARD NUMBER</th>
 <th>DATE</th>
 <th>STATUS</th>
-<th>EDIT</th>
-<th>DELETE</th>
+
 </tr>
 
 <%
 
 RequestDAOlmpl Dao=new RequestDAOlmpl();
- List<RequestModel>  requestList = Dao.RequestUpdateAndDelete();
+ List<RequestModel>  requestList = Dao.ShowRequest();
+ 
  RequestModel requestModel=null;
   for(int i=0;i<requestList.size();i++){
 	  requestModel=requestList.get(i);
@@ -107,8 +111,6 @@ RequestDAOlmpl Dao=new RequestDAOlmpl();
       <td> <%=requestModel.getAadharcard() %></td>
       <td> <%= requestModel.getRequestDate()%></td>
       <td> <%= requestModel.getStatus()%></td>
-      <td class="rowlink"><a href="RequestUpdateAdmin.jsp?phoneNumber=<%=requestModel.getPhoneNumber() %>">RequestUpdate </a> </td>
-      <td class="rowlink"><a href="RequestDeleteAdmin.jsp?Aadharcard=<%=requestModel.getAadharcard() %>">request delete </a></td>    
       
 </tr>
 
@@ -116,9 +118,13 @@ RequestDAOlmpl Dao=new RequestDAOlmpl();
 
 </table>
 <div class="backBtn">
-<a href="ShowRequest.jsp">Back </a>
+<a href="RequestShowAndDeleteAdmin.jsp">Request Pending </a>
+</div>
+<div class="backBtn">
+<a href="AdminWork.jsp">Back </a>
 </div>
 </div>
+
 
 </body>
 </html>

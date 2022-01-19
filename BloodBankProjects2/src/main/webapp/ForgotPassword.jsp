@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
+
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Forgot Password</title>
-</head>
+<style type="text/css">
 
-<style>
 a{
 	text-decoration:none
 }
@@ -34,7 +34,7 @@ a{
     text-align: center;
 }
     .loginForm {
-    width: 65%;
+    width: 58%;
     padding: 0px;
     margin: auto;
     height: 100vh;
@@ -42,15 +42,16 @@ a{
     align-items: center;
     justify-content: end;
 }
-.formcontrol input {
+.formcontrol input, textarea {
     border: none;
+    width: 90%;
     padding: 10px;
     background: #ffffff;
     border-radius: 3px;
     color: black;
     font-weight: bold;
     box-shadow: 0px 0px 8px 0px #d1d1d1;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 .formbtn button, .formbtn input {
     border: none;
@@ -67,7 +68,7 @@ a{
     background: black;
     color: white;
     border-radius: 3px;
-     margin-left: 107px;
+        margin-right: 5px;
     padding: 10px 20px;
     font-weight: bold;
     box-shadow: 0px 0px 3px 0px #606060;
@@ -95,42 +96,74 @@ p {
     width: 100%;
 }
 .cardContent {
-    background: linear-gradient(
+    background: linear-gradient( 
 141deg
-, black 50%, white 50%);
+ , black 50%, white 50%);
     padding: 11Spx;
     border-radius: 6px;
+    width: 50%;
 }
+
+
+
 </style>
+</head>
 <body>
+
+
+
+
 <div class="loginForm">
 <div class="cardContent">
+<form action="Forgotpassword" method="post">
+              <h1 style="text-align: center;">Forgot Password</h1>
+                
+        
+         <div class="formcontrol" >
+            <input type="text" id="number" name="number" required  pattern="[0-9]{10}" placeholder="PhoneNumber" title=" mininum 10characters"><br><br>
+            
+                    </div>  <div class="formcontrol" >       
+            <input type="password" id="PASSWORD" name="PASSWORD" required placeholder="PASSWORD"  pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}" title=" mininum 8characters may includes @#$%&*_?/ "><br><br>
+            
+                       </div> 
+          <div class="formcontrol" >       
+            <input type="password" id="CONFIRM" name="CONFIRM" required placeholder="CONFIRM PASSWORD"  pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}" title=" mininum 8characters may includes @#$%&*_?/ "><br><br>
+            
+                       </div> 
+          
+       
+          
+          <div  class="formbtn">
+          <input type="submit"  value="submit">
+          <input type="reset" value="reset">        
+           </div>
+           
+           
+           <%
+           String error=(String) session.getAttribute("PasswordError");
+           if(error!=null){
+           
+           %>
+          
+           <p class="text-primary"> <%= error%></p>
+           <%session.setAttribute("PasswordError", null); %>
+           <%} %>
+          
+           
+           <%
+           String error1=(String) session.getAttribute("numbererror");
+           if(error1!=null){
+           
+           %>
+          
+           <p class="text-primary"> <%= error1%></p>
+           <%session.setAttribute("numbererror", null); %>
+           <%} %>
+     
 
-
-
-
-
-<form action="ForgetPasswordServlet" method="post">
-<h1>FORGET PASSWORD</h1>
-
-<div class="formcontrol" >
-  <input type="password" id="PASSWORD" name="PASSWORD" required placeholder="PASSWORD" pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}" title=" mininum 8characters may includes @#$%&*_?/ " >
-     </div><div class="formcontrol" >
-  <input type="password" id="PASSWORD" name="CONFIRMPASSWORD" required placeholder="CONFIRM PASSWORD" pattern="[0-9A-Za-Z@#$%&*_?/]{8,15}" title=" mininum 8characters may includes @#$%&*_?/ " >
-     <%
-         String error=(String)session.getAttribute("PasswordError");
-     if(error!=null){
-    	  %>
-    	 <p><%=error  %></p>
-    	 
-    	 <%session.setAttribute("PasswordError", null) ;%>
-     <%} %>
-     </div>
-    <div  class="formbtn">
-  <button type="submit">submit</button>
+    </form>
 </div>
-</form>
-</div>
-</div>
+   </div>
+
 </body>
 </html>

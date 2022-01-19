@@ -36,17 +36,20 @@ public class BookingDAOlmpl implements  BookingDAO {
 		try {
 			Connection con=connection.getConnection();
 			PreparedStatement pstmt=con.prepareStatement(query);
+			System.out.println("priya"+book.getAddress());
+			//String commit="commit";
+			//System.out.println(book.getDonor().getAadharcard());
 			
-			String commit="commit";
-			System.out.println(book.getDonor().getAadharcard());
 			pstmt.setLong(1,book.getDonor().getAadharcard());
 			pstmt.setString(2, book.getAddress());
 			pstmt.setDate(3, java.sql.Date.valueOf(book.getAppdate() ));
 			pstmt.setString(4, book.getBloodType());
 			pstmt.setString(5, book.getBloodCollectChoice());
+			
 			tempNumber=pstmt.executeUpdate();
-			pstmt.executeQuery(commit);
-			System.out.println("insert"+tempNumber);
+			
+			//pstmt.executeQuery(commit);
+			//System.out.println("insert"+tempNumber);
 	     //fg System.out.println("DONE...!!!");
 			
 		
@@ -94,6 +97,7 @@ public class BookingDAOlmpl implements  BookingDAO {
  }
  public int deleteBooking(Long aadharcard) {
 	 ConnectionUtil connection=new ConnectionUtil();
+	 //System.out.println(aadharcard+"dfvgbhnjm");
 	 int tempNumber=0;
 			 try {
 				Connection con=connection.getConnection();
@@ -102,9 +106,10 @@ public class BookingDAOlmpl implements  BookingDAO {
 				PreparedStatement pstmt=con.prepareStatement(query);
 				
 				pstmt.setLong(1, aadharcard);
-				pstmt.executeQuery(commit);
-			tempNumber=pstmt.executeUpdate();
 				
+				
+			tempNumber=pstmt.executeUpdate();
+			pstmt.executeQuery(commit);
 			} catch (ClassNotFoundException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -169,7 +174,7 @@ public class BookingDAOlmpl implements  BookingDAO {
 		pstmt.setLong(1, donor.getAadharcard());
 		//System.out.println(donor.getAdharcard());
 		ResultSet rs= pstmt.executeQuery();
-		System.out.println("date ");
+		System.out.println("date");
 		while(rs.next()) {
 			
 			

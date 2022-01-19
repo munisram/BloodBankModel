@@ -13,7 +13,7 @@ public interface SeekerDAO  {
 	
 	public SeekerDetails FindSeekerId(int seekerId);
 	
-	public int ForgetPassword(Long phoneNumber ,String password); 
+	public int ForgotPassword(Long phoneNumber ,String password); 
 	
 	public SeekerDetails FindSeekerObjectId(long phoneNumber);
 	

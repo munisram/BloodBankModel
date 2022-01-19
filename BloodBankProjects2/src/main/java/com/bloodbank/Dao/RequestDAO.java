@@ -19,9 +19,9 @@ public interface RequestDAO {
 	public RequestModel RequestObject(Long phoneNumber);
 	
 	
+	public Long AadharcardValid(Long aadharcard);
 	
-	
-	
+	public List<RequestModel> RequestUpdateAndDelete();
 	
 	
 }

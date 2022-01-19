@@ -1,14 +1,17 @@
-<%@page import="com.bloodbank.DaoImpl.DonorDAOImpl"%>
-<%@page import="com.bloodbank.model.Donor"%>
+
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Donor Login</title>
+<link rel="stylesheet" type="text/css" href="css/Style.css">
+<style >
 
-<style>
+
+
 a{
 	text-decoration:none
 }
@@ -104,9 +107,25 @@ p {
 </style>
 </head>
 <body>
+
+
+
+
+        <nav class="header seakerindex">
+        <h1 style="text-align: left;">BLOOD BANK </h1>
+      <ul >
+      	<li><a  href="DonorIndex.jsp">Donor</a> </li>        
+     	<li><a href="SeekerIndex.jsp">Seeker</a> </li>
+     	<li><a href="index.jsp">Home</a> </li>
+      </ul>
+   </nav>
+ 
+
+
 <div class="loginForm">
 
 <div class="cardContent">
+
 	<form action="login" method="post">
 <h1 >login</h1>
   <div class="formcontrol" >
@@ -128,6 +147,7 @@ p {
     	<%session.setAttribute("DonorError", null); %>
     	
    <%}%>
+   
 </form>
 </div>
 </div>

@@ -6,9 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
+import org.apache.tomcat.jni.Local;
 
 import com.bloodbank.Dao.BillingDAO;
 import com.bloodbank.Util.ConnectionUtil;
@@ -138,10 +141,12 @@ public List<BillingModel> biilingShowAdmin(){
 		return billingList;
 	}
 
-public List<BillingModel> biilingShowAdminDate(Date date){
+public List<BillingModel> biilingShowAdminDate(LocalDate date){
 	
 	List<BillingModel>billingList=new ArrayList<BillingModel>();
-	SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyy");
+	
+	//SimpleDateFormat sdf=new SimpleDateFormat("dd-MM-yyy");
+	
 	ConnectionUtil connection=new ConnectionUtil();
 	SeekerDAOlmpl seekerDao=new SeekerDAOlmpl();
 	System.out.println(date);
@@ -151,7 +156,7 @@ public List<BillingModel> biilingShowAdminDate(Date date){
 		String query="select * from billing where ?<=billing_date order by bill_id desc";
 		PreparedStatement pstmt=con.prepareStatement(query);
 		
-		pstmt.setString(1, sdf.format(date));
+		pstmt.setDate(1,java.sql.Date.valueOf(date));
 		 ResultSet rs=pstmt.executeQuery();
 		while(rs.next()) {
 			

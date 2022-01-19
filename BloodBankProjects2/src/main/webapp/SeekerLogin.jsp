@@ -6,8 +6,14 @@
 <meta charset="ISO-8859-1">
 <title>Seeker Login</title>
 
+<link rel="stylesheet" type="text/css" href="css/Style.css">
+<style >
 
-<style>
+nav.header {
+    background: #160101;
+}
+
+
 a{
 	text-decoration:none
 }
@@ -105,6 +111,17 @@ p {
 </head>
 <body>
 
+  <nav class="header seakerindex">
+        <h1 style="text-align: left;">BLOOD BANK </h1>
+      <ul >
+      	<li><a  href="DonorIndex.jsp">Donor</a> </li>        
+     	<li><a href="SeekerIndex.jsp">Seeker</a> </li>
+     	<li><a href="index.jsp">Home</a> </li>
+      </ul>
+   </nav>
+ 
+
+
 <div class="loginForm">
 <div class="cardContent">
 <form action="SeekerLoginServlet" method="post" style="text-align: center;">
@@ -125,7 +142,7 @@ p {
   <div  class="formbtn">
                <button>Submit</button>
              
-                <button ><a href="ForgotPassword.jsp">Forgot password</a></button>
+                <button ><a href="Forgotpassword.jsp">Forgot password</a></button>
               
 </div>
 

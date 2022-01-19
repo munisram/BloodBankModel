@@ -10,6 +10,10 @@
 <meta charset="ISO-8859-1">
 <title>Show Booking</title>
 <style type="text/css">
+input{
+background-color: black;
+color:white;
+}
 body {
     height: 100vh;
     margin: 0px;
@@ -66,20 +70,13 @@ width: 100%;
 
 
 }
-.backBtn a {
-        text-decoration: none;
-    color: white;
-    margin-right: 14px;
-    background: black;
-    padding: 5px 10px;
-    border-radius: 3px
-}
+
 
 .backBtn {
     float: right;
     margin-top: 10px;
     font-size: 19px;
-    
+  
     padding: 5px 20px;
 }
 </style>
@@ -119,7 +116,12 @@ for(int i=0;i<bookingList.size();i++){
 	</tr>
 <%} %>
 </table><br><br>
+<div class="backBtn">
+<form action="DonorLogoutServlet">
+<input type="submit" value="Logout">
 
+</form>
+</div>
 </div>
 </body>
 </html>

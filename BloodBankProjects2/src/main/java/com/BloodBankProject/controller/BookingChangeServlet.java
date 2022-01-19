@@ -60,16 +60,38 @@ public class BookingChangeServlet extends HttpServlet {
 		PrintWriter pw=response.getWriter();
 		HttpSession htp=request.getSession();
 		Donor donor= (Donor) htp.getAttribute("Donor");
-		
+		System.out.println("sorry"+donor.getFirstName());
+		if(address!=null) {
 		 BookingModel model=new BookingModel(donor, address, BookingDate, donor.getBloodType(), choice);
 		BookingDAOlmpl Dao=new BookingDAOlmpl();
 		if(Dao.updateBooking(model)>0) {
 			
-			
-			response.sendRedirect("BookingProcess.jsp");
+			pw.println("<script type=\"text/javascript\">");
+			 pw.println("alert('Booking changed');");
+			 pw.println("location='BookingProcess.jsp';");
+			 pw.println("</script>");
+		
+			//response.sendRedirect("BookingProcess.jsp");
 			
 		}
-		
+		}else {
+			                  String address1=donor.getAddress();
+			 BookingModel model=new BookingModel(donor,address1, BookingDate, donor.getBloodType(), choice);
+				BookingDAOlmpl Dao=new BookingDAOlmpl();
+				if(Dao.updateBooking(model)>0) {
+					
+					
+					//response.sendRedirect("");
+					
+					//PrintWriter pw=response.getWriter();
+						
+						pw.println("<script type=\"text/javascript\">");
+						 pw.println("alert('Booking changed');");
+						 pw.println("location='BookingProcess.jsp';");
+						 pw.println("</script>");
+					
+				}
+		}
 		
 		
 		

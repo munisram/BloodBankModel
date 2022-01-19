@@ -1,17 +1,31 @@
-<%@page import="java.time.LocalDate"%>
-<%@page import="org.apache.tomcat.jni.Local"%>
-<%@page import="com.bloodbank.model.BillingModel"%>
+<%@page import="com.bloodbank.model.BookingModel"%>
 <%@page import="java.util.List"%>
-<%@page import="com.bloodbank.DaoImpl.BillingDAOlmpl"%>
-<%@page import="java.util.Date"%>
+<%@page import="com.bloodbank.DaoImpl.BookingDAOlmpl"%>
+<%@page import="com.bloodbank.model.Donor"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
-<title>ShowForBillingDate</title>
+<title>Show Booking</title>
 <style type="text/css">
+
+.backBtn a {
+        text-decoration: none;
+    color: white;
+    background: black;
+    padding: 5px 10px;
+    border-radius: 3px
+}
+
+.backBtn {
+    float: right;
+    margin-top: 10px;
+    font-size: 19px;
+    
+    padding: 5px 0px;
+}
 body {
     height: 100vh;
     margin: 0px;
@@ -87,49 +101,43 @@ width: 100%;
 </style>
 </head>
 <body>
-<div class="adminCard">
-<table >
-<tr>
-<th><strong>BLOODTYPE</strong></th>
-<th><strong>SEEKER NAME</strong></th>
-<th><strong>SEEKER PHONENUMBER</strong></th>
-<th><strong>QUANTITY</strong></th>
-<th><strong>PRICE</strong></th>
-<th><strong>Date</strong></th>
-</tr>
 
+<div class="adminCard">
+<table class="center">
+
+<tr>
+<th><strong>AADHARCARD</strong></th>
+<th><strong>ADDRESS</strong></th>
+<th><strong>BOOK DATE</strong></th>
+<th><strong>BLOOD TYPE</strong></th>
+<th><strong>BLOOD COLLECT CHOICE</strong></th>
+
+</tr>
 
 <%
 
+Donor donor=(Donor) session.getAttribute("Donor");
+BookingDAOlmpl Dao=new BookingDAOlmpl();
 
-LocalDate date=(LocalDate) session.getAttribute("billingdate");
+ List<BookingModel>  bookingList= Dao.ShowBookingDonor(donor);
 
-BillingDAOlmpl billigDao=new BillingDAOlmpl();
-//System.out.println(date);
-List<BillingModel>  billingList= billigDao.biilingShowAdminDate(date);
-for(int i=0;i<billingList.size();i++){
+for(int i=0;i<bookingList.size();i++){
 	
-	BillingModel model=billingList.get(i);
-	
-	%>	
+	BookingModel booking=bookingList.get(i);
+	%>
 	<tr>
-	<td> <%=model.getBloodType()%></td> 
-	<td> <%=model.getSeeker().getFirstName()%></td>
-	<td> <%=model.getSeeker().getPhoneNumber()%></td>
-	<td> <%=model.getUnit()%></td>
-	<td> <%=model.getTotalprice()%></td>
-	<td> <%=model.getBillDate()%></td>
+	<td><%=booking.getDonor().getAadharcard() %></td>
+	<td><%=booking.getAddress() %></td>
+	<td><%= booking.getAppdate()%></td>
+	<td><%=booking.getBloodType() %></td>
+	<td><%= booking.getBloodCollectChoice()%></td>
+	
+	</tr>
 <%} %>
-	
-	
-
-</tr>
-</table>
-
+</table><br><br>
 <div class="backBtn">
-<a href="ShowbillingAdmin.jsp">back</a>
+<a href="index.jsp">back</a>
 </div>
 </div>
-
 </body>
 </html>

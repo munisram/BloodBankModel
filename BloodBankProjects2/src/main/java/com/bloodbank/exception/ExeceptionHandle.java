@@ -30,7 +30,7 @@ return "*Invalid Email Id and password";
 
 }
 
-public String ForgetPassword() {
+public String ForgotPassword() {
 
 
 
@@ -43,15 +43,26 @@ public String PhoneNumber() {
 	
 	return "*Phone number already register";
 }
+
+
 public String AadharcardNumber() {
 	
-	return "*Phone number already register";
+	return "*Aadharcard Number already register";
 } 
 
 
 public String HomeCollection() {
 	
 	return "No one choice the Home";
+	
+	
+}
+
+
+
+public String SeekerPhoneNumberFind() {
+	
+	return " this number not register";
 	
 	
 }

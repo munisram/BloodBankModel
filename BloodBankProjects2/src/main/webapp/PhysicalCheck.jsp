@@ -1,11 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
+    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="ISO-8859-1">
 <title>Check-up</title>
-<style type="text/css">
+<link rel="stylesheet" type="text/css" href="css/Style.css">
+<style >
+
+nav.header {
+    background: #160101;
+}
+
 
 a{
 	text-decoration:none
@@ -22,13 +29,13 @@ a{
         width: 130px;
         display: inline-block;
     }
-    body {
+     body {
     background-image: url(Images/background.jpg);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: bottom;
     margin:0px;
-}
+} 
     .loginForm form {
     text-align: center;
 }
@@ -103,12 +110,22 @@ p {
     width: 50%;
 }
 
-
-
 </style>
-</head>
 
-<body>
+</head>
+<body >
+    
+        <nav class="header seakerindex">
+        <h1 style="text-align: left;">BLOOD BANK </h1>
+      <ul >
+      	<li><a  href="DonorIndex.jsp">Donor</a> </li>        
+     	<li><a href="SeekerIndex.jsp">Seeker</a> </li>
+     	<li><a href="index.jsp">Home</a> </li>
+      </ul>
+   </nav>
+ 
+
+
 <div class="loginForm">
 <div class="cardContent">
 
@@ -143,5 +160,8 @@ p {
 </form>
 </div>
 </div>
+
+
+
 </body>
 </html>

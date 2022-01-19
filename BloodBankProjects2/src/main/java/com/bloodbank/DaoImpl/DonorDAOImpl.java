@@ -47,7 +47,7 @@ return tempNumber;
 		try {
 		
 			Connection con = connection.getConnection();
-			String query = "select * from donor_details where aadharcard=" + aadharcard ;
+			String query = "select * from donor_details where aadharcard='" + aadharcard+"'" ;
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(query);
 			if (rs.next()) {

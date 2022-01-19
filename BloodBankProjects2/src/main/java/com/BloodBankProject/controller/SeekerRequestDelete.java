@@ -40,12 +40,13 @@ public class SeekerRequestDelete extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		Long aadharcard=Long.parseLong(request.getParameter("aadharcard"));
-		
+		System.out.println(aadharcard);
 		RequestDAOlmpl dao=new RequestDAOlmpl();
 		if(dao.deleteRequest(aadharcard)>0) {
 			
 			HttpSession htp=request.getSession();
 			htp.setAttribute("seeker",null );
+			
 			PrintWriter pw=response.getWriter();
 			
 			pw.println("<script type=\"text/javascript\">");

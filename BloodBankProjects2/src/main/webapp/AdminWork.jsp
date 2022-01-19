@@ -63,6 +63,21 @@ body {
     border-radius: 19px;
     box-shadow: 0px 0px 12px 0px #ededed;
 }
+.backBtn a {
+        text-decoration: none;
+    color: white;
+    background: black;
+    padding: 5px 10px;
+    border-radius: 3px
+}
+
+.backBtn {
+    float: right;
+       margin-top: 440px;
+    font-size: 15px;
+    
+    padding: 5px 0px;
+}
 </style>
 </head>
 <body>
@@ -76,10 +91,12 @@ body {
 <h1 style="text-align: center;">Admin Work</h1>
 	<a href="ShowStock.jsp"> ShowStock</a>
 	<a href="ShowbillingAdmin.jsp"> ShowBilling</a>
-	<a href="RequestShowAndDeleteAdmin.jsp"> ShowRequest </a>
+	<a href="ShowRequest.jsp"> ShowRequest </a>
 	<a href="AdminShowBooking.jsp">Booking</a>
 </div>
-
+<div class="backBtn">
+<a href="AdminLogin.jsp">back</a>
+</div>
 </div>
 
 </body>

@@ -153,7 +153,7 @@ status varchar2 (100) default 'pending');
 
 select * from donor_details;
 /
-drop  table request_details cascade constraints;
+--drop  table request_details cascade constraints;
 
 desc request_details
 commit;
@@ -200,7 +200,7 @@ select * from admin;
 select * from seeker_details;
 --desc seeker_details;
 select * from donor_details;
-select * from request_details order by request_id desc ;
+select * from request_details where status='pending' order by request_id desc ;
 select * from billing;
 desc billing
 desc seeker_details
@@ -223,24 +223,24 @@ where BLOOD_COLLECT_CHOICE='home';
 select * from billing where '1-1-2022'<=billing_date;
 select * from blood_details;
 select * from booking;
-truncate table booking;
+--truncate table booking;
 commit;
 select * from  blood_stack;
 select * from  admin;
 
 select book_date+90 from booking where adharcard=123456789012;
-/
+
 select donor_date from donor_details where adharcard=98378837938;
 select * from booking where to_char(book_date,'dd-mm-yyyy')between '27-12-2019' and '27-12-2021';
-/
+
 select QUANTITY from blood_stack where blood_type='o-';
 --truncate table seeker_details;
-select * from seeker_details;
-desc seeker_details
+select * from request_details;
+desc request_details
 update  admin set wallet=10000 where password ='050476ram';
 
 select * from billing;
-
+commit;
 
 
 select * from blood_details;

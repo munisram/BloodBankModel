@@ -1,5 +1,6 @@
 package com.bloodbank.Dao;
 
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -10,7 +11,7 @@ public interface BillingDAO {
 	public int insertBilling(BillingModel bill );	
 	public List<BillingModel> biilingShow( BillingModel bill);
 	public List<BillingModel> biilingShowAdmin();
-	public List<BillingModel> biilingShowAdminDate(Date date);
+	public List<BillingModel> biilingShowAdminDate(LocalDate date);
 	
 
 }

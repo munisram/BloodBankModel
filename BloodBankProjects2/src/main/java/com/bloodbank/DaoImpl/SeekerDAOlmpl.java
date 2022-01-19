@@ -198,18 +198,24 @@ public Long PhoneNumberValid(long phoneNumber) {
 	return number;
 	
 }
-public  int ForgetPassword(Long phoneNumber  ,String password) {
+public  int ForgotPassword(Long phoneNumber  ,String password) {
 	int n=0;
 	ConnectionUtil connection=new ConnectionUtil();
 	
 	try {
 		Connection con=connection.getConnection();
-		String commit="commit";
-		String query="update  seeker_details  set password=?  where phone_number=?";
+		//String commit="commit";
+		String query="update  seeker_details  set PASSWORD=?  where PHONE_NUMBER=?";
 		
 		PreparedStatement pstmt=con.prepareStatement(query);
+		
+		pstmt.setString(1, password);
+		System.out.println(phoneNumber);
+		pstmt.setLong(2, phoneNumber);
+		
 		n=pstmt.executeUpdate();
-		pstmt.executeQuery(commit);
+		
+		//pstmt.executeQuery(commit);
 		
 	} catch (ClassNotFoundException e) {
 		// TODO Auto-generated catch block

@@ -4,6 +4,7 @@
 <html>
 <head>
 <meta charset="ISO-8859-1">
+
 <title>AdminLogin</title>
 
 <style>
@@ -126,7 +127,7 @@ p {
 
   </div>
     <%
- String error=(String)session.getAttribute("error");
+ String error =(String)session.getAttribute("error");
 if(error!=null){%>
 	
 	<p class="text-primary"> <%= error%></p>

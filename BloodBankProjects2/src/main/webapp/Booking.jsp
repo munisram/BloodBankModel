@@ -7,8 +7,17 @@
 <title>Booking</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-
+<link rel="stylesheet" type="text/css" href="css/Style.css">
 <style type="text/css">
+
+nav.header {
+    background: #160101;
+}
+
+
+a{
+	text-decoration:none
+}
 .book{
 
     height: 100vh;
@@ -64,26 +73,37 @@ body {
 </style>
 </head>
 <body>
+
+ <nav class="header seakerindex">
+        <h1 style="text-align: left;">BLOOD BANK </h1>
+      <ul >
+      	<li><a  href="DonorIndex.jsp">Donor</a> </li>        
+     	<li><a href="SeekerIndex.jsp">Seeker</a> </li>
+     	<li><a href="index.jsp">Home</a> </li>
+      </ul>
+   </nav>
 <div class="d-flex book align-items-center">
 <div class="col-sm-5"></div>
-<div class="bookinner col-sm-3">
+<div class="bookinner col-sm-3" onmouseover="check()"> 
 
 <form action="BloodBookingServlet"   method="post" >
 
         <h1 > BOOKING</h1>
-    <div >
-                 <div class="inputtype">
-            <textarea id="address" name="address" maxlength="50" required  placeholder="Address"></textarea>
-                    
-                 </div>    <div class="inputtype">    
+    <div > <div class="inputtype">    
            <input type="date" id="bookingDate" name="bookingDate" required="required" placeholder="" >  
            
               </div>  <div class="inputtype">
            <select name="Choice" id="Choice" value="center" required="required" >   
-           <option  disabled="disabled">  BloodCollectChoice  </option>                 
+           <option  disabled="disabled">  BloodCollectChoice  </option>  
+            <option value="center">center</option>                
            <option value="home">Home</option>
-             <option value="center">center</option>    
+               
            </select>
+           
+                 <div class="inputtype">
+            <textarea style="visibility: hidden;" id="address" name="address" maxlength="50"   placeholder="Address"></textarea>
+ 
+                 </div>   
            </div>
           </div>
           
@@ -111,6 +131,24 @@ console.log(maxdate);
 console.log(mindate);
 document.getElementById("bookingDate").setAttribute("min",mindate);
 } 
+
+function check(){
+	
+	var address=document.getElementById("Choice");
+
+
+	if(address.value=="home"){
+		
+		document.getElementById("address").style.visibility = "visible";
+
+	}else if(address.value=="center"){
+		
+		document.getElementById("address").style.visibility = "hidden";
+		
+	}
+	
+	
+	}
 </script>
 
 </html>

@@ -3,6 +3,7 @@ package com.BloodBankProject.controller;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.Date;
 
 import javax.servlet.ServletException;
@@ -39,15 +40,11 @@ public class ShowForBillingDateServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-	Date date=null;
+	//SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+	LocalDate date=null;
 		
-		try {
-		 date=sdf.parse(request.getParameter("date"));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		// date=sdf.parse(request.getParameter("date"));
+		 date=LocalDate.parse(request.getParameter("date"));
 		
 		//System.out.println(date);
 		HttpSession session=request.getSession();

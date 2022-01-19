@@ -42,7 +42,7 @@ public class BookingCancelServlet extends HttpServlet {
 		Long aadharcard=Long.parseLong(request.getParameter("aadharcard"));
 		
 		BookingDAOlmpl Dao=new BookingDAOlmpl();
-		
+		//System.out.println("gowtham"+aadharcard);
 		if(Dao.deleteBooking(aadharcard)>0) {
 			
 			

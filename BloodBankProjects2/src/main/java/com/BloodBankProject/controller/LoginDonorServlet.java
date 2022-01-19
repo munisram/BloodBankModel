@@ -45,15 +45,18 @@ public class LoginDonorServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		PrintWriter pw=response.getWriter();
-		
+		System.out.println("sdfghjkl");
 		Long aadharcard=Long.parseLong(request.getParameter("aadharcard"));
 		//Donor donor =new Donor();
 		DonorDAOImpl donorDao=new DonorDAOImpl();
-		//System.out.println(aadharcard);
+		System.out.println(aadharcard);
+		
 	   Donor donor= donorDao.validAadharcardNumber(aadharcard);
+	   System.out.println(donor.getAddress()+"cvbnm");
 	 try {
 	    
 		if(donor!=null) {
+			System.out.println("dfghjnmk,l");
 			HttpSession session=request.getSession();
 			session.setAttribute("Donor", donor);
 			
@@ -76,6 +79,7 @@ public class LoginDonorServlet extends HttpServlet {
 		 session.setAttribute("DonorError", e.DonorMessage());
 		 response.sendRedirect("DonorLogin.jsp");
 	 }
+	 
 	}
 
 }

@@ -26,7 +26,7 @@ nav.header {
       <ul >
       	<li><a  href="DonorIndex.jsp">Donor</a> </li>        
      	<li><a href="SeekerIndex.jsp">Seeker</a> </li>
-     	<li><a href="Adminlogin.jsp">Admin</a> </li>
+     	<li><a href="AdminLogin.jsp">Admin</a> </li>
       </ul>
    </nav>
 <div class="homeContent">
