@@ -147,7 +147,7 @@ blood_type varchar2(50) not null,
 unit number(11) not null,
 blood_collector_name varchar2(50) not null,
 phone_number number(20) not null,
-aadharcard_number number(20) not null unique ,
+aadharcard_number number(20) not null  ,
 request_date date not null,
 status varchar2 (100) default 'pending');
 
@@ -167,7 +167,7 @@ billing_Date Date default SYSDATE);
 
 --drop table billing cascade constraints;
 
-
+commit;
 
 
 
@@ -202,7 +202,7 @@ select * from seeker_details;
 select * from donor_details;
 select * from request_details where status='pending' order by request_id desc ;
 select * from billing;
-desc billing
+desc billing;
 desc seeker_details
 select * from booking;
 desc booking;
@@ -212,7 +212,7 @@ desc request_details
 /
 select * from admin;
 
-desc booking
+desc donor_details;
 select * from blood_details;
 select * from donor_details;
 select * from seeker_details;
@@ -223,10 +223,12 @@ where BLOOD_COLLECT_CHOICE='home';
 select * from billing where '1-1-2022'<=billing_date;
 select * from blood_details;
 select * from booking;
+desc blood_stack;
 --truncate table booking;
 commit;
 select * from  blood_stack;
 select * from  admin;
+desc seeker_details;
 
 select book_date+90 from booking where adharcard=123456789012;
 
@@ -236,9 +238,17 @@ select * from booking where to_char(book_date,'dd-mm-yyyy')between '27-12-2019' 
 select QUANTITY from blood_stack where blood_type='o-';
 --truncate table seeker_details;
 select * from request_details;
+
+select status from  request_details where status='panding' and aadharcard_number=987654328813;
+
+/
+select status from  request_details where status='approved' and aadharcard_number=987654328813;
+/
+--update request_details set status='pending' where aadharcard_number=987654328856;
+/
 desc request_details
 update  admin set wallet=10000 where password ='050476ram';
-
+commit;
 select * from billing;
 commit;
 
@@ -249,7 +259,7 @@ select * from billing where TO_CHAR(billing_date,'YYYY-MM-DD') between TO_CHAR(S
 
 select  from  billing where billing_date='';
 commit;
-
+desc admin;
 
 select * from billing order by bill_id desc;
 select * from billing where sysdate <=billing_date order by bill_id desc;

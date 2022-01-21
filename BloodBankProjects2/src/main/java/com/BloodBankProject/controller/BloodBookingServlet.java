@@ -37,61 +37,59 @@ public class BloodBookingServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		
+
 		LocalDate date = null;
 		String address = request.getParameter("address");
-		
+
 		String choice = request.getParameter("Choice");
-		
+
 		BookingDAOlmpl bookingDao = new BookingDAOlmpl();
 
 		try {
 			date = LocalDate.parse(request.getParameter("bookingDate"));
-			
 
 			HttpSession htp = request.getSession();
 
 			Donor donor = (Donor) htp.getAttribute("Donor");
-			
-			
+
 			AdminDAOlmpl admin = new AdminDAOlmpl();
-			
-			
+               // check the date for Donor validation
 			LocalDate date1 = bookingDao.dateCheck(donor);
+
 			
-		System.out.println(date1+"gowtham");
-			
+                   //check the amount in ADMIN wallet to above 300 to Allowed
+		
+			//Donor once Donated to come next Donate check the last Donating Date to  90day  after  come to allow
+
 			if (date1 != null && date.isAfter(date1) && admin.CheckWallet() > 300) {
-				// System.out.println("Hello Peter");
-System.out.println("kaviya");
+				
 				PrintWriter out = response.getWriter();
-				if(address!=null) {
+				
+				//User select by Center Address is Null  On time work this condition
+				if (address.isEmpty()) {
 
-				BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-				htp.setAttribute("bookingDate", booking);
-				int i = bookingDao.booking(booking);
+					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
+					BookingModel booking = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
+					htp.setAttribute("bookingDate", booking);
 
-				if (i > 0) {
+					int i = bookingDao.booking(booking);
 
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Booking Successfully');");
-					out.println("location='BookingProcess.jsp';");
-					out.println("</script>");
-					// response.sendRedirect("");
-					//System.out.println("Hello Peter");
-					//response.sendRedirect("BookingProcess.jsp");
+					if (i > 0) {
+
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Booking Successfully');");
+						out.println("location='BookingProcess.jsp';");
+						out.println("</script>");
+						
+					}
 
 				}
 
-				
-				}
-				
 				else {
-					
-                             System.out.println("kaviya 2"); 
-					
-					String address1=donor.getAddress();
-					BookingModel booking = new BookingModel(donor, address1, date, donor.getBloodType(), choice);
+
+					//User select by Home  On time work this condition
+
+					BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
 					htp.setAttribute("bookingDate", booking);
 					int i = bookingDao.booking(booking);
 
@@ -102,49 +100,25 @@ System.out.println("kaviya");
 						out.println("location='BookingProcess.jsp';");
 						out.println("</script>");
 						// response.sendRedirect("");
-						System.out.println("Hello Peter");
-						response.sendRedirect("BookingProcess.jsp");
+						// System.out.println("Hello Peter");
+						// response.sendRedirect("BookingProcess.jsp");
 
 					}
-					
-					
+
 				}
 			}
-			// }
+			 //check the amount in ADMIN wallet to above 300 to Allowed
+			
 			else if (date1 == null && admin.CheckWallet() > 300) {
-
 				
-				if(address!=null) {
-					
-					
+				//User select by Center Address is Null  On time work this condition
 				
-				BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
-				htp.setAttribute("bookingDate", booking);
+				if (address.isEmpty()) {
 
-				if (bookingDao.booking(booking) > 0) {
+					String address2 = "1/71 Gokula Nagar ,Devipattinam," + "ramanathapuram," + "pincode:623513";
 
-					PrintWriter out = response.getWriter();
-
-					out.println("<script type=\"text/javascript\">");
-					out.println("alert('Booking Successfully');");
-					 out.println("location='BookingProcess.jsp';");
-					out.println("</script>");
-					System.out.println("Hello Peter");
-					
-					//response.sendRedirect("BookingProcess.jsp");
-
-				}
-				
-				
-				
-				}else {
-					
-					
-					String address2=donor.getAddress();
-					
-					BookingModel booking = new BookingModel(donor,address2, date, donor.getBloodType(), choice);
+					BookingModel booking = new BookingModel(donor, address2, date, donor.getBloodType(), choice);
 					htp.setAttribute("bookingDate", booking);
-					int i = bookingDao.booking(booking);
 
 					if (bookingDao.booking(booking) > 0) {
 
@@ -154,24 +128,51 @@ System.out.println("kaviya");
 						out.println("alert('Booking Successfully');");
 						out.println("location='BookingProcess.jsp';");
 						out.println("</script>");
-						System.out.println("Hello Peter 2");
-						//response.sendRedirect("BookingProcess.jsp");
+
+						// System.out.println("Hello Peter");
+
+						// response.sendRedirect("BookingProcess.jsp");
 
 					}
-					
-					
+
+				} else {
+					//User select by Home  On time work this condition
+
+					BookingModel booking = new BookingModel(donor, address, date, donor.getBloodType(), choice);
+					htp.setAttribute("bookingDate", booking);
+					int i = bookingDao.booking(booking);
+
+					if (i > 0) {
+
+						PrintWriter out = response.getWriter();
+
+						out.println("<script type=\"text/javascript\">");
+						out.println("alert('Booking Successfully');");
+						out.println("location='BookingProcess.jsp';");
+						out.println("</script>");
+						System.out.println("Hello Peter 2");
+						// response.sendRedirect("BookingProcess.jsp");
+
+					}
+
 				}
 
+				
+				//User Not Qualified by Blood Donate to Exit
 			} else {
 
+				
+				
 				PrintWriter out = response.getWriter();
 
 				out.println("<script type=\"text/javascript\">");
 				out.println("alert('your previous donated date is with in 90 days,so please donate after 90 days ');");
 				out.println("location='index.jsp';");
 				out.println("</script>");
-				System.out.println("Joh Wick");
-				//response.sendRedirect("BookingProcess.jsp");
+				
+				
+				// System.out.println("Joh Wick");
+				// response.sendRedirect("BookingProcess.jsp");
 
 			}
 		} catch (Exception e) {

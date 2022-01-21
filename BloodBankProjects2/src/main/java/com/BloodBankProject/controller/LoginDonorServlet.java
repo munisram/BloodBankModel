@@ -22,64 +22,67 @@ import com.bloodbank.model.Donor;
 @WebServlet("/login")
 public class LoginDonorServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public LoginDonorServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	public LoginDonorServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		PrintWriter pw=response.getWriter();
-		System.out.println("sdfghjkl");
-		Long aadharcard=Long.parseLong(request.getParameter("aadharcard"));
-		//Donor donor =new Donor();
-		DonorDAOImpl donorDao=new DonorDAOImpl();
-		System.out.println(aadharcard);
-		
-	   Donor donor= donorDao.validAadharcardNumber(aadharcard);
-	   System.out.println(donor.getAddress()+"cvbnm");
-	 try {
-	    
-		if(donor!=null) {
-			System.out.println("dfghjnmk,l");
-			HttpSession session=request.getSession();
-			session.setAttribute("Donor", donor);
-			
-			pw.println("<script type=\"text/javascript\">");
-			 pw.println("alert('Login success');");
-			 pw.println("location='PhysicalCheck.jsp';");
-			 pw.println("</script>");
-			    
-			
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		PrintWriter pw = response.getWriter();
+		// System.out.println("sdfghjkl");
+		Long aadharcard = Long.parseLong(request.getParameter("aadharcard"));
+		// Donor donor =new Donor();
+		DonorDAOImpl donorDao = new DonorDAOImpl();
+		// System.out.println(aadharcard);
+
+		Donor donor = donorDao.validAadharcardNumber(aadharcard);
+		// System.out.println(donor.getAddress()+"cvbnm");
+		try {
+
+			if (donor != null) {
+				// System.out.println("dfghjnmk,l");
+				HttpSession session = request.getSession();
+				session.setAttribute("Donor", donor);
+
+				// System.out.println(donor.getAddress()+"longin");
+
+				pw.println("<script type=\"text/javascript\">");
+				pw.println("alert('Login success');");
+				pw.println("location='PhysicalCheck.jsp';");
+				pw.println("</script>");
+
+			} else {
+
+				throw new ExeceptionHandle();
+
+			}
+		} catch (ExeceptionHandle e) {
+
+			HttpSession session = request.getSession();
+			session.setAttribute("DonorError", e.DonorMessage());
+			response.sendRedirect("DonorLogin.jsp");
 		}
-		else {
-			
-			throw new ExeceptionHandle();
-			
-			
-		}
-	 }catch (ExeceptionHandle e){
-		 
-		 HttpSession session=request.getSession(); 
-		 session.setAttribute("DonorError", e.DonorMessage());
-		 response.sendRedirect("DonorLogin.jsp");
-	 }
-	 
+
 	}
 
 }

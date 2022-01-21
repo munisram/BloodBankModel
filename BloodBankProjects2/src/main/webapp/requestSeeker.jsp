@@ -8,7 +8,11 @@
 <head>
 <meta charset="ISO-8859-1">
 <title>Seeker Request</title>
-
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+	crossorigin="anonymous">
 <link rel="stylesheet" type="text/css" href="css/Style.css">
 <style>
 nav.header {
@@ -40,6 +44,7 @@ body {
 	background-size: cover;
 	background-position: bottom;
 	margin: 0px;
+	overflow: hidden;
 }
 
 .loginForm form {
@@ -131,8 +136,8 @@ p {
 		<h1 style="text-align: left;">BLOOD BANK</h1>
 		<ul>
 			<li><a href="DonorIndex.jsp">Donor</a></li>
-			<li><a href="SeekerIndex.jsp">Seeker</a></li>
-			<li><a href="index.jsp">Home</a></li>
+
+			<li><a href="LogoutSeeker.jsp">Logout</a></li>
 		</ul>
 	</nav>
 	<div class="loginForm">
@@ -144,7 +149,7 @@ p {
 
 					<input type="text" id="NAME" name="NAME" required autofocus
 						pattern="[A-Za-z]{3,}" title="enter the Name"
-						placeholder="BLOOD COLLECTOR NAME">
+						placeholder=" Enter the Blood Collector Name">
 				</div>
 
 
@@ -152,24 +157,27 @@ p {
 				<div class="formcontrol">
 					<input type="text" id="number" name="number" required
 						pattern="[987654321][0-9]{11}"
-						title="enter the valid Aadharcard number" placeholder="Aadharcard">
+						title="enter the valid Aadharcard number"
+						placeholder=" Enter the Aadharcard Number">
 				</div>
 
 
 				<div class="formcontrol">
 					<input type="TEXT" id="HOSPITAL" name="HOSPITAL" required
 						pattern="[A-Za-z]{3,}" title="enter the valid hospital name"
-						placeholder="HOSPITAL NAME">
+						placeholder=" Enter the hospital Name">
 				</div>
 
 				<div class="formcontrol">
+					<p class="text-secondary" style="font-family: fantasy;"> Request Date 
+						</p>
 					<input type="date" id="Date" name="currentdate" required="required"
 						placeholder="Date">
 				</div>
 
 				<div class="formcontrol">
 					<input list="blood type" id="bloodtype" name="bloodtype" required
-						placeholder="Blood Type">
+						placeholder="choose the Blood Type">
 				</div>
 				<datalist id="blood type">
 					<option value="a+">a+</option>
@@ -185,7 +193,7 @@ p {
 
 				<div class="formcontrol">
 					<input type="NUMBER" ID="UNIT" NAME="UNIT" min="0" max="10"
-						required placeholder="UNIT">
+						required placeholder="Enter the Unit">
 
 
 				</div>
@@ -195,27 +203,28 @@ p {
 
 				<div class="formbtn">
 					<button type="submit">Submit</button>
-				
+
 
 					<button type="reset">Reset</button>
 				</div>
 				<%
-		String error = (String) session.getAttribute("Aadharcard");
+				String error = (String) session.getAttribute("Aadharcard");
 
-		if (error != null) {
-		%>
+				if (error != null) {
+				%>
 
-		<p class="text-primary">
-			<%=error%></p>
-		<%
-		session.setAttribute("Aadharcard", null);
-		%>
+				<p class="text-primary">
+					<%=error%></p>
+				<%
+				session.setAttribute("Aadharcard", null);
+				%>
 
-		<%
-		}
-		%>
+				<%
+				}
+				%>
+			
 		</div>
-		
+
 		</form>
 	</div>
 	</div>

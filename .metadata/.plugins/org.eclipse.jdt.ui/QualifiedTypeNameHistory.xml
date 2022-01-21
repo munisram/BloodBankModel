@@ -42,22 +42,22 @@
     <fullyQualifiedTypeName name="com.bloodbank.model.BookingModel"/>
     <fullyQualifiedTypeName name="com.bloodbank.Dao.BookingDAOlmpl"/>
     <fullyQualifiedTypeName name="java.util.Date"/>
-    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
     <fullyQualifiedTypeName name="com.bloodbank.Dao.RequestDAOlmpl"/>
     <fullyQualifiedTypeName name="com.bloodbank.model.RequestModel"/>
     <fullyQualifiedTypeName name="com.bloodbank.Dao.SeekerDAOlmpl"/>
     <fullyQualifiedTypeName name="com.bloodbank.model.SeekerDetails"/>
     <fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
     <fullyQualifiedTypeName name="com.bloodbank.DaoImpl.SeekerDAOlmpl"/>
-    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
     <fullyQualifiedTypeName name="java.lang.Override"/>
     <fullyQualifiedTypeName name="java.time.zone.ZoneRulesException"/>
     <fullyQualifiedTypeName name="java.io.PrintWriter"/>
     <fullyQualifiedTypeName name="com.bloodbank.DaoImpl.AdminDAOlmpl"/>
     <fullyQualifiedTypeName name="java.lang.Exception"/>
-    <fullyQualifiedTypeName name="com.bloodbank.exception.ExeceptionHandle"/>
     <fullyQualifiedTypeName name="java.sql.ResultSet"/>
     <fullyQualifiedTypeName name="java.sql.Date"/>
     <fullyQualifiedTypeName name="org.apache.tomcat.jni.Local"/>
     <fullyQualifiedTypeName name="java.time.LocalDate"/>
+    <fullyQualifiedTypeName name="com.bloodbank.exception.ExeceptionHandle"/>
+    <fullyQualifiedTypeName name="javax.servlet.http.HttpSession"/>
+    <fullyQualifiedTypeName name="java.sql.PreparedStatement"/>
 </qualifiedTypeNameHistroy>

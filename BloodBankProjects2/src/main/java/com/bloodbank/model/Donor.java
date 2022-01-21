@@ -12,52 +12,68 @@ public class Donor {
 	private long number;
 	private Date donorDate;
 	private String bloodType;
+
 	public String getFirstName() {
 		return firstName;
 	}
+
 	public void setFirstName(String firstName) {
 		this.firstName = firstName;
 	}
+
 	public String getLastName() {
 		return lastName;
 	}
+
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
 	}
+
 	public String getAddress() {
 		return address;
 	}
+
 	public void setAddress(String address) {
 		this.address = address;
 	}
+
 	public Long getAadharcard() {
 		return aadharcard;
 	}
+
 	public void setAadharcard(Long aadharcard) {
 		this.aadharcard = aadharcard;
 	}
+
 	public long getNumber() {
 		return number;
 	}
+
 	public void setNumber(long number) {
 		this.number = number;
 	}
+
 	public Date getDonorDate() {
 		return donorDate;
 	}
+
 	public void setDonorDate(Date donorDate) {
 		this.donorDate = donorDate;
 	}
+
 	public String getBloodType() {
 		return bloodType;
 	}
+
 	public void setBloodType(String bloodType) {
 		this.bloodType = bloodType;
 	}
+
 	@Override
 	public int hashCode() {
 		return Objects.hash(aadharcard, address, bloodType, donorDate, firstName, lastName, number);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -72,11 +88,13 @@ public class Donor {
 				&& Objects.equals(firstName, other.firstName) && Objects.equals(lastName, other.lastName)
 				&& number == other.number;
 	}
+
 	@Override
 	public String toString() {
 		return "Donor [firstName=" + firstName + ", lastName=" + lastName + ", address=" + address + ", aadharcard="
 				+ aadharcard + ", number=" + number + ", donorDate=" + donorDate + ", bloodType=" + bloodType + "]";
 	}
+
 	public Donor(String firstName, String lastName, String address, Long aadharcard, long number, Date donorDate,
 			String bloodType) {
 		super();
@@ -88,11 +106,10 @@ public class Donor {
 		this.donorDate = donorDate;
 		this.bloodType = bloodType;
 	}
+
 	public Donor() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	
-	
-	
+
 }

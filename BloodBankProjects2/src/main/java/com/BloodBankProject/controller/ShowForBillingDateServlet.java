@@ -19,46 +19,44 @@ import javax.servlet.http.HttpSession;
 @WebServlet("/ShowForBillingDateServlet")
 public class ShowForBillingDateServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public ShowForBillingDateServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	public ShowForBillingDateServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	//SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
-	LocalDate date=null;
-		
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		LocalDate date = null;
+
 		// date=sdf.parse(request.getParameter("date"));
-		 date=LocalDate.parse(request.getParameter("date"));
-		
-		//System.out.println(date);
-		HttpSession session=request.getSession();
-		
-				session.setAttribute("billingdate", date);
-		
-	response.sendRedirect("ShowForBillingDate.jsp");
-		
-		
-		
-		
-		
-		
-		
+		date = LocalDate.parse(request.getParameter("date"));
+
+		// System.out.println(date);
+		HttpSession session = request.getSession();
+
+		session.setAttribute("billingdate", date);
+
+		response.sendRedirect("ShowForBillingDate.jsp");
+
 	}
 
 }

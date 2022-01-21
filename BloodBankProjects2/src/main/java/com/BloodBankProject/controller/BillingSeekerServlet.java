@@ -25,80 +25,77 @@ import com.bloodbank.model.SeekerDetails;
 @WebServlet("/BillingSeekerServlet")
 public class BillingSeekerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public BillingSeekerServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public BillingSeekerServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		   PrintWriter pw=response.getWriter();
-		
-		 
-		  
-		   
-		HttpSession hp=request.getSession();
-	RequestModel requestModel= (RequestModel) hp.getAttribute("requestModel");	
-	 SeekerDetails  seeker=  (SeekerDetails) hp.getAttribute("seeker");
-		
-		   
-		  BloodStackDAOlmpl stack=new BloodStackDAOlmpl();
-		  
-		  double unitPrice= stack.findPrice(requestModel.getBloodType())*requestModel.getUnit();
-		 
-		
-		  
-		 BillingModel  BillingModel=new  BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(), unitPrice,null);
-		 
-	 	 hp.setAttribute("billingProces",BillingModel );
-	 	 
-		 BillingDAOlmpl biiling=new  BillingDAOlmpl();
-		 
-	int n= biiling.insertBilling(BillingModel);
-	
-	
-		
-	if(n>0) {
-		
-	int num=stack.updateStackReduce(requestModel.getBloodType(), requestModel.getUnit());
-	
-	
-		if(num>0) {
-			
-			AdminDAOlmpl admin=new AdminDAOlmpl();
-		if(admin.seekerPayment(unitPrice)>0) {
-			
-			//PrintWriter pw=response.getWriter();
-			pw.println("<script type=\"text/javascript\">");
-			 pw.println("alert('your request success');");
-			 pw.println("location='seekerbill.jsp';");
-			 pw.println("</script>");
-			//response.sendRedirect("seekerbill.jsp");
-			
-		}
-			
-			
-		}
-		
-		
-	}
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
 
+		PrintWriter pw = response.getWriter();
+
+		HttpSession hp = request.getSession();
 		
+		RequestModel requestModel = (RequestModel) hp.getAttribute("requestModel");
+		SeekerDetails seeker = (SeekerDetails) hp.getAttribute("seeker");
+
+		BloodStackDAOlmpl stack = new BloodStackDAOlmpl();
+                           // unit of blood and multiple blood price
+		
+		double unitPrice = stack.findPrice(requestModel.getBloodType()) * requestModel.getUnit();
+              // Request model object to get the blood type and unit ofm blood
+		BillingModel BillingModel = new BillingModel(requestModel.getBloodType(), seeker, requestModel.getUnit(),
+				unitPrice, null);
+
+		hp.setAttribute("billingProces", BillingModel);
+		
+
+		BillingDAOlmpl billing = new BillingDAOlmpl();
+             //insert the billing table
+		int n = billing.insertBilling(BillingModel);
+
+		if (n > 0) {
+                     //Stack table reduce the blood quantity  
+			int num = stack.updateStackReduce(requestModel.getBloodType(), requestModel.getUnit());
+
+			if (num > 0) {
+
+				AdminDAOlmpl admin = new AdminDAOlmpl();
+				
+				if (admin.seekerPayment(unitPrice) > 0) {
+
+					// PrintWriter pw=response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('your request success');");
+					pw.println("location='seekerbill.jsp';");
+					pw.println("</script>");
+					// response.sendRedirect("seekerbill.jsp");
+
+				}
+
+			}
+
+		}
+
 	}
 
 }

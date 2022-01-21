@@ -12,7 +12,7 @@ public interface RequestDAO {
 	public int deleteRequest(Long aadharcard);
 	
 	public List<RequestModel> ShowRequest();
-	
+	public String StatusCheck(Long aadharcard);
 	
 	public List<RequestModel> ShowRequestSeeker(Long phoneNumber);
 	

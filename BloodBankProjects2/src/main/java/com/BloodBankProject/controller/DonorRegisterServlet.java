@@ -23,92 +23,83 @@ import com.bloodbank.model.Donor;
 @WebServlet("/Register")
 public class DonorRegisterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DonorRegisterServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		//response.getWriter().append("Served at: ").append(request.getContextPath());
+	public DonorRegisterServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		SimpleDateFormat sdf=new  SimpleDateFormat("yyyy-MM-dd");
-		Date date=null;
-		String firstName =request.getParameter("firstname");
-		String lastName =request.getParameter("lastName");
-		//String email = request.getParameter("email");
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		// response.getWriter().append("Served at: ").append(request.getContextPath());
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		Date date = null;
+		String firstName = request.getParameter("firstname");
+		String lastName = request.getParameter("lastName");
+		// String email = request.getParameter("email");
 		String address = request.getParameter("address");
-		Long phoneNumber =Long.parseLong(request.getParameter("number"));
-		Long aadharcard=Long.parseLong(request.getParameter("ADHARCARD"));
-		String bloodType =request.getParameter("bloodtype");
-		
-	
-		
+		Long phoneNumber = Long.parseLong(request.getParameter("number"));
+		Long aadharcard = Long.parseLong(request.getParameter("ADHARCARD"));
+		String bloodType = request.getParameter("bloodtype");
+
 		try {
-			
-			
-			 date=sdf.parse(request.getParameter("bio"));
+
+			date = sdf.parse(request.getParameter("bio"));
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		DonorDAOImpl donorDao=new DonorDAOImpl();
-		Donor donor1=donorDao.validAadharcardNumber(aadharcard);
+
+		DonorDAOImpl donorDao = new DonorDAOImpl();
+		Donor donor1 = donorDao.validAadharcardNumber(aadharcard);
 		try {
-		if(donor1==null) {
-		
-	    Donor donor=new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
-		
-		
-		    
-	   int check= donorDao.insertDonor(donor);
-	   
-	   
-		if(check>0) {
-			
-			PrintWriter pw=response.getWriter();
-			pw.println("<script type=\"text/javascript\">");
-			 pw.println("alert('Register success');");
-			 pw.println("location='DonorLogin.jsp';");
-			 pw.println("</script>");
-		//response.sendRedirect("DonorLogin.jsp");
-		
-		}
-			
-		
-		}else {
-			
-			
-			
-			throw new ExeceptionHandle();
-			
-			
-			
-			
-		}
-		
-		}catch (ExeceptionHandle e) {
-			
-			HttpSession session=request.getSession();
+			if (donor1 == null) {
+
+				Donor donor = new Donor(firstName, lastName, address, aadharcard, phoneNumber, date, bloodType);
+
+				int check = donorDao.insertDonor(donor);
+
+				if (check > 0) {
+
+					PrintWriter pw = response.getWriter();
+					pw.println("<script type=\"text/javascript\">");
+					pw.println("alert('Register success');");
+					pw.println("location='DonorLogin.jsp';");
+					pw.println("</script>");
+					// response.sendRedirect("DonorLogin.jsp");
+
+				}
+
+			} else {
+
+				throw new ExeceptionHandle();
+
+			}
+
+		} catch (ExeceptionHandle e) {
+
+			HttpSession session = request.getSession();
 			session.setAttribute("aadharcardNumber", e.AadharcardNumber());
-			
-			
+
 			response.sendRedirect("DonorRegister.jsp");
 		}
-		
+
 	}
 
 }
